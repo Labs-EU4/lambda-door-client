@@ -1,0 +1,10 @@
+.ant-input:focus,
+.ant-select-open .ant-select-selection:focus,
+.ant-select-focused .ant-select-selection,
+.ant-select-selection:focus {
+  border-color: #40a9ff !important;
+  outline: 0 !important;
+}
+ body {
+   word-wrap: break-word;
+ }
