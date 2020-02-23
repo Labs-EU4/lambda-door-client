@@ -42,7 +42,7 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "test:watch": "react-app-rewired test", 
+    "test:watch": "react-app-rewired test",
     "test": "react-app-rewired test --updateSnapshot --coverage --watchAll=false && make-coverage-badge --output-path \"badges.svg\" ",
     "eject": "react-scripts eject"
   },
