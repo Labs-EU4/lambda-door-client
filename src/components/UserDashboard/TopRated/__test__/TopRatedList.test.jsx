@@ -6,6 +6,9 @@ import { TopRatedList } from '../TopRatedList';
 
 const getTopRatedReviews = jest.fn();
 const isFetching = false;
+const authState = {
+  credentials: { location: false },
+};
 const topRatedReviews = {
   topRatedReviews: [
     {
@@ -29,6 +32,7 @@ beforeEach(() => {
         getTopRatedReviews={getTopRatedReviews}
         isFetching={isFetching}
         topRatedReviews={topRatedReviews}
+        authState={authState}
       />
     </Router>
   );
@@ -41,6 +45,7 @@ describe('TopRatedList', () => {
         getTopRatedReviews={getTopRatedReviews}
         isFetching={isFetching}
         topRatedReviews={topRatedReviews}
+        authState={authState}
       />
     </Router>
   );

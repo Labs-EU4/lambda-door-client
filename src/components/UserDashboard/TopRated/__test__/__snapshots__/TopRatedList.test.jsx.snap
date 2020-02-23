@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TopRatedList renders correctly 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-bxivhb iaTuCm"
+    >
+      <div
+        class="cards"
+      >
+        <a
+          class="nav-link"
+          href="/company-page/undefined"
+        >
+          <div>
+            <h3 />
+            <p
+              class="sc-bwzfXH hKkmqJ"
+            />
+          </div>
+        </a>
+        <div
+          class="sc-htpNat ckDsGN"
+        >
+          <div />
+          <div />
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
