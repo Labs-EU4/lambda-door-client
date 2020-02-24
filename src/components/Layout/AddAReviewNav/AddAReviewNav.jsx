@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import SearchForm from '../Search/Search';
 import { Button, Icon } from 'antd';
 import styled from 'styled-components';
-import { mobilePortrait, tabletPortrait } from '../../../styles/theme.styles';
+import {
+  primaryGrey,
+  textGrey,
+  mobilePortrait,
+  tabletPortrait,
+} from '../../../styles/theme.styles';
 
 const AddAReviewNav = () => {
   const [searchVisible, setSearchVisible] = useState(false);
@@ -15,20 +20,19 @@ const AddAReviewNav = () => {
   return (
     <AddReviewNavCon>
       {/* Searchbar */}
-      <div>
-        <SearchForm
-          searchVisible={searchVisible}
-          setSearchVisible={setSearchVisible}
-        />
+      <SearchForm
+        searchVisible={searchVisible}
+        setSearchVisible={setSearchVisible}
+      />
 
-        <SearchButton onClick={toggleSearch}>
+      {/* <SearchButton onClick={toggleSearch}>
           <Icon type="search" style={{ fontSize: '1.5rem', color: 'white' }} />
-        </SearchButton>
-      </div>
+        </SearchButton> */}
+
       {/* Add a review button */}
-      <div>
-        <Button>Add a review</Button>
-      </div>
+      <Button type="primary" icon="plus">
+        Add a review
+      </Button>
     </AddReviewNavCon>
   );
 };
@@ -40,29 +44,31 @@ const AddReviewNavCon = styled.div`
   justify-content: space-between;
   padding: 2em;
   align-items: center;
+  background: ${primaryGrey};
+  border-bottom: 1px solid #d6d6d6;
 `;
 
-const SearchButton = styled.div`
-  /* background-color: #bb1333;
-  position: absolute;
-  bottom: 0.5rem;
-  right: 0.5rem;
-  border-radius: 50%;
-  height: 3rem;
-  width: 3rem;
-  display: none; */
-  /* @media ${tabletPortrait} {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  @media ${mobilePortrait} {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } */
+// const SearchButton = styled.div`
+//   background-color: #bb1333;
+//   position: absolute;
+//   bottom: 0.5rem;
+//   right: 0.5rem;
+//   border-radius: 50%;
+//   height: 3rem;
+//   width: 3rem;
+//   display: none;
+//   @media ${tabletPortrait} {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//   }
+//   @media ${mobilePortrait} {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//   }
 
-  /* .ant-icon {
-    color: white !important;
-  } */
-`;
+//   .ant-icon {
+//     color: white !important;
+//   }
+// `;
