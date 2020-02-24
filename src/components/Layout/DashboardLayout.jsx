@@ -43,7 +43,7 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
       render={props => {
         return (
           <StyledContainer>
-            <SideNav visible={visible} />
+            <SideNav visible={visible} toggleDrawer={toggleDrawer} />
             <div className="main-container" onClick={hideDrawer}>
               <div className="top-bar">
                 <button

@@ -32,7 +32,14 @@ const StyledSpin = styled.div`
   align-items: center;
 `;
 
-const SideNav = ({ visible, user, editProfile, isLoading, LogoutUser }) => {
+const SideNav = ({
+  visible,
+  user,
+  editProfile,
+  isLoading,
+  LogoutUser,
+  toggleDrawer,
+}) => {
   const handleChange = async fullname => {
     await editProfile({ full_name: fullname }, user.id);
   };
@@ -50,6 +57,7 @@ const SideNav = ({ visible, user, editProfile, isLoading, LogoutUser }) => {
       ) : (
         <>
           <div className="branding">
+            <Icon type="menu" className="hamburger" onClick={toggleDrawer} />
             <NavLink
               exact
               to="/dashboard"
@@ -58,7 +66,7 @@ const SideNav = ({ visible, user, editProfile, isLoading, LogoutUser }) => {
             >
               <Logo smaller />
             </NavLink>
-            <h2>Lambda Door</h2>
+            {/* <h2>Lambda Door</h2> */}
             {!user.location ? (
               notification.info({
                 description:
@@ -152,8 +160,17 @@ const StyledContainer = styled.div`
     width: 60%;
   }
 
+  .show-drawer {
+    display: none;
+  }
   .branding {
     display: flex;
+    justify-content: left;
+    .hamburger {
+      font-size: 2rem;
+      color: #bb1333;
+      padding-right: 1.5rem;
+    }
     h2 {
       margin-left: 1rem;
       font-family: 'Lato';
