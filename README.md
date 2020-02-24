@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/Labs-EU4/lambda-door-client.svg?branch=develop)](https://travis-ci.com/Labs-EU4/lambda-door-client) ![](badges.svg)
+[![Build Status](https://travis-ci.com/Labs-EU4/lambda-door-client.svg?branch=develop)](https://travis-ci.com/Labs-EU4/lambda-door-client)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/1568ef4b-934b-4ce2-a4e1-0a00a72f719b/deploy-status)](https://app.netlify.com/sites/lambdadooreu4/deploys)
 [![Coverage Status](https://coveralls.io/repos/github/Labs-EU4/lambda-door-client/badge.svg?branch=develop)](https://coveralls.io/github/Labs-EU4/lambda-door-client?branch=develop)
 
