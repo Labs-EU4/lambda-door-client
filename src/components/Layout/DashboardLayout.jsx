@@ -11,7 +11,6 @@ import { Button, Icon } from 'antd';
 import { connect } from 'react-redux';
 import SideNav from './SideNav/SideNav';
 import AddAReviewNav from './AddAReviewNav/AddAReviewNav';
-import SearchForm from './Search/Search';
 import {
   primaryGrey,
   textGrey,
@@ -25,7 +24,6 @@ import logo from '../../assets/lambda-logo.png';
 
 const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
   const [visible, setVisible] = useState(false);
-  const [searchVisible, setSearchVisible] = useState(false);
   const hideDrawer = () => {
     setVisible(false);
   };
@@ -34,10 +32,7 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
     e.stopPropagation();
     setVisible(!visible);
   };
-  const toggleSearch = e => {
-    e.stopPropagation();
-    setSearchVisible(!searchVisible);
-  };
+  
   return (
     <Route
       {...rest}
@@ -55,10 +50,6 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
                   <img className="lambda-logo" src={logo} alt="Lambda logo" />
                   <Icon type="menu" className="hamburger" />
                 </button>
-                <SearchForm
-                  searchVisible={searchVisible}
-                  setSearchVisible={setSearchVisible}
-                />
                 <div className="sign-out-btn">
                   <Button type="link" onClick={LogoutUser}>
                     Sign Out
@@ -83,12 +74,6 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
                 <Component {...props} />
               </div>
             </div>
-            <SearchButton onClick={toggleSearch}>
-              <Icon
-                type="search"
-                style={{ fontSize: '1.5rem', color: 'white' }}
-              />
-            </SearchButton>
           </StyledContainer>
         );
       }}
@@ -207,30 +192,5 @@ const StyledContainer = styled.div`
       text-align: center;
       height: 70px;
     }
-  }
-`;
-
-const SearchButton = styled.div`
-  background-color: #bb1333;
-  position: absolute;
-  bottom: 0.5rem;
-  right: 0.5rem;
-  border-radius: 50%;
-  height: 3rem;
-  width: 3rem;
-  display: none;
-  @media ${tabletPortrait} {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  @media ${mobilePortrait} {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .ant-icon {
-    color: white !important;
   }
 `;
