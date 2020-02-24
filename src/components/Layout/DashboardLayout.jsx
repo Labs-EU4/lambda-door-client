@@ -10,6 +10,7 @@ import { Route, NavLink } from 'react-router-dom';
 import { Button, Icon } from 'antd';
 import { connect } from 'react-redux';
 import SideNav from './SideNav/SideNav';
+import AddAReviewNav from './AddAReviewNav/AddAReviewNav';
 import SearchForm from './Search/Search';
 import {
   primaryGrey,
@@ -77,6 +78,7 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
                   />
                 </NavLink>
               </div>
+              <AddAReviewNav />
               <div className="main-content">
                 <Component {...props} />
               </div>
