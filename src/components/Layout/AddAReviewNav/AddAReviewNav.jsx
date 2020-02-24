@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
 import SearchForm from '../Search/Search';
-import { Button, Icon } from 'antd';
+import { Button } from 'antd';
 import styled from 'styled-components';
 import {
   primaryGrey,
-  textGrey,
-  mobilePortrait,
-  tabletPortrait,
 } from '../../../styles/theme.styles';
 
 const AddAReviewNav = () => {
   const [searchVisible, setSearchVisible] = useState(false);
 
-  const toggleSearch = e => {
-    e.stopPropagation();
-    setSearchVisible(!searchVisible);
-  };
+  // const toggleSearch = e => {
+  //   e.stopPropagation();
+  //   setSearchVisible(!searchVisible);
+  // };
 
   return (
     <AddReviewNavCon>
