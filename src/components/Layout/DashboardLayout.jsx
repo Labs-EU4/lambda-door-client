@@ -93,6 +93,7 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
                     </Button>
                   </div>
                 </Header>
+                <AddAReviewNav />
                 <Content
                   style={{
                     margin: '24px 16px',
@@ -177,7 +178,11 @@ const StyledContainer = styled.div`
   }
 
   header.ant-layout-header {
+      flex: 1 0 10%;
+      background: blue;
     .header-content {
+      display: flex;
+      justify-content: space-between;
       .trigger {
         border: none;
         .anticon.anticon-menu-fold {
