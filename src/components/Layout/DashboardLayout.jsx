@@ -47,30 +47,51 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
         return (
           <StyledContainer>
             <Layout>
-              <Sider trigger={null} collapsible collapsed={collapsed}>
-                <div className="logo" />
+              <Sider
+                trigger={null}
+                collapsible
+                collapsed={collapsed}
+                className="side-nav"
+              >
+                <div className="logo">
+                  <img src={logo} alt="Lambda logo" className="lambda-logo" />
+                  <h2>Lambda Door</h2>
+                </div>
                 <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
                   <Menu.Item key="1">
-                    <Icon type="user" />
-                    <span>nav 1</span>
+                    <Icon type="home" />
+                    <span>Home</span>
                   </Menu.Item>
                   <Menu.Item key="2">
-                    <Icon type="video-camera" />
-                    <span>nav 2</span>
+                    <Icon type="file-done" />
+                    <span>Reviews</span>
                   </Menu.Item>
                   <Menu.Item key="3">
-                    <Icon type="upload" />
-                    <span>nav 3</span>
+                    <Icon type="snippets" />
+                    <span>My Reviews</span>
+                  </Menu.Item>
+                  <Menu.Item key="4">
+                    <Icon type="user" />
+                    <span>User Profile</span>
+                  </Menu.Item>
+                  <Menu.Item key="5">
+                    <Icon type="setting" />
+                    <span>Account Settings</span>
                   </Menu.Item>
                 </Menu>
               </Sider>
               <Layout>
                 <Header style={{ background: '#fff', padding: 0 }}>
-                  <Icon
-                    className="trigger"
-                    type={collapsed ? 'menu-unfold' : 'menu-fold'}
-                    onClick={toggle}
-                  />
+                  <div className="header-content">
+                    <Button type="button" className="trigger" onClick={toggle}>
+                      <Icon type={collapsed ? 'menu-unfold' : 'menu-fold'} />
+                    </Button>
+
+                    <Button type="link" onClick={LogoutUser}>
+                      Sign Out
+                      <Icon type="right" />
+                    </Button>
+                  </div>
                 </Header>
                 <Content
                   style={{
@@ -80,7 +101,7 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
                     minHeight: 280,
                   }}
                 >
-                  Content
+                  <Component {...props} />
                 </Content>
               </Layout>
             </Layout>
@@ -122,7 +143,7 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
                 </div>
               </div>
             </StyledContainer> */}
-            </StyledContainer>
+          </StyledContainer>
         );
       }}
     />
@@ -131,71 +152,58 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
 
 export default connect(null, { LogoutUser })(DashboardLayout);
 
-// class SiderDemo extends React.Component {
-//   // state = {
-//   //   collapsed: false,
-//   // };
-
-//   // toggle = () => {
-//   //   this.setState({
-//   //     collapsed: !this.state.collapsed,
-//   //   });
-//   // };
-
-//   render() {
-//     return (
-//       // <Layout>
-//       //   <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
-//       //     <div className="logo" />
-//       //     <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-//       //       <Menu.Item key="1">
-//       //         <Icon type="user" />
-//       //         <span>nav 1</span>
-//       //       </Menu.Item>
-//       //       <Menu.Item key="2">
-//       //         <Icon type="video-camera" />
-//       //         <span>nav 2</span>
-//       //       </Menu.Item>
-//       //       <Menu.Item key="3">
-//       //         <Icon type="upload" />
-//       //         <span>nav 3</span>
-//       //       </Menu.Item>
-//       //     </Menu>
-//       //   </Sider>
-//       //   <Layout>
-//       //     <Header style={{ background: '#fff', padding: 0 }}>
-//       //       <Icon
-//       //         className="trigger"
-//       //         type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-//       //         onClick={this.toggle}
-//       //       />
-//       //     </Header>
-//       //     <Content
-//       //       style={{
-//       //         margin: '24px 16px',
-//       //         padding: 24,
-//       //         background: '#fff',
-//       //         minHeight: 280,
-//       //       }}
-//       //     >
-//       //       Content
-//       //     </Content>
-//       //   </Layout>
-//       // </Layout>
-//     );
-//   }
-// }
-
-// ReactDOM.render(<SiderDemo />, mountNode);
-
 const StyledContainer = styled.div`
   height: 100vh;
   overflow: hidden;
   display: flex;
-  @media ${tabletPortrait} {
-    height: 100%;
+
+  .side-nav {
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2em 0 2em 0;
+      .lambda-logo {
+        max-width: 15%;
+        height: auto;
+      }
+      h2 {
+        color: #BB1333;
+        padding-left: 1em;
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+    }
   }
-  .main-container {
+
+  header.ant-layout-header {
+    .header-content {
+      .trigger {
+        border: none;
+        .anticon.anticon-menu-fold {
+          font-size: 1.3rem;
+        }
+        .anticon.anticon-menu-unfold {
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
+
+/* class="anticon anticon-menu-fold" */
+
+
+/* // Aside 
+  class="side-nav ant-layout-sider ant-layout-sider-dark"
+  class="side-nav ant-layout-sider ant-layout-sider-dark ant-layout-sider-collapsed"
+
+//UL
+  class="ant-menu ant-menu-dark ant-menu-root ant-menu-inline"
+  class="ant-menu ant-menu-dark ant-menu-inline-collapsed ant-menu-root ant-menu-vertical" */
+  /* @media ${tabletPortrait} {
+    height: 100%;
+  } */
+  /* .main-container {
     width: calc(100% - 250px);
     height: 100vh;
     overflow: hidden;
@@ -297,5 +305,5 @@ const StyledContainer = styled.div`
       text-align: center;
       height: 70px;
     }
-  }
+  } */
 `;
