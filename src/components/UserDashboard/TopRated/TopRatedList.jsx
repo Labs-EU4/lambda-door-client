@@ -79,10 +79,6 @@ const StyledDiv = styled.div`
     height: 150px;
     max-width: 350px;
 
-    &:hover {
-      border: 2px solid #bb1333;
-    }
-
     a {
       position: absolute;
       left: 0;
@@ -96,6 +92,10 @@ const StyledDiv = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+
+      &:hover {
+        border: 1px solid #bb1333;
+      }
     }
 
     p {
