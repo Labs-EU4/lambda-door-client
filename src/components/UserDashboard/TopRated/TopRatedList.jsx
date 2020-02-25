@@ -88,7 +88,7 @@ const StyledDiv = styled.div`
       padding: 1rem;
       color: rgba(0, 0, 0, 0.65);
       border: 1px solid #e8e8e8;
-      border-radius: 2px;
+      border-radius: 4px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
