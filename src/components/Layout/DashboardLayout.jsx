@@ -30,16 +30,6 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
     setCollapsed(!collapsed);
   };
 
-  // const [visible, setVisible] = useState(false);
-  // const hideDrawer = () => {
-  //   setVisible(false);
-  // };
-
-  // const toggleDrawer = e => {
-  //   e.stopPropagation();
-  //   setVisible(!visible);
-  // };
-
   return (
     <Route
       {...rest}
@@ -87,7 +77,11 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
                       <Icon type={collapsed ? 'menu-unfold' : 'menu-fold'} />
                     </Button>
 
-                    <Button type="link" onClick={LogoutUser}>
+                    <Button
+                      type="link"
+                      onClick={LogoutUser}
+                      className="sign-out-btn"
+                    >
                       Sign Out
                       <Icon type="right" />
                     </Button>
@@ -96,7 +90,6 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
                 <AddAReviewNav />
                 <Content
                   style={{
-                    margin: '24px 16px',
                     padding: 24,
                     background: '#fff',
                     minHeight: 280,
@@ -178,11 +171,12 @@ const StyledContainer = styled.div`
   }
 
   header.ant-layout-header {
-      flex: 1 0 10%;
-      background: blue;
+      display: flex;
+      align-items: center;
     .header-content {
       display: flex;
       justify-content: space-between;
+      width: 100%;
       .trigger {
         border: none;
         .anticon.anticon-menu-fold {
@@ -192,10 +186,16 @@ const StyledContainer = styled.div`
           font-size: 1.3rem;
         }
       }
+      .sign-out-btn {
+        padding-right: 4em;
+      }
     }
   }
 
-/* class="anticon anticon-menu-fold" */
+  .ant-layout-content {
+    margin: 10px 16px;
+    overflow-y: scroll;
+  }
 
 
 /* // Aside 
