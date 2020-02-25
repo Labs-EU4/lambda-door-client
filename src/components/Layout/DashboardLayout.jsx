@@ -7,7 +7,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Route, NavLink } from 'react-router-dom';
-import { Button, Icon } from 'antd';
+import { Button, Icon, Layout, Menu } from 'antd';
 import { connect } from 'react-redux';
 import SideNav from './SideNav/SideNav';
 import AddAReviewNav from './AddAReviewNav/AddAReviewNav';
@@ -22,59 +22,107 @@ import { LogoutUser } from '../../state/actions/auth';
 
 import logo from '../../assets/lambda-logo.png';
 
+const { Header, Sider, Content } = Layout;
+
 const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
-  const [visible, setVisible] = useState(false);
-  const hideDrawer = () => {
-    setVisible(false);
+  const [collapsed, setCollapsed] = useState(false);
+  const toggle = () => {
+    setCollapsed(!collapsed);
   };
 
-  const toggleDrawer = e => {
-    e.stopPropagation();
-    setVisible(!visible);
-  };
-  
+  // const [visible, setVisible] = useState(false);
+  // const hideDrawer = () => {
+  //   setVisible(false);
+  // };
+
+  // const toggleDrawer = e => {
+  //   e.stopPropagation();
+  //   setVisible(!visible);
+  // };
+
   return (
     <Route
       {...rest}
       render={props => {
         return (
           <StyledContainer>
-            <SideNav visible={visible} />
-            <div className="main-container" onClick={hideDrawer}>
-              <div className="top-bar">
-                <button
-                  type="button"
-                  className="mobile-logo-btn"
-                  onClick={e => toggleDrawer(e)}
-                >
-                  <img className="lambda-logo" src={logo} alt="Lambda logo" />
-                  <Icon type="menu" className="hamburger" />
-                </button>
-                <div className="sign-out-btn">
-                  <Button type="link" onClick={LogoutUser}>
-                    Sign Out
-                    <Icon type="right" />
-                  </Button>
-                </div>
-                <NavLink
-                  exact
-                  to="/dashboard"
-                  className="link"
-                  activeClassName="active"
-                >
-                  <img
-                    className="right-hand-logo"
-                    src={logo}
-                    alt="Lambda logo"
+            <Layout>
+              <Sider trigger={null} collapsible collapsed={collapsed}>
+                <div className="logo" />
+                <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+                  <Menu.Item key="1">
+                    <Icon type="user" />
+                    <span>nav 1</span>
+                  </Menu.Item>
+                  <Menu.Item key="2">
+                    <Icon type="video-camera" />
+                    <span>nav 2</span>
+                  </Menu.Item>
+                  <Menu.Item key="3">
+                    <Icon type="upload" />
+                    <span>nav 3</span>
+                  </Menu.Item>
+                </Menu>
+              </Sider>
+              <Layout>
+                <Header style={{ background: '#fff', padding: 0 }}>
+                  <Icon
+                    className="trigger"
+                    type={collapsed ? 'menu-unfold' : 'menu-fold'}
+                    onClick={toggle}
                   />
-                </NavLink>
+                </Header>
+                <Content
+                  style={{
+                    margin: '24px 16px',
+                    padding: 24,
+                    background: '#fff',
+                    minHeight: 280,
+                  }}
+                >
+                  Content
+                </Content>
+              </Layout>
+            </Layout>
+
+            {/* <StyledContainer>
+              <SideNav visible={visible} />
+              <div className="main-container" onClick={hideDrawer}>
+                <div className="top-bar">
+                  <button
+                    type="button"
+                    className="mobile-logo-btn"
+                    onClick={e => toggleDrawer(e)}
+                  >
+                    <img className="lambda-logo" src={logo} alt="Lambda logo" />
+                    <Icon type="menu" className="hamburger" />
+                  </button>
+                  <div className="sign-out-btn">
+                    <Button type="link" onClick={LogoutUser}>
+                      Sign Out
+                      <Icon type="right" />
+                    </Button>
+                  </div>
+                  <NavLink
+                    exact
+                    to="/dashboard"
+                    className="link"
+                    activeClassName="active"
+                  >
+                    <img
+                      className="right-hand-logo"
+                      src={logo}
+                      alt="Lambda logo"
+                    />
+                  </NavLink>
+                </div>
+                <AddAReviewNav />
+                <div className="main-content">
+                  <Component {...props} />
+                </div>
               </div>
-              <AddAReviewNav />
-              <div className="main-content">
-                <Component {...props} />
-              </div>
-            </div>
-          </StyledContainer>
+            </StyledContainer> */}
+            </StyledContainer>
         );
       }}
     />
@@ -82,6 +130,63 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
 };
 
 export default connect(null, { LogoutUser })(DashboardLayout);
+
+// class SiderDemo extends React.Component {
+//   // state = {
+//   //   collapsed: false,
+//   // };
+
+//   // toggle = () => {
+//   //   this.setState({
+//   //     collapsed: !this.state.collapsed,
+//   //   });
+//   // };
+
+//   render() {
+//     return (
+//       // <Layout>
+//       //   <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
+//       //     <div className="logo" />
+//       //     <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+//       //       <Menu.Item key="1">
+//       //         <Icon type="user" />
+//       //         <span>nav 1</span>
+//       //       </Menu.Item>
+//       //       <Menu.Item key="2">
+//       //         <Icon type="video-camera" />
+//       //         <span>nav 2</span>
+//       //       </Menu.Item>
+//       //       <Menu.Item key="3">
+//       //         <Icon type="upload" />
+//       //         <span>nav 3</span>
+//       //       </Menu.Item>
+//       //     </Menu>
+//       //   </Sider>
+//       //   <Layout>
+//       //     <Header style={{ background: '#fff', padding: 0 }}>
+//       //       <Icon
+//       //         className="trigger"
+//       //         type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+//       //         onClick={this.toggle}
+//       //       />
+//       //     </Header>
+//       //     <Content
+//       //       style={{
+//       //         margin: '24px 16px',
+//       //         padding: 24,
+//       //         background: '#fff',
+//       //         minHeight: 280,
+//       //       }}
+//       //     >
+//       //       Content
+//       //     </Content>
+//       //   </Layout>
+//       // </Layout>
+//     );
+//   }
+// }
+
+// ReactDOM.render(<SiderDemo />, mountNode);
 
 const StyledContainer = styled.div`
   height: 100vh;
