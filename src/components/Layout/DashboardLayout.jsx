@@ -9,7 +9,6 @@ import styled from 'styled-components';
 import { Route, NavLink } from 'react-router-dom';
 import { Button, Icon, Layout, Menu } from 'antd';
 import { connect } from 'react-redux';
-import SideNav from './SideNav/SideNav';
 import AddAReviewNav from './AddAReviewNav/AddAReviewNav';
 import {
   primaryGrey,
@@ -101,7 +100,6 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
             </Layout>
 
             {/* <StyledContainer>
-              <SideNav visible={visible} />
               <div className="main-container" onClick={hideDrawer}>
                 <div className="top-bar">
                   <button
@@ -150,8 +148,16 @@ const StyledContainer = styled.div`
   height: 100vh;
   overflow: hidden;
   display: flex;
+  @media ${tabletPortrait} {
+    height: 100%;
+  }
 
   .side-nav {
+    @media ${mobilePortrait} {
+      position: absolute;
+      z-index: 1;
+      height: 100vh;
+    }
     .logo {
       display: flex;
       align-items: center;
@@ -170,31 +176,61 @@ const StyledContainer = styled.div`
     }
   }
 
-  header.ant-layout-header {
+  .ant-layout {
+    width: calc(100% - 250px);
+    height: 100vh;
+    overflow: hidden;
+
+    @media ${mobilePortrait} {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header.ant-layout-header {
       display: flex;
       align-items: center;
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      .trigger {
-        border: none;
-        .anticon.anticon-menu-fold {
-          font-size: 1.3rem;
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        @media ${mobilePortrait} {
+          height: 80px;
+          padding: 1rem;
+          background-color: #fafafa;
+          position: fixed;
+          top: 0;
+          width: 100%;
+          z-index: 100;
         }
-        .anticon.anticon-menu-unfold {
-          font-size: 1.3rem;
+
+        .trigger {
+          border: none;
+          .anticon.anticon-menu-fold {
+            font-size: 1.3rem;
+          }
+          .anticon.anticon-menu-unfold {
+            font-size: 1.3rem;
+          }
         }
-      }
-      .sign-out-btn {
-        padding-right: 4em;
+        .sign-out-btn {
+          padding-right: 4em;
+          color: ${textGrey};
+          font-weight: 500;
+
+          @media ${mobilePortrait} {
+            display: none;
+          }
+        }
       }
     }
-  }
 
-  .ant-layout-content {
-    margin: 10px 16px;
-    overflow-y: scroll;
+    .ant-layout-content {
+      margin: 10px 16px;
+      overflow-y: scroll;
+    }
   }
 
 
@@ -205,92 +241,9 @@ const StyledContainer = styled.div`
 //UL
   class="ant-menu ant-menu-dark ant-menu-root ant-menu-inline"
   class="ant-menu ant-menu-dark ant-menu-inline-collapsed ant-menu-root ant-menu-vertical" */
-  /* @media ${tabletPortrait} {
-    height: 100%;
-  } */
-  /* .main-container {
-    width: calc(100% - 250px);
-    height: 100vh;
-    overflow: hidden;
-    @media ${mobilePortrait} {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-    .top-bar {
-      width: 100%;
-      padding: 1.5rem 1.5rem 2.5rem 0;
-      background: ${primaryGrey};
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      @media ${mobilePortrait} {
-        height: 80px;
-        padding: 1rem;
-        background-color: #fafafa;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 100;
-      }
-      .mobile-logo-btn {
-        display: none;
-        border: none;
-        outline: none;
-        background: transparent;
-        @media ${mobilePortrait} {
-          display: inherit;
-          width: 50px;
-          margin-right: 0.75rem;
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: none;
-          }
-          .hamburger {
-            display: none;
-            @media ${mobilePortrait} {
-              display: block;
-              font-size: 1.9rem;
-              color: #bb1333;
-            }
-          }
-        }
-      }
-      .right-hand-logo {
-        display: none;
-        @media ${mobilePortrait} {
-          display: block;
-          width: 2.9rem;
-          padding-right: 1rem;
-          max-height: 2.9rem;
-        }
-      }
-      .ant-input {
-        background: transparent;
-      }
-      .ant-input-affix-wrapper {
-        font-size: 18px;
-      }
-      .ant-btn-link {
-        color: ${textGrey};
-        font-weight: 500;
-      }
-    }
-    .main-content {
-      padding: 2rem 1.5rem;
-      height: calc(100vh - 70px);
-      overflow-y: auto;
-      @media ${mobilePortrait} {
-        padding-top: 100px;
-      }
-    }
-    .sign-out-btn {
-      @media ${mobilePortrait} {
-        display: none;
-      }
-    }
+
+  /* 
+
     .empty-state {
       min-height: 300px;
       width: 100%;
