@@ -143,6 +143,7 @@ const StyledContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    
 
     & > div {
       width: calc(50% - 1.5rem);
