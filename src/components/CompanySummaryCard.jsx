@@ -23,6 +23,7 @@ const CardBottom = styled.div`
   width: 100%;
   padding: 1rem;
   justify-content: space-between;
+  z-index: -1;
 `;
 
 export default function CompanySummaryCard(props) {

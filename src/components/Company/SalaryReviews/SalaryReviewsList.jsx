@@ -77,7 +77,7 @@ const StyledCard = styled(Card)`
   height: 200px;
   cursor: pointer;
   &:hover {
-    border: 2px solid #bb1333;
+    border: 1px solid #bb1333;
   }
 
   .card-top {
