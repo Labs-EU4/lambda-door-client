@@ -5,6 +5,10 @@
   border-color: #40a9ff !important;
   outline: 0 !important;
 }
- body {
-   word-wrap: break-word;
- }
+body {
+  word-wrap: break-word;
+}
+
+.ant-card {
+  border-radius: 4px;
+}

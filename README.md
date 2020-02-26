@@ -1,6 +1,8 @@
-[![Build Status](https://travis-ci.com/Labs-EU4/lambda-door-client.svg?branch=develop)](https://travis-ci.com/Labs-EU4/lambda-door-client) ![](badges.svg) [![Netlify Status](https://api.netlify.com/api/v1/badges/d7c57980-e371-4865-b666-2ebf173bcff9/deploy-status)](https://app.netlify.com/sites/lambdadoor/deploys)
+[![Build Status](https://travis-ci.com/Labs-EU4/lambda-door-client.svg?branch=develop)](https://travis-ci.com/Labs-EU4/lambda-door-client)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1568ef4b-934b-4ce2-a4e1-0a00a72f719b/deploy-status)](https://app.netlify.com/sites/lambdadooreu4/deploys)
+[![Coverage Status](https://coveralls.io/repos/github/Labs-EU4/lambda-door-client/badge.svg?branch=develop)](https://coveralls.io/github/Labs-EU4/lambda-door-client?branch=develop)
 
-# LambdaDoor
+<!-- # LambdaDoor
 
 Many atimes Job seekers find it difficult getting information specific to their search with respect to companies' interview processes, cultures and salary information that are less generalized, hence they spend alot of time searching and filtering what's needed from the sea of available information.
 
@@ -12,7 +14,7 @@ LambdaDoor is here to make that search simpler by providing stream lined informa
 
 HTML, CSS, Ant design, Formik, Styled-Component, Javascript, React, Redux, coveralls, Sentry, Travis CI etc.
 
-===============================================================================
+=============================================================================== -->
 
 <!-- ## Contributors
 
@@ -28,7 +30,7 @@ HTML, CSS, Ant design, Formik, Styled-Component, Javascript, React, Redux, cover
 |                       [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/basilcea)                        |
 | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/ogbonna-basil-cea/) | -->
 
-<br>
+<!-- <br>
 
 ## Project Overview
 
@@ -230,4 +232,4 @@ shows the Manage review page that contains reviews the user made as well as the 
 
 ![Search Bar](https://media.giphy.com/media/jQ8uoOo6m4lhN2OC5u/giphy.gif)
 
-Shows a clip of the search bar being used for search company, Salary and interview information either by location,company name or job title.
+Shows a clip of the search bar being used for search company, Salary and interview information either by location,company name or job title. -->

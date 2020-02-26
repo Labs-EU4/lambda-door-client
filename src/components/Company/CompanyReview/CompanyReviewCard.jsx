@@ -34,7 +34,7 @@ const StyledCard = styled(Card)`
   cursor: pointer;
 
   &:hover {
-    border: 2px solid #bb1333;
+    border: 1px solid #bb1333;
   }
 
   span {

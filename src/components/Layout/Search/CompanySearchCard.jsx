@@ -24,7 +24,7 @@ const StyledCard = styled(Card)`
   margin-right: 1rem !important;
   margin-bottom: 1rem !important;
   &:hover {
-    border: 2px solid #bb1333;
+    border: 1px solid #bb1333;
     cursor: pointer;
   }
 `;
