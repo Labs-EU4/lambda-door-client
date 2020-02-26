@@ -6,12 +6,11 @@
 
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Route, NavLink } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { Button, Icon, Layout, Menu } from 'antd';
 import { connect } from 'react-redux';
 import AddAReviewNav from './AddAReviewNav/AddAReviewNav';
 import {
-  primaryGrey,
   textGrey,
   mobilePortrait,
   tabletPortrait,
@@ -59,7 +58,7 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
                     src={logo}
                     alt="Lambda logo"
                     className="lambda-logo"
-                    style={{ 'max-width': collapsed ? '30%' : '15%' }}
+                    style={{ maxWidth: collapsed ? '30%' : '15%' }}
                   />
                   <h2 style={{ display: collapsed ? 'none' : 'initial' }}>
                     Lambda Door
