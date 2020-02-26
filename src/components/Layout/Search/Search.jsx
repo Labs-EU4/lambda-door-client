@@ -52,7 +52,6 @@ const SearchForm = ({
             name="search_category"
             defaultValue="companies"
             onChange={handleComponentChange}
-            size="large"
           >
             <Option value="companies">Companies</Option>
             <Option value="salaries">Salaries</Option>
@@ -68,14 +67,11 @@ const SearchForm = ({
                 ? 'Job Title, Location'
                 : 'Company Name, Job Title'
             }
-            size="large"
             name="search_query"
             onChange={handleChange}
           />
         </div>
-        <Button onClick={handleSubmit} size="large">
-          Search
-        </Button>
+        <Button onClick={handleSubmit}>Search</Button>
         <CloseSearch onClick={closeSearch}>
           <Icon type="close" />
         </CloseSearch>
@@ -91,7 +87,6 @@ export default withRouter(
 const StyledFormContainer = styled.div`
   position: relative;
   .ant-form {
-    max-width: 800px;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -127,7 +122,7 @@ const StyledFormContainer = styled.div`
       }
     }
     .ant-input {
-      width: 500px;
+      width: 350px;
       background-color: #ffffff !important;
       @media ${tabletPortrait} {
         width: 90vw;
