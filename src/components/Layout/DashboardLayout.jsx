@@ -6,7 +6,7 @@
 
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Route } from 'react-router-dom';
+import { Route, NavLink, Link } from 'react-router-dom';
 import { Button, Icon, Layout, Menu } from 'antd';
 import { connect } from 'react-redux';
 import AddAReviewNav from './AddAReviewNav/AddAReviewNav';
@@ -66,24 +66,38 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
                 </div>
                 <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
                   <Menu.Item key="1">
-                    <Icon type="home" />
-                    <span>Home</span>
+                    <NavLink exact to="/dashboard">
+                      <Icon type="home" />
+                      <span>Home</span>
+                    </NavLink>
                   </Menu.Item>
+
                   <Menu.Item key="2">
-                    <Icon type="file-done" />
-                    <span>Reviews</span>
+                    <NavLink exact to="/reviews">
+                      <Icon type="file-done" />
+                      <span>Reviews</span>
+                    </NavLink>
                   </Menu.Item>
+
                   <Menu.Item key="3">
-                    <Icon type="snippets" />
-                    <span>My Reviews</span>
+                    <NavLink exact to="/">
+                      <Icon type="snippets" />
+                      <span>My Reviews</span>
+                    </NavLink>
                   </Menu.Item>
+
                   <Menu.Item key="4">
-                    <Icon type="user" />
-                    <span>User Profile</span>
+                    <NavLink exact to="/users">
+                      <Icon type="user" />
+                      <span>User Profile</span>
+                    </NavLink>
                   </Menu.Item>
+
                   <Menu.Item key="5">
-                    <Icon type="setting" />
-                    <span>Account Settings</span>
+                    <NavLink exact to="/">
+                      <Icon type="setting" />
+                      <span>Account Settings</span>
+                    </NavLink>
                   </Menu.Item>
                 </Menu>
 
@@ -300,7 +314,7 @@ const SearchButton = styled.div`
     justify-content: center;
     align-items: center;
   }
-  
+
   .ant-icon {
     color: white !important;
   }
