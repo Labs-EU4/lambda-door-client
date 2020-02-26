@@ -41,10 +41,19 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
                 collapsible
                 collapsed={collapsed}
                 className="side-nav"
+                collapsedWidth={
+                  window.screen.width >= 1024 && window.screen.height >= 768 ? 80 : 0 }
               >
                 <div className="logo">
-                  <img src={logo} alt="Lambda logo" className="lambda-logo" />
-                  <h2>Lambda Door</h2>
+                  <img
+                    src={logo}
+                    alt="Lambda logo"
+                    className="lambda-logo"
+                    style={{ 'max-width': collapsed ? '30%' : '15%' }}
+                  />
+                  <h2 style={{ display: collapsed ? 'none' : 'initial' }}>
+                    Lambda Door
+                  </h2>
                 </div>
                 <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
                   <Menu.Item key="1">
@@ -98,43 +107,6 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
                 </Content>
               </Layout>
             </Layout>
-
-            {/* <StyledContainer>
-              <div className="main-container" onClick={hideDrawer}>
-                <div className="top-bar">
-                  <button
-                    type="button"
-                    className="mobile-logo-btn"
-                    onClick={e => toggleDrawer(e)}
-                  >
-                    <img className="lambda-logo" src={logo} alt="Lambda logo" />
-                    <Icon type="menu" className="hamburger" />
-                  </button>
-                  <div className="sign-out-btn">
-                    <Button type="link" onClick={LogoutUser}>
-                      Sign Out
-                      <Icon type="right" />
-                    </Button>
-                  </div>
-                  <NavLink
-                    exact
-                    to="/dashboard"
-                    className="link"
-                    activeClassName="active"
-                  >
-                    <img
-                      className="right-hand-logo"
-                      src={logo}
-                      alt="Lambda logo"
-                    />
-                  </NavLink>
-                </div>
-                <AddAReviewNav />
-                <div className="main-content">
-                  <Component {...props} />
-                </div>
-              </div>
-            </StyledContainer> */}
           </StyledContainer>
         );
       }}
@@ -164,7 +136,6 @@ const StyledContainer = styled.div`
       justify-content: center;
       padding: 2em 0 2em 0;
       .lambda-logo {
-        max-width: 15%;
         height: auto;
       }
       h2 {
@@ -197,11 +168,8 @@ const StyledContainer = styled.div`
         width: 100%;
 
         @media ${mobilePortrait} {
-          height: 80px;
           padding: 1rem;
           background-color: #fafafa;
-          position: fixed;
-          top: 0;
           width: 100%;
           z-index: 100;
         }
@@ -223,6 +191,10 @@ const StyledContainer = styled.div`
           @media ${mobilePortrait} {
             display: none;
           }
+
+          &:hover {
+            color: #BB1333;
+          }
         }
       }
     }
@@ -232,36 +204,4 @@ const StyledContainer = styled.div`
       overflow-y: scroll;
     }
   }
-
-
-/* // Aside 
-  class="side-nav ant-layout-sider ant-layout-sider-dark"
-  class="side-nav ant-layout-sider ant-layout-sider-dark ant-layout-sider-collapsed"
-
-//UL
-  class="ant-menu ant-menu-dark ant-menu-root ant-menu-inline"
-  class="ant-menu ant-menu-dark ant-menu-inline-collapsed ant-menu-root ant-menu-vertical" */
-
-  /* 
-
-    .empty-state {
-      min-height: 300px;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      max-width: 100%;
-    }
-    .footer {
-      display: none;
-      background-color: ${primaryGrey};
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      text-align: center;
-      height: 70px;
-    }
-  } */
 `;
