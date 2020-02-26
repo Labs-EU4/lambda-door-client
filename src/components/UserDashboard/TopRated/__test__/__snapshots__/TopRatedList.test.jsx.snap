@@ -4,7 +4,7 @@ exports[`TopRatedList renders correctly 1`] = `
 <body>
   <div>
     <div
-      class="sc-bxivhb iaTuCm"
+      class="sc-bxivhb fuwRjj"
     >
       <div
         class="cards"
@@ -21,7 +21,7 @@ exports[`TopRatedList renders correctly 1`] = `
           </div>
         </a>
         <div
-          class="sc-htpNat ckDsGN"
+          class="sc-htpNat cZvbaH"
         >
           <div />
           <div />

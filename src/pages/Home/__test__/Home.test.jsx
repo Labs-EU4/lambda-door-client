@@ -69,10 +69,6 @@ describe('ConnectedHome', () => {
         interests: [],
         isLoading: false,
       },
-      jobroles: {
-        isFetching: true,
-        jobroles: [],
-      },
       reviews: {
         isFetching: false,
         reviews: { company: [], salary: [], interview: [] },
