@@ -87,6 +87,15 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
                     <span>Account Settings</span>
                   </Menu.Item>
                 </Menu>
+
+                <Button
+                  type="link"
+                  onClick={LogoutUser}
+                  className="side-logout"
+                >
+                  Sign Out
+                  <Icon type="right" />
+                </Button>
               </Sider>
               <Layout>
                 <Header style={{ background: '#fff', padding: 0 }}>
@@ -94,13 +103,8 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
                     <Button type="button" className="trigger" onClick={toggle}>
                       <Icon type={collapsed ? 'menu-unfold' : 'menu-fold'} />
                     </Button>
-                    <div className="mobile-logo-con">
-                      <img
-                        src={logo}
-                        alt="Lambda logo"
-                        className="mobile-logo"
-                      />
-                    </div>
+
+                    <img src={logo} alt="Lambda logo" className="mobile-logo" />
 
                     <Button
                       type="link"
@@ -151,16 +155,22 @@ const StyledContainer = styled.div`
   }
 
   .side-nav {
+    z-index: 100;
     @media ${mobilePortrait} {
       position: absolute;
-      z-index: 1;
       height: 100vh;
+      padding-top: 4.5em;
     }
     .logo {
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 2em 0 2em 0;
+
+      @media ${mobilePortrait} {
+        display: none;
+      }
+
       .lambda-logo {
         height: auto;
       }
@@ -169,6 +179,17 @@ const StyledContainer = styled.div`
         padding-left: 1em;
         font-size: 1.1rem;
         font-weight: 600;
+      }
+    }
+
+    .side-logout {
+      color: rgba(255, 255, 255, 0.65);
+      margin-left: 0.8em;
+      margin-top: 3em;
+      display: none;
+
+      @media ${mobilePortrait} {
+        display: unset;
       }
     }
   }
@@ -202,16 +223,32 @@ const StyledContainer = styled.div`
 
         .trigger {
           border: none;
+          background: none;
           .anticon.anticon-menu-fold {
             font-size: 1.3rem;
+
+            @media ${mobilePortrait} {
+              font-size: 1.8rem;
+            }
           }
           .anticon.anticon-menu-unfold {
             font-size: 1.3rem;
+            @media ${mobilePortrait} {
+              font-size: 1.8rem;
+            }
           }
         }
 
-        .mobile-logo-con {
+        .mobile-logo {
+          width: 8%;
+          max-width: 100%;
+          height: 100%;
           display: none;
+
+          @media ${mobilePortrait} {
+            display: unset;
+            margin-right: 1em;
+          }
         }
 
         .sign-out-btn {
