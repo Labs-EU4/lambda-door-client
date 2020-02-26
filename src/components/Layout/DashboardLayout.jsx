@@ -149,17 +149,20 @@ const StyledContainer = styled.div`
   height: 100vh;
   overflow: hidden;
   display: flex;
+
   @media ${tabletPortrait} {
     height: 100%;
   }
 
   .side-nav {
     z-index: 100;
+
     @media ${mobilePortrait} {
       position: absolute;
       height: 100vh;
       padding-top: 4.5em;
     }
+
     .logo {
       display: flex;
       align-items: center;
@@ -173,6 +176,7 @@ const StyledContainer = styled.div`
       .lambda-logo {
         height: auto;
       }
+
       h2 {
         color: #bb1333;
         padding-left: 1em;
@@ -223,6 +227,7 @@ const StyledContainer = styled.div`
         .trigger {
           border: none;
           background: none;
+
           .anticon.anticon-menu-fold {
             font-size: 1.3rem;
 
@@ -232,6 +237,7 @@ const StyledContainer = styled.div`
           }
           .anticon.anticon-menu-unfold {
             font-size: 1.3rem;
+
             @media ${mobilePortrait} {
               font-size: 1.8rem;
             }
@@ -282,16 +288,19 @@ const SearchButton = styled.div`
   height: 3rem;
   width: 3rem;
   display: none;
+
   @media ${tabletPortrait} {
     display: flex;
     justify-content: center;
     align-items: center;
   }
+
   @media ${mobilePortrait} {
     display: flex;
     justify-content: center;
     align-items: center;
   }
+  
   .ant-icon {
     color: white !important;
   }
