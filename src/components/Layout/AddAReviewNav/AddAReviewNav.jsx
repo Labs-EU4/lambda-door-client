@@ -6,8 +6,7 @@ import {
   primaryGrey,
 } from '../../../styles/theme.styles';
 
-const AddAReviewNav = () => {
-  const [searchVisible, setSearchVisible] = useState(false);
+const AddAReviewNav = ( { searchVisible, setSearchVisible }) => {
 
   return (
     <AddReviewNavCon>

@@ -25,8 +25,15 @@ const { Header, Sider, Content } = Layout;
 
 const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
   const [collapsed, setCollapsed] = useState(false);
+  const [searchVisible, setSearchVisible] = useState(false);
+
   const toggle = () => {
     setCollapsed(!collapsed);
+  };
+
+  const toggleSearch = evt => {
+    evt.stopPropagation();
+    setSearchVisible(!searchVisible);
   };
 
   return (
@@ -42,7 +49,10 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
                 collapsed={collapsed}
                 className="side-nav"
                 collapsedWidth={
-                  window.screen.width >= 1024 && window.screen.height >= 768 ? 80 : 0 }
+                  window.screen.width >= 1024 && window.screen.height >= 768
+                    ? 80
+                    : 0
+                }
               >
                 <div className="logo">
                   <img
@@ -84,6 +94,13 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
                     <Button type="button" className="trigger" onClick={toggle}>
                       <Icon type={collapsed ? 'menu-unfold' : 'menu-fold'} />
                     </Button>
+                    <div className="mobile-logo-con">
+                      <img
+                        src={logo}
+                        alt="Lambda logo"
+                        className="mobile-logo"
+                      />
+                    </div>
 
                     <Button
                       type="link"
@@ -95,7 +112,10 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
                     </Button>
                   </div>
                 </Header>
-                <AddAReviewNav />
+                <AddAReviewNav
+                  searchVisible={searchVisible}
+                  setSearchVisible={setSearchVisible}
+                />
                 <Content
                   style={{
                     padding: 24,
@@ -104,6 +124,12 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
                   }}
                 >
                   <Component {...props} />
+                  <SearchButton onClick={toggleSearch}>
+                    <Icon
+                      type="search"
+                      style={{ fontSize: '1.5rem', color: 'white' }}
+                    />
+                  </SearchButton>
                 </Content>
               </Layout>
             </Layout>
@@ -139,7 +165,7 @@ const StyledContainer = styled.div`
         height: auto;
       }
       h2 {
-        color: #BB1333;
+        color: #bb1333;
         padding-left: 1em;
         font-size: 1.1rem;
         font-weight: 600;
@@ -183,6 +209,11 @@ const StyledContainer = styled.div`
             font-size: 1.3rem;
           }
         }
+
+        .mobile-logo-con {
+          display: none;
+        }
+
         .sign-out-btn {
           padding-right: 4em;
           color: ${textGrey};
@@ -193,7 +224,7 @@ const StyledContainer = styled.div`
           }
 
           &:hover {
-            color: #BB1333;
+            color: #bb1333;
           }
         }
       }
@@ -203,5 +234,29 @@ const StyledContainer = styled.div`
       margin: 10px 16px;
       overflow-y: scroll;
     }
+  }
+`;
+
+const SearchButton = styled.div`
+  background-color: #bb1333;
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+  display: none;
+  @media ${tabletPortrait} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  @media ${mobilePortrait} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .ant-icon {
+    color: white !important;
   }
 `;
