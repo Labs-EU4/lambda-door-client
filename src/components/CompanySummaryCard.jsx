@@ -20,10 +20,11 @@ const CardBottom = styled.div`
   position: absolute;
   bottom: 0;
   display: flex;
-  width: 100%;
-  padding: 1rem;
+  width: 50%;
+  padding: 0;
+  margin-bottom: 1rem;
   justify-content: space-between;
-  z-index: -1;
+  z-index: 0;
 `;
 
 export default function CompanySummaryCard(props) {
@@ -35,27 +36,25 @@ export default function CompanySummaryCard(props) {
           <h3>{name}</h3>
           <StyledP>{text}</StyledP>
         </div>
-        {/* <p style={{ marginBottom: 0 }}>Link: </p> */}
+        <CardBottom>
+          <div>
+            {rating && (
+              <Rate
+                disabled
+                allowHalf
+                defaultValue={Math.round(rating * 10) / 10}
+              />
+            )}
+          </div>
+          <div>
+            {website && (
+              <Website href={website} target="_blank" rel="noopener noreferrer">
+                {website}
+              </Website>
+            )}
+          </div>
+        </CardBottom>
       </Link>
-
-      <CardBottom>
-        <div>
-          {rating && (
-            <Rate
-              disabled
-              allowHalf
-              defaultValue={Math.round(rating * 10) / 10}
-            />
-          )}
-        </div>
-        <div>
-          {website && (
-            <Website href={website} target="_blank" rel="noopener noreferrer">
-              {website}
-            </Website>
-          )}
-        </div>
-      </CardBottom>
     </div>
   );
 }
