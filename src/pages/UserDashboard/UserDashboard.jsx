@@ -90,22 +90,22 @@ export const UserDashboard = ({
     <StyledContainer>
       <div className="top-layout">
         <div>
-          <h2>
+          <h2 style={{ color: 'dodgerblue' }}>
             Top Rated Companies
             <Button className="view-button" type="link">
               view all
             </Button>
           </h2>
-          <TopRatedList />
+          <TopRatedList color="dodgerblue" />
         </div>
         <div>
-          <h2>
+          <h2 style={{ color: 'purple' }}>
             Companies with best Salaries
             <Button className="view-button" type="link">
               view all
             </Button>
           </h2>
-          <TopRatedList />
+          <TopRatedList color="purple" />
         </div>
       </div>
       {location && (
@@ -177,9 +177,11 @@ const StyledContainer = styled.div`
       flex-direction: column;
     }
   }
+  .top-rated {
+    color: dodgerblue;
+  }
 
   .bottom-layout h2 {
     margin-top: 3rem;
-    
   }
 `;

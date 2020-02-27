@@ -14,6 +14,7 @@ export const TopRatedList = ({
   authState: {
     credentials: { location },
   },
+  color,
 }) => {
   useEffect(() => {
     getTopRatedReviews();
@@ -36,6 +37,7 @@ export const TopRatedList = ({
                 id={topRated.id}
                 rating={topRated.average_rating}
                 website={topRated.website}
+                color={color}
               />
             ))
           ) : (
@@ -48,6 +50,7 @@ export const TopRatedList = ({
                 id={topRated.id}
                 rating={topRated.average_rating}
                 website={topRated.website}
+                color={color}
               />
             ))
           )}

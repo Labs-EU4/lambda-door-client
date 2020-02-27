@@ -23,6 +23,7 @@ export const ClosestLocationList = ({
                 id={closest.id}
                 website={closest.website}
                 rating={closest.rating}
+                color={closest.color}
               />
             ))
           ) : (
