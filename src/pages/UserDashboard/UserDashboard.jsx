@@ -6,9 +6,10 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { Spin } from 'antd';
+import { Spin, Button } from 'antd';
 import TopRatedList from '../../components/UserDashboard/TopRated/TopRatedList';
 import ClosestLocationList from '../../components/UserDashboard/UserLocationComp/ClosestLocationList';
+
 import { editProfile } from '../../state/actions/user';
 import { getLocation } from '../../utils/getLocation';
 import { LoginUser, SetAuthenticated } from '../../state/actions/auth';
@@ -89,8 +90,22 @@ export const UserDashboard = ({
     <StyledContainer>
       <div className="top-layout">
         <div>
-          <h2>Top Rated Companies</h2>
-          <TopRatedList />
+          <h2 style={{ color: 'dodgerblue' }}>
+            Top Rated Companies
+            <Button className="view-button" type="link">
+              view all
+            </Button>
+          </h2>
+          <TopRatedList color="dodgerblue" />
+        </div>
+        <div>
+          <h2 style={{ color: 'purple' }}>
+            Companies with best Salaries
+            <Button className="view-button" type="link">
+              view all
+            </Button>
+          </h2>
+          <TopRatedList color="purple" />
         </div>
       </div>
       {location && (
@@ -137,13 +152,17 @@ const StyledContainer = styled.div`
   h2 {
     font-size: 1.1rem;
     font-weight: 600;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .view-button {
+    color: grey;
   }
   .top-layout {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: baseline;
-    
 
     & > div {
       width: calc(50% - 1.5rem);
@@ -158,8 +177,11 @@ const StyledContainer = styled.div`
       flex-direction: column;
     }
   }
+  .top-rated {
+    color: dodgerblue;
+  }
 
-  .bottom-layout {
+  .bottom-layout h2 {
     margin-top: 3rem;
   }
 `;

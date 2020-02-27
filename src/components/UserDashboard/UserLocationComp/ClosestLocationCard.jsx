@@ -20,12 +20,12 @@ const StyledP = styled.p`
 `;
 
 export default function ClosestLocationCard(props) {
-  const { text, name, id, website } = props;
+  const { text, name, id, website, color } = props;
   return (
     <div className="cards">
       <Link to={`company-page/${id}`} className="nav-link">
         <div>
-          <h3>{name}</h3>
+          <h3 style={{ color: color }}>{name}</h3>
           <StyledP>{text}</StyledP>
         </div>
         {/* <p style={{ marginBottom: 0 }}>Link: </p> */}

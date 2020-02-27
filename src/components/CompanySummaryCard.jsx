@@ -28,12 +28,12 @@ const CardBottom = styled.div`
 `;
 
 export default function CompanySummaryCard(props) {
-  const { text, name, id, website, rating } = props;
+  const { text, name, id, website, rating, color } = props;
   return (
     <div className="cards">
       <Link to={`company-page/${id}`} className="nav-link">
         <div>
-          <h3>{name}</h3>
+          <h3 style={{ color: color }}>{name}</h3>
           <StyledP>{text}</StyledP>
         </div>
         <CardBottom>
