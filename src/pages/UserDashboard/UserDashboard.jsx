@@ -6,7 +6,7 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { Spin } from 'antd';
+import { Spin, Button } from 'antd';
 import TopRatedList from '../../components/UserDashboard/TopRated/TopRatedList';
 import ClosestLocationList from '../../components/UserDashboard/UserLocationComp/ClosestLocationList';
 
@@ -90,22 +90,21 @@ export const UserDashboard = ({
     <StyledContainer>
       <div className="top-layout">
         <div>
-          <h2>Top Rated Companies</h2>
-          <TopRatedList />
-
-        </div>
-        <div>
-          <h2>Remote Friendly Companies</h2>
-          <TopRatedList />
-        </div>
-      </div>
-      <div className="top-layout">
-        <div>
-          <h2>Companies with the best culture</h2>
+          <h2>
+            Top Rated Companies
+            <Button className="view-button" type="link">
+              view all
+            </Button>
+          </h2>
           <TopRatedList />
         </div>
         <div>
-          <h2>Supports Visa and relocation</h2>
+          <h2>
+            Companies with best Salaries
+            <Button className="view-button" type="link">
+              view all
+            </Button>
+          </h2>
           <TopRatedList />
         </div>
       </div>
@@ -153,7 +152,12 @@ const StyledContainer = styled.div`
   h2 {
     font-size: 1.1rem;
     font-weight: 600;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .view-button {
+    color: grey;
   }
   .top-layout {
     display: flex;
@@ -174,7 +178,8 @@ const StyledContainer = styled.div`
     }
   }
 
-  .bottom-layout {
+  .bottom-layout h2 {
     margin-top: 3rem;
+    
   }
 `;
