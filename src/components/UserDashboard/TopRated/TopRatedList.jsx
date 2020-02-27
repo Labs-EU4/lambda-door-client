@@ -65,7 +65,7 @@ export default connect(state => state, { getTopRatedReviews })(TopRatedList);
 
 const StyledDiv = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   grid-gap: 1.5rem;
   position: relative;
   min-height: 300px;
@@ -77,7 +77,7 @@ const StyledDiv = styled.div`
   .cards {
     position: relative;
     height: 150px;
-    max-width: 350px;
+    max-width: 395px;
 
     a {
       position: absolute;

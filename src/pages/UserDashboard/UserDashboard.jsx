@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import { Spin } from 'antd';
 import TopRatedList from '../../components/UserDashboard/TopRated/TopRatedList';
 import ClosestLocationList from '../../components/UserDashboard/UserLocationComp/ClosestLocationList';
+
 import { editProfile } from '../../state/actions/user';
 import { getLocation } from '../../utils/getLocation';
 import { LoginUser, SetAuthenticated } from '../../state/actions/auth';
@@ -91,6 +92,21 @@ export const UserDashboard = ({
         <div>
           <h2>Top Rated Companies</h2>
           <TopRatedList />
+
+        </div>
+        <div>
+          <h2>Remote Friendly Companies</h2>
+          <TopRatedList />
+        </div>
+      </div>
+      <div className="top-layout">
+        <div>
+          <h2>Companies with the best culture</h2>
+          <TopRatedList />
+        </div>
+        <div>
+          <h2>Supports Visa and relocation</h2>
+          <TopRatedList />
         </div>
       </div>
       {location && (
@@ -141,9 +157,8 @@ const StyledContainer = styled.div`
   }
   .top-layout {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: baseline;
-    
 
     & > div {
       width: calc(50% - 1.5rem);
