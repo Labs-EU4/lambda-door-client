@@ -9,7 +9,6 @@ import styled from 'styled-components';
 import { Spin } from 'antd';
 import TopRatedList from '../../components/UserDashboard/TopRated/TopRatedList';
 import ClosestLocationList from '../../components/UserDashboard/UserLocationComp/ClosestLocationList';
-import JobTitleVisualization from '../../components/UserDashboard/JobTitleVisualization';
 import { editProfile } from '../../state/actions/user';
 import { getLocation } from '../../utils/getLocation';
 import { LoginUser, SetAuthenticated } from '../../state/actions/auth';
@@ -93,10 +92,6 @@ export const UserDashboard = ({
           <h2>Top Rated Companies</h2>
           <TopRatedList />
         </div>
-        <div>
-          <h2>Popular Job Roles</h2>
-          <JobTitleVisualization />
-        </div>
       </div>
       {location && (
         <div className="bottom-layout">
@@ -148,6 +143,7 @@ const StyledContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    
 
     & > div {
       width: calc(50% - 1.5rem);
