@@ -78,6 +78,10 @@ const StyledDiv = styled.div`
     grid-template-columns: repeat(1, 1fr);
   }
 
+  @media (max-width: 500px) {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+
   .cards {
     position: relative;
     height: 150px;
