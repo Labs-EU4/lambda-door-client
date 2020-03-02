@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import axios from 'axios';
 
 import { Input, Switch, Form, Button, Icon, AutoComplete } from 'antd';
 import styled from 'styled-components';
@@ -22,6 +21,7 @@ const SalaryReview = ({
   addSalaryReview,
   getCurrencyRates,
   companies: { companies },
+  currencyRates: { currencyRates },
   authState: {
     credentials: { id },
   },
@@ -41,10 +41,26 @@ const SalaryReview = ({
     is_accepting_questions: false,
   });
   const [loading, setLoading] = useState(false);
+  console.log(currencyRates)
+  fx.base = currencyRates.base;
+
+  fx.rates = currencyRates.rates;
+
+  console.log(fx.base, fx.rates);
 
   useEffect(() => {
     getCurrencyRates();
-  }, [])
+  }, [getCurrencyRates]);
+
+  const convertCurrency = () => {
+
+    const { unit } = formValues;
+
+    fx.base = currencyRates.base;
+
+    fx.rates = currencyRates.rates;
+
+  }
 
   const handleSubmit = async e => {
     e.preventDefault();

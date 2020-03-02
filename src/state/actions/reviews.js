@@ -255,27 +255,25 @@ export const getSalaryReviews = id => async dispatch => {
   }
 };
 
-export const getCurrencyRates = () => dispatch => {
+export const getCurrencyRates = () => async dispatch => {
   const exchangeApi = `https://api.exchangeratesapi.io/latest?base=USD`;
 
   dispatch({
     type: types.GET_CURRENCY_RATES,
   })
 
-  axios
-    .get(exchangeApi)
-    .then(res => {
-      debugger
-      dispatch({
-        type: types.GET_CURRENCY_RATES_SUCCESS,
-        payload: res,
-      })
+  try {
+    const response = await axios.get(exchangeApi);
+    dispatch({
+      type: types.GET_CURRENCY_RATES_SUCCESS,
+      payload: response.data,
     })
-    .catch(err => {
-      dispatch({
-        type: types.GET_CURRENCY_RATES_FAILURE,
-      })
-    });
+  } catch(error) {
+    dispatch({
+      type: types.GET_CURRENCY_RATES_FAILURE,
+      payload: error,
+    })
+  }
 };
 
 export const addSalaryReview = (review, id, history) => async dispatch => {
