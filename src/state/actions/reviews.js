@@ -2,6 +2,7 @@ import axios from 'axios';
 import * as types from '../types';
 import openNotification from '../../utils/openNotification';
 import failureNotification from '../../utils/failureNotification';
+import ActionButton from 'antd/lib/modal/ActionButton';
 
 export const getReviewsByCompanyId = id => async dispatch => {
   dispatch({
@@ -254,6 +255,29 @@ export const getSalaryReviews = id => async dispatch => {
   }
 };
 
+export const getCurrencyRates = () => dispatch => {
+  const exchangeApi = `https://api.exchangeratesapi.io/latest?base=USD`;
+
+  dispatch({
+    type: types.GET_CURRENCY_RATES,
+  })
+
+  axios
+    .get(exchangeApi)
+    .then(res => {
+      debugger
+      dispatch({
+        type: types.GET_CURRENCY_RATES_SUCCESS,
+        payload: res,
+      })
+    })
+    .catch(err => {
+      dispatch({
+        type: types.GET_CURRENCY_RATES_FAILURE,
+      })
+    });
+};
+
 export const addSalaryReview = (review, id, history) => async dispatch => {
   dispatch({
     type: types.ADD_SALARY_REVIEW,
@@ -279,6 +303,7 @@ export const addSalaryReview = (review, id, history) => async dispatch => {
     failureNotification('Review could not be added');
   }
 };
+
 export const deleteSalaryReview = (id, history) => async dispatch => {
   dispatch({
     type: types.DELETE_SALARY_REVIEWS,

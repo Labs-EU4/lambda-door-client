@@ -1,21 +1,26 @@
 /* eslint-disable react/jsx-curly-newline */
 /* eslint-disable no-shadow */
-import React, { useState } from 'react';
-import { Input, Switch, Form, Button, Icon, AutoComplete } from 'antd';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios';
+
+import { Input, Switch, Form, Button, Icon, AutoComplete } from 'antd';
+import styled from 'styled-components';
 import { mobilePortrait, tabletPortrait } from '../../styles/theme.styles';
+
 import currencies from '../../utils/currencies';
 import Select from '../../utils/select';
 import AutoCompleteComponent from '../../utils/autocomplete';
-import { addSalaryReview } from '../../state/actions/reviews';
+
+import { addSalaryReview, getCurrencyRates } from '../../state/actions/reviews';
 
 const { TextArea } = Input;
 const { Option } = AutoComplete;
 
 const SalaryReview = ({
   addSalaryReview,
+  getCurrencyRates,
   companies: { companies },
   authState: {
     credentials: { id },
@@ -29,12 +34,17 @@ const SalaryReview = ({
     job_title: '',
     description: '',
     currency: '',
+    base_salary: '',
     unit: '',
     is_current_employee: false,
     is_anonymous: false,
     is_accepting_questions: false,
   });
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    getCurrencyRates();
+  }, [])
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -44,6 +54,7 @@ const SalaryReview = ({
 
     review.salary = Number(currency);
     review.currency = unit;
+    review.base_salary = 'something';
 
     await addSalaryReview(review, id, history);
     setLoading(false);
@@ -74,7 +85,10 @@ const SalaryReview = ({
   };
 
   const handleChange = event => {
-    setFormValues({ ...formValues, [event.target.name]: event.target.value });
+    setFormValues({
+      ...formValues,
+      [event.target.name]: event.target.value,
+    });
   };
 
   const handleAnonymous = value => {
@@ -222,7 +236,7 @@ const SalaryReview = ({
 };
 
 export default withRouter(
-  connect(state => state, { addSalaryReview })(SalaryReview)
+  connect(state => state, { addSalaryReview, getCurrencyRates })(SalaryReview)
 );
 
 const StyledContainer = styled.div`
