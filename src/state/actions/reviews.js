@@ -304,7 +304,6 @@ export const deleteSalaryReview = (id, history) => async dispatch => {
       payload: error.message || 'Something went wrong.',
     });
     failureNotification('Review could not be deleted');
-    console.log(error.message);
   }
 };
 

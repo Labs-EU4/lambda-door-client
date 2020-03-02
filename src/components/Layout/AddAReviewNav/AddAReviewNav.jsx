@@ -15,7 +15,7 @@ const AddAReviewNav = ({ searchVisible, setSearchVisible }) => {
       />
 
       {/* Add a review button */}
-      <Link exact to="/add-review">
+      <Link exact="true" to="/add-review">
         <Button type="primary" icon="plus">
           Add a review
         </Button>
