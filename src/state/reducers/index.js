@@ -6,6 +6,7 @@ import { topRatedReviewsReducer } from './topRatedReviews';
 import { closestCompaniesReducer } from './closestCompanies';
 import { companiesReducer } from './companies';
 import { avgSalariesReducer } from './avgSalaries';
+import {highestSalaryReducer} from './highestSalary';
 import companyReviewsReducer from './singleCompany';
 import singleReviewReducer from './singleReview';
 import searchReducer from './search';
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   singleCompanyReviews: companyReviewsReducer,
   singleReview: singleReviewReducer,
   search: searchReducer,
+  highestSalaries: highestSalaryReducer,
 });
 
 export default rootReducer;
