@@ -4,18 +4,22 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { Input, Switch, Form, Button, Icon, AutoComplete } from 'antd';
+import { fx } from 'money';
+
+import { Input, Switch, Form, Button, Icon, AutoComplete, Select } from 'antd';
 import styled from 'styled-components';
 import { mobilePortrait, tabletPortrait } from '../../styles/theme.styles';
 
 import currencies from '../../utils/currencies';
-import Select from '../../utils/select';
+// import Select from '../../utils/select';
 import AutoCompleteComponent from '../../utils/autocomplete';
 
 import { addSalaryReview, getCurrencyRates } from '../../state/actions/reviews';
+import { getInterests } from '../../state/actions/interests';
 
 const { TextArea } = Input;
-const { Option } = AutoComplete;
+// const { Option } = AutoComplete;
+const { Option } = Select;
 
 const SalaryReview = ({
   addSalaryReview,
@@ -25,6 +29,7 @@ const SalaryReview = ({
   authState: {
     credentials: { id },
   },
+  getInterests,
   allInterests,
   history,
 }) => {
@@ -34,45 +39,55 @@ const SalaryReview = ({
     job_title: '',
     description: '',
     currency: '',
-    base_salary: '',
     unit: '',
     is_current_employee: false,
     is_anonymous: false,
     is_accepting_questions: false,
   });
   const [loading, setLoading] = useState(false);
-  console.log(currencyRates)
-  fx.base = currencyRates.base;
-
-  fx.rates = currencyRates.rates;
-
-  console.log(fx.base, fx.rates);
 
   useEffect(() => {
     getCurrencyRates();
-  }, [getCurrencyRates]);
+    getInterests();
+  }, []);
 
-  const convertCurrency = () => {
-
-    const { unit } = formValues;
-
-    fx.base = currencyRates.base;
-
-    fx.rates = currencyRates.rates;
-
-  }
+  console.log(currencyRates);
+  console.log(`formValues`, formValues);
 
   const handleSubmit = async e => {
     e.preventDefault();
     setLoading(true);
-    const { currency, unit, ...rest } = formValues;
-    const review = { ...rest };
+    // const { currency, unit, ...rest } = formValues;
+    // const review = { ...rest };
+    const { company_id, interest_id, job_title, description, is_current_employee, is_anonymous, is_accepting_questions } = formValues;
 
-    review.salary = Number(currency);
-    review.currency = unit;
-    review.base_salary = 'something';
+    const review = {
+      company_id,
+      interest_id,
+      job_title,
+      description,
+      is_current_employee,
+      is_anonymous,
+      is_accepting_questions,
+    };
 
-    await addSalaryReview(review, id, history);
+    fx.base = currencyRates.base;
+    fx.rates = currencyRates.rates;
+
+    const convertedSalary = fx.convert(Number(formValues.currency), {
+      from: formValues.unit.key,
+      to: fx.base,
+    });
+    
+    const currency = formValues.unit.label;
+    const salary = Number(formValues.currency);
+    const base_salary = convertedSalary;
+
+    await addSalaryReview(
+      { salary, currency, base_salary, ...review },
+      id,
+      history
+    );
     setLoading(false);
   };
 
@@ -152,15 +167,14 @@ const SalaryReview = ({
         </Form.Item>
         <Form.Item label="Job Category">
           <Select
-            placeholder="Category"
-            arr={allInterests.interests.map(obj => {
-              return {
-                id: obj.id,
-                name: obj.interest,
-              };
+            labelInValue
+            onChange={e => handleComponentChange('interest_id', Number(e.key))}
+            placeholder="Pick Category"
+          >
+            {allInterests.interests.map(obj => {
+              return <Option key={obj.id}>{obj.interest}</Option>;
             })}
-            onChange={handleComponentChange}
-          />
+          </Select>
         </Form.Item>
         <Form.Item label="Job Description">
           <TextArea
@@ -183,11 +197,11 @@ const SalaryReview = ({
               />
             </div>
             <div className="currency" style={{ width: '60%' }}>
-              <AutoComplete
-                label="Currency"
-                placeholder="Currency"
-                optionLabelProp="value"
+              <Select
+                labelInValue
+                defaultValue={{ key: 'USD' }}
                 onChange={e => handleComponentChange('unit', e)}
+                placeholder="Pick currency"
                 filterOption={(inputValue, option) => {
                   if (
                     option.key.toLowerCase().includes(inputValue.toLowerCase())
@@ -196,14 +210,15 @@ const SalaryReview = ({
                   }
                   return false;
                 }}
-                dataSource={currencies.map(elem => (
-                  <Option key={elem.name} text={elem.name} value={elem.name}>
-                    <p>{elem.name}</p>
-                  </Option>
-                ))}
               >
-                <Input size="default" />
-              </AutoComplete>
+                {currencies.map((elem, i) => {
+                  return (
+                    <Option key={i} value={elem.code}>
+                      {elem.name}
+                    </Option>
+                  );
+                })}
+              </Select>
             </div>
           </EmployeeInfo>
         </Form.Item>
@@ -252,7 +267,9 @@ const SalaryReview = ({
 };
 
 export default withRouter(
-  connect(state => state, { addSalaryReview, getCurrencyRates })(SalaryReview)
+  connect(state => state, { addSalaryReview, getCurrencyRates, getInterests })(
+    SalaryReview
+  )
 );
 
 const StyledContainer = styled.div`
