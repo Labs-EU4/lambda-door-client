@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Tabs } from 'antd';
+import { Tabs, Alert } from 'antd';
 import styled from 'styled-components';
 import Select from '../../utils/select';
 import AutoCompleteComponent from '../../utils/autocomplete';
@@ -56,6 +56,8 @@ const AddReview = ({
     text: '',
   });
 
+  const [errors, setErrors] = useState({});
+
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async e => {
@@ -107,7 +109,27 @@ const AddReview = ({
   };
 
   const handleChange = event => {
+    event.persist();
+    console.log(event);
+
     setFormValues({ ...formValues, [event.target.name]: event.target.value });
+
+    let error = '';
+
+    switch (event.target.name) {
+      case 'review':
+      case 'description':
+      case 'text':
+        error =
+          event.target.value.length < 5 || event.target.value.length > 255
+            ? 'Review must be 5 to 255 characters long!'
+            : '';
+        break;
+      default:
+        break;
+    }
+
+    setErrors({ ...errors, [event.target.name]: error });
   };
 
   const handleComponentChange = (name, value) => {
@@ -225,7 +247,13 @@ const AddReview = ({
             placeholder="Please share some of the pros and cons of working at this company"
             name="review"
             onChange={handleChange}
+            maxLength="255"
+            minLength="5"
+            required
           />
+          {errors.review && (
+            <Alert type="error" message={errors.review} showIcon />
+          )}
         </Form.Item>
         <h3>
           <b>Salary Review</b>
@@ -255,7 +283,13 @@ const AddReview = ({
             name="description"
             placeholder="Please share with us what the job role involves"
             onChange={handleChange}
+            maxLength="255"
+            minLength="5"
+            required
           />
+          {errors.description && (
+            <Alert type="error" message={errors.description} showIcon />
+          )}
         </Form.Item>
         <Form.Item label="Salary">
           <div
@@ -307,12 +341,13 @@ const AddReview = ({
             rows={10}
             name="text"
             placeholder="Please share the steps involved in the interview process"
-            onChange={e =>
-              setFormValues({ ...formValues, text: e.target.value })
-            }
+            onChange={handleChange}
+            maxLength="255"
+            minLength="5"
+            required
           />
+          {errors.text && <Alert type="error" message={errors.text} showIcon />}
         </Form.Item>
-
         <Button
           type="primary"
           htmlType="submit"
@@ -322,7 +357,9 @@ const AddReview = ({
             Boolean(
               Object.keys(formValues).filter(elem => formValues[elem] === '')
                 .length
-            ) || Number(formValues.company_id) !== formValues.company_id
+            ) ||
+            Number(formValues.company_id) !== formValues.company_id ||
+            Object.values(errors).filter(elem => elem !== '').length // if there is more than 0 non empty properties on the errors object
           }
         >
           Submit
