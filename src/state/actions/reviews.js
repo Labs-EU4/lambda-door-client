@@ -286,7 +286,6 @@ export const addSalaryReview = (review, id, history) => async dispatch => {
       `${process.env.REACT_APP_BACKEND_URL}/salaryreviews/`,
       { ...review, user_id: id }
     );
-    debugger
     dispatch({
       type: types.ADD_SALARY_REVIEW_SUCCESS,
       payload: response.data,

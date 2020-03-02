@@ -51,40 +51,31 @@ const SalaryReview = ({
     getInterests();
   }, []);
 
-  console.log(currencyRates);
-  console.log(`formValues`, formValues);
-
   const handleSubmit = async e => {
     e.preventDefault();
     setLoading(true);
-    // const { currency, unit, ...rest } = formValues;
-    // const review = { ...rest };
-    const { company_id, interest_id, job_title, description, is_current_employee, is_anonymous, is_accepting_questions } = formValues;
+    const { currency, unit, ...rest } = formValues;
+    const review = { ...rest };
 
-    const review = {
-      company_id,
-      interest_id,
-      job_title,
-      description,
-      is_current_employee,
-      is_anonymous,
-      is_accepting_questions,
-    };
+    const otherRates = {
+      "NGN": 360,
+    }
 
     fx.base = currencyRates.base;
-    fx.rates = currencyRates.rates;
+    fx.rates = { ...currencyRates.rates, ...otherRates };
 
-    const convertedSalary = fx.convert(Number(formValues.currency), {
-      from: formValues.unit.key,
+    const convertedSalary = fx.convert(Number(currency), {
+      from: unit.key,
       to: fx.base,
     });
+
     
-    const currency = formValues.unit.label;
-    const salary = Number(formValues.currency);
-    const base_salary = convertedSalary;
+    review['salary'] = Number(currency)
+    review['currency'] = unit.label;
+    review['base_salary'] = Math.round(convertedSalary);
 
     await addSalaryReview(
-      { salary, currency, base_salary, ...review },
+      review,
       id,
       history
     );
