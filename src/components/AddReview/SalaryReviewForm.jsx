@@ -14,6 +14,7 @@ import { addSalaryReview } from '../../state/actions/reviews';
 const { TextArea } = Input;
 const { Option } = AutoComplete;
 
+
 const SalaryReview = ({
   addSalaryReview,
   companies: { companies },
@@ -220,6 +221,7 @@ const SalaryReview = ({
     </StyledContainer>
   );
 };
+
 
 export default withRouter(
   connect(state => state, { addSalaryReview })(SalaryReview)

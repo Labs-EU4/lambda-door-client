@@ -10,7 +10,6 @@ export const getHighestSalary = () => async dispatch => {
     const response = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/salaryreviews/highest/`
     );
-    console.log(response);
     dispatch({
       type: types.GET_HIGHEST_SUCCESS,
       payload: response.data,

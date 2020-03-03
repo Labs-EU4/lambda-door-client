@@ -109,6 +109,9 @@ const Interests = ({
   );
 };
 
-export default connect(state => state, { removeInterest, addInterest, getInterests, getUsersInterests  })(
-  Interests
-);
+export default connect(state => state, {
+  removeInterest,
+  addInterest,
+  getInterests,
+  getUsersInterests,
+})(Interests);
