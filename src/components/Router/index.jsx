@@ -34,6 +34,7 @@ import { getHighestSalary } from '../../state/actions/highestSalaries';
 import SearchResults from '../Layout/Search/SearchResults';
 import DetailedSalarySearchCard from '../Layout/Search/DetailedSalarySearchCard';
 import DetailedInterviewSearchCard from '../Layout/Search/DetailedInterviewSearchCard';
+import { HighestRated } from '../UserDashboard/TopRated/HighestRated';
 
 const start = async () => {
   const token = localStorage.getItem('token');
@@ -60,6 +61,7 @@ const AppRouter = ({
       <Switch>
         <Route exact path="/" component={Home} />
         <DashboardLayout path="/dashboard" component={UserDashboard} />
+        <DashboardLayout path="/highest" component={HighestRated} />
         <DashboardLayout path="/add-review" component={AddReview} />
         <DashboardLayout path="/company-page/:id" component={CompanyPage} />
         <DashboardLayout path="/reviews" exact component={ManageReviews} />
