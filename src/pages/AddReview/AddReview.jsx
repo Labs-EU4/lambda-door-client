@@ -1,28 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { Tabs, Alert } from 'antd';
-import styled from 'styled-components';
-import Select from '../../utils/select';
-import AutoCompleteComponent from '../../utils/autocomplete';
-
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Input, Rate, Switch, Form, Button, Icon, AutoComplete } from 'antd';
-import AutoCompleteCompany from '../../utils/autocomplete';
+import { Alert } from 'antd';
+import styled from 'styled-components';
+import { fx } from 'money';
 
+import {
+  Input,
+  Rate,
+  Switch,
+  Form,
+  Button,
+  Icon,
+  Select,
+} from 'antd';
+import AutoCompleteCompany from '../../utils/autocomplete';
 import { mobilePortrait, tabletPortrait } from '../../styles/theme.styles';
 
 import { getInterests } from '../../state/actions/interests';
 import {
   addCompanyReview,
-  addSalaryReview,
   addInterviewReview,
+  addSalaryReview,
+  getCurrencyRates,
 } from '../../state/actions/reviews';
+
 import currencies from '../../utils/currencies';
 
-const { TabPane } = Tabs;
 const { TextArea } = Input;
-const { Option } = AutoComplete;
+const { Option } = Select;
 
 const AddReview = ({
   history,
@@ -34,8 +41,10 @@ const AddReview = ({
     credentials: { id },
   },
   addCompanyReview,
-  addSalaryReview,
   addInterviewReview,
+  addSalaryReview,
+  getCurrencyRates,
+  currencyRates: { currencyRates },
 }) => {
   const [formValues, setFormValues] = useState({
     company_id: '',
@@ -60,31 +69,83 @@ const AddReview = ({
 
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      history.push('/');
+    }
+
+    getInterests();
+    getCurrencyRates();
+  }, []);
+
   const handleSubmit = async e => {
     e.preventDefault();
     setLoading(true);
 
-    // formValues.is_current_employee = formValues.is_currently_employed;
+    const {
+      currency,
+      unit,
+      ratings,
+      is_currently_employed,
+      review_headline,
+      review,
+      text,
+      is_accepting_questions,
+      company_id,
+      ...rest
+    } = formValues;
 
-    // setFormValues({
-    //   ...formValues,
-    //   is_current_employee: formValues.is_currently_employed,
-    // });
+    const salaryReview = {
+      company_id,
+      is_accepting_questions,
+      ...rest,
+    };
+    const companyReview = {
+      company_id,
+      ratings,
+      is_currently_employed,
+      review_headline,
+      review,
+      is_accepting_questions,
+    };
 
-    const { currency, unit, ...rest } = formValues;
-    const review = { ...rest };
+    const otherRates = {
+      "NGN": 360,
+    };
 
-    review.salary = Number(currency);
-    review.currency = unit;
+    fx.base = currencyRates.base;
+    fx.rates = {
+      ...currencyRates.rates,
+      ...otherRates,
+    };
 
-    await addCompanyReview({ ...formValues, user_id: id }, id, history);
-    await addSalaryReview(
-      { ...review, is_current_employee: formValues.is_currently_employed },
-      id,
-      history
+    const convertedSalary = fx.convert(Number(currency), {
+      from: unit.key,
+      to: fx.base,
+    });
+
+    salaryReview['salary'] = Number(currency);
+    salaryReview['currency'] = unit.label;
+    salaryReview['base_salary'] = Math.round(convertedSalary);
+
+    console.log(`currencyRates`, currencyRates);
+    console.log(`base`, fx.base);
+    console.log(`rates`, fx.rates);
+    console.log(`salaryReview`, salaryReview);
+    console.log(`companyReview`, companyReview);
+
+    await addCompanyReview({ ...companyReview, user_id: id }, id, history);
+    console.log(
+      `companyId`,
+      addCompanyReview({ ...companyReview, user_id: id }, id, history)
     );
+    await addSalaryReview(salaryReview, id, history);
     await addInterviewReview(
-      { ...formValues, is_current_employee: formValues.is_currently_employed },
+      {
+        ...formValues,
+        is_current_employee: formValues.is_currently_employed,
+      },
       id,
       history
     );
@@ -110,7 +171,6 @@ const AddReview = ({
 
   const handleChange = event => {
     event.persist();
-    console.log(event);
 
     setFormValues({ ...formValues, [event.target.name]: event.target.value });
 
@@ -146,18 +206,6 @@ const AddReview = ({
     });
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      history.push('/');
-    }
-    async function allInterests() {
-      await getInterests();
-    }
-
-    allInterests();
-  }, []);
-
   return (
     <div>
       <h1>
@@ -169,12 +217,6 @@ const AddReview = ({
           <b>General Review</b>
         </h3>
         <Form.Item
-          // validateStatus={
-          //   Number(formValues.company_id) === formValues.company_id ||
-          //   formValues.company_id === ''
-          //     ? 'validating'
-          //     : 'error'
-          // }
           hasFeedback={Number(formValues.company_id) !== formValues.company_id}
           help={
             Number(formValues.company_id) !== formValues.company_id &&
@@ -267,15 +309,14 @@ const AddReview = ({
         </Form.Item>
         <Form.Item label="Job Category">
           <Select
-            placeholder="Category"
-            arr={allInterests.interests.map(obj => {
-              return {
-                id: obj.id,
-                name: obj.interest,
-              };
+            labelInValue
+            onChange={e => handleComponentChange('interest_id', Number(e.key))}
+            placeholder="Pick Category"
+          >
+            {allInterests.interests.map(obj => {
+              return <Option key={obj.id}>{obj.interest}</Option>;
             })}
-            onChange={handleComponentChange}
-          />
+          </Select>
         </Form.Item>
         <Form.Item label="Job Description">
           <TextArea
@@ -309,9 +350,11 @@ const AddReview = ({
               />
             </div>
             <div className="currency" style={{ width: '60%' }}>
-              <AutoComplete
+              <Select
+                labelInValue
+                defaultValue={{ key: 'USD' }}
                 label="Currency"
-                placeholder="Currency"
+                placeholder="Pick currency"
                 optionLabelProp="value"
                 onChange={e => handleComponentChange('unit', e)}
                 filterOption={(inputValue, option) => {
@@ -322,14 +365,15 @@ const AddReview = ({
                   }
                   return false;
                 }}
-                dataSource={currencies.map(elem => (
-                  <Option key={elem.name} text={elem.name} value={elem.name}>
-                    <p>{elem.name}</p>
-                  </Option>
-                ))}
               >
-                <Input size="default" />
-              </AutoComplete>
+                {currencies.map((elem, i) => {
+                  return (
+                    <Option key={i} value={elem.code}>
+                      {elem.name}
+                    </Option>
+                  );
+                })}
+              </Select>
             </div>
           </div>
         </Form.Item>
@@ -375,6 +419,7 @@ export default withRouter(
     addCompanyReview,
     addSalaryReview,
     addInterviewReview,
+    getCurrencyRates,
   })(AddReview)
 );
 
