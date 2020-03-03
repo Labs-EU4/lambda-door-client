@@ -15,12 +15,13 @@ export const TopRatedList = ({
     credentials: { location },
   },
   color,
+  gridTemplate,
 }) => {
   useEffect(() => {
     getTopRatedReviews();
   }, []);
   return (
-    <StyledDiv>
+    <StyledDiv style={{ gridTemplateColumns: gridTemplate }}>
       {!isFetching ? (
         <>
           {topRatedReviews.length === 0 ? (
@@ -75,6 +76,10 @@ const StyledDiv = styled.div`
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(1, 1fr);
+  }
+
+  @media (max-width: 500px) {
+    grid-template-columns: repeat(1, 1fr) !important;
   }
 
   .cards {

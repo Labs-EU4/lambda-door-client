@@ -4,6 +4,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
 import axios from 'axios';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Spin, Button } from 'antd';
@@ -93,9 +94,11 @@ export const UserDashboard = ({
         <div>
           <h2 style={{ color: 'dodgerblue' }}>
             Top Rated Companies
-            <Button className="view-button" type="link">
-              view all
-            </Button>
+            <NavLink to="/highest">
+              <Button className="view-button" type="link">
+                view all
+              </Button>
+            </NavLink>
           </h2>
           <TopRatedList color="dodgerblue" />
         </div>
