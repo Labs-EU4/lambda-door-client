@@ -61,6 +61,14 @@ describe('ConnectedHome', () => {
         companies: [],
         isLoading: false,
       },
+      currencyRates: {
+        currencyRates: {},
+        isSearching: false,
+      },
+      highestSalaries: {
+        highestSalaries: [],
+        isFetching: false,
+      },
       allInterests: {
         interests: [],
         isLoading: false,
