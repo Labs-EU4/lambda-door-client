@@ -92,6 +92,10 @@ describe('ConnectedHome', () => {
         isSearching: false,
         searchResults: [],
       },
+      highestSalaries: {
+        highestSalaries: [],
+        isFetching: false,
+      },
       singleCompanyReviews: {
         isFetching: false,
         reviews: {
