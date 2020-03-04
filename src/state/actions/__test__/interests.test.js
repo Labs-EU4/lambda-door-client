@@ -16,6 +16,12 @@ const interests = {
   interest: 'AI Engineer',
 };
 
+const userInterests = {
+  id: 5,
+  interest: 'Data Science',
+  user_id: 5,
+};
+
 afterEach(rtl.cleanup);
 let wrapper;
 beforeEach(() => {
@@ -54,6 +60,45 @@ describe('Action/types interests testing', () => {
     const store = mockStore({});
     const actions = store.getActions();
     await store.dispatch(getInterests(1));
+    expect(actions[1]).toEqual(expectedAction);
+  });
+});
+
+describe('Action/types user interests testing', () => {
+  it('should execute get user interests data', async () => {
+    const store = mockStore({});
+    const actions = store.getActions();
+    await store.dispatch(getUsersInterests());
+    expect(actions[0]).toEqual({ type: types.GET_USER_INTERESTS });
+  });
+
+  it('should execute fetch user interests data with success', async () => {
+    mock
+      .onGet(`${process.env.REACT_APP_BACKEND_URL}/interests/user/1`)
+      .reply(200, userInterests);
+    const expectedActions = {
+      type: types.GET_USER_INTERESTS_SUCCESS,
+      payload: userInterests,
+    };
+    const store = mockStore({});
+    await store.dispatch(getUsersInterests(1));
+    const actions = store.getActions();
+
+    expect(actions[1]).toEqual(expectedActions);
+  });
+
+  it('should execute fetch Error data', async () => {
+    const code2 = 404;
+    mock
+      .onGet(`${process.env.REACT_APP_BACKEND_URL}/interests/user/1`)
+      .reply(code2, { message: 'Request failed with status code 404' });
+    const expectedAction = {
+      type: types.GET_USER_INTERESTS_FAILURE,
+      payload: `Request failed with status code ${code2}`,
+    };
+    const store = mockStore({});
+    const actions = store.getActions();
+    await store.dispatch(getUsersInterests());
     expect(actions[1]).toEqual(expectedAction);
   });
 });
