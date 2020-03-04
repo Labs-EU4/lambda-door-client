@@ -13,7 +13,6 @@ const StyledP = styled.p`
 
 export default function HighestSalaryCard(props) {
   const { job_title, salary, company, color } = props;
-  console.log(props);
 
   return (
     <div className="cards">
