@@ -13,7 +13,7 @@ const SelectOptions = ({ placeholder, arr, onChange }) => {
   return (
     <Select
       onChange={e => {
-        onChange('interest_id', e);
+        onChange('employment_type', e);
       }}
       placeholder={placeholder}
     >

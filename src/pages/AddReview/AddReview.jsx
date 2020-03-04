@@ -6,15 +6,7 @@ import { Alert } from 'antd';
 import styled from 'styled-components';
 import { fx } from 'money';
 
-import {
-  Input,
-  Rate,
-  Switch,
-  Form,
-  Button,
-  Icon,
-  Select,
-} from 'antd';
+import { Input, Rate, Switch, Form, Button, Icon, Select } from 'antd';
 import AutoCompleteCompany from '../../utils/autocomplete';
 import { mobilePortrait, tabletPortrait } from '../../styles/theme.styles';
 
@@ -35,7 +27,6 @@ const AddReview = ({
   history,
   location,
   companies: { companies },
-  allInterests,
   getInterests,
   authState: {
     credentials: { id },
@@ -48,18 +39,17 @@ const AddReview = ({
 }) => {
   const [formValues, setFormValues] = useState({
     company_id: '',
-    interest_id: '',
+    employment_type: '',
     job_title: '',
     description: '',
     currency: '',
-    unit: '',
+    unit: { key: 'USD', label: 'US Dollar' },
     is_anonymous: false,
     is_current_employee: false,
     is_accepting_questions: false,
 
     ratings: 0,
     is_currently_employed: false,
-    review_headline: '',
     review: '',
 
     text: '',
@@ -75,9 +65,26 @@ const AddReview = ({
       history.push('/');
     }
 
-    getInterests();
     getCurrencyRates();
   }, []);
+  const employmentType = [
+    {
+      id: 1,
+      name: 'Full-time',
+    },
+    {
+      id: 2,
+      name: 'Contract',
+    },
+    {
+      id: 3,
+      name: 'Part-time',
+    },
+    {
+      id: 4,
+      name: 'Interneship',
+    },
+  ];
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -88,7 +95,6 @@ const AddReview = ({
       unit,
       ratings,
       is_currently_employed,
-      review_headline,
       review,
       text,
       is_accepting_questions,
@@ -105,13 +111,12 @@ const AddReview = ({
       company_id,
       ratings,
       is_currently_employed,
-      review_headline,
       review,
       is_accepting_questions,
     };
 
     const otherRates = {
-      "NGN": 360,
+      NGN: 360,
     };
 
     fx.base = currencyRates.base;
@@ -119,6 +124,13 @@ const AddReview = ({
       ...currencyRates.rates,
       ...otherRates,
     };
+
+    console.log(Number(currency));
+
+    console.log(unit);
+    console.log(unit.key);
+    console.log(unit.label);
+    console.log(fx.base);
 
     const convertedSalary = fx.convert(Number(currency), {
       from: unit.key,
@@ -135,10 +147,10 @@ const AddReview = ({
     console.log(`salaryReview`, salaryReview);
     console.log(`companyReview`, companyReview);
 
-    await addCompanyReview({ ...companyReview, user_id: id }, id, history);
-    console.log(
-      `companyId`,
-      addCompanyReview({ ...companyReview, user_id: id }, id, history)
+    await addCompanyReview(
+      { ...companyReview, user_id: id, review_headline: '' },
+      id,
+      history
     );
     await addSalaryReview(salaryReview, id, history);
     await addInterviewReview(
@@ -193,6 +205,8 @@ const AddReview = ({
   };
 
   const handleComponentChange = (name, value) => {
+    console.log(name);
+
     setFormValues({
       ...formValues,
       [name]: value,
@@ -275,14 +289,6 @@ const AddReview = ({
             </div>
           </SwitchContainer>
         </Form.Item>
-        <Form.Item label="Review Headline">
-          <Input
-            name="review_headline"
-            placeholder="Review Headline"
-            onChange={handleChange}
-            maxLength={100}
-          />
-        </Form.Item>
         <Form.Item label="Review">
           <TextArea
             rows={10}
@@ -307,17 +313,22 @@ const AddReview = ({
             onChange={handleChange}
           />
         </Form.Item>
-        <Form.Item label="Job Category">
+        <Form.Item label="Employment Type">
           <Select
-            labelInValue
-            onChange={e => handleComponentChange('interest_id', Number(e.key))}
-            placeholder="Pick Category"
+            name="employment_type"
+            placeholder="Category"
+            onChange={e => handleComponentChange('employment_type', e)}
           >
-            {allInterests.interests.map(obj => {
-              return <Option key={obj.id}>{obj.interest}</Option>;
+            {employmentType.map((elem, i) => {
+              return (
+                <Option key={elem.id} value={elem.id}>
+                  {elem.name}
+                </Option>
+              );
             })}
           </Select>
         </Form.Item>
+
         <Form.Item label="Job Description">
           <TextArea
             rows={5}
@@ -392,6 +403,9 @@ const AddReview = ({
           />
           {errors.text && <Alert type="error" message={errors.text} showIcon />}
         </Form.Item>
+        {JSON.stringify(
+          Object.keys(formValues).filter(elem => formValues[elem] === '')
+        )}
         <Button
           type="primary"
           htmlType="submit"
