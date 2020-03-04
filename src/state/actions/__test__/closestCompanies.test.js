@@ -42,9 +42,7 @@ describe('Action/types for Closest companies', () => {
     });
   });
   it('Should return an array of the closest companies', async () => {
-    await mock
-      .onGet(`${process.env.REACT_APP_BACKEND_URL}/companies/1/closest`)
-      .reply(200, closestCompanies);
+    await mock.onGet().reply(200, closestCompanies);
     const expectedActions = {
       type: types.GET_CLOSEST_COMPANIES_SUCCESS,
       payload: closestCompanies,
@@ -56,9 +54,7 @@ describe('Action/types for Closest companies', () => {
   });
   it('should execute fetch error', async () => {
     const code = 404;
-    await mock
-      .onGet(`${process.env.REACT_APP_BACKEND_URL}/companies/1/closest`)
-      .reply(code);
+    await mock.onGet().reply(code);
     const expectedActions = {
       type: types.GET_CLOSEST_COMPANIES_FAILURE,
       payload: `Request failed with status code ${code}`,
