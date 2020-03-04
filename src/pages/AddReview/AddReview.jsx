@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Alert } from 'antd';
+import { Alert, Input, Rate, Switch, Form, Button, Icon, Select } from 'antd';
 import styled from 'styled-components';
 import { fx } from 'money';
 
-import { Input, Rate, Switch, Form, Button, Icon, Select } from 'antd';
 import AutoCompleteCompany from '../../utils/autocomplete';
 import { mobilePortrait, tabletPortrait } from '../../styles/theme.styles';
+import currencies from '../../utils/currencies';
+import { employmentType } from '../../utils/employmentType';
 
-import { getInterests } from '../../state/actions/interests';
 import {
   addCompanyReview,
   addInterviewReview,
@@ -18,7 +18,6 @@ import {
   getCurrencyRates,
 } from '../../state/actions/reviews';
 
-import currencies from '../../utils/currencies';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -27,7 +26,6 @@ const AddReview = ({
   history,
   location,
   companies: { companies },
-  getInterests,
   authState: {
     credentials: { id },
   },
@@ -43,7 +41,7 @@ const AddReview = ({
     job_title: '',
     description: '',
     currency: '',
-    unit: { key: 'USD', label: 'US Dollar' },
+    unit: '',
     is_anonymous: false,
     is_current_employee: false,
     is_accepting_questions: false,
@@ -67,24 +65,6 @@ const AddReview = ({
 
     getCurrencyRates();
   }, []);
-  const employmentType = [
-    {
-      id: 1,
-      name: 'Full-time',
-    },
-    {
-      id: 2,
-      name: 'Contract',
-    },
-    {
-      id: 3,
-      name: 'Part-time',
-    },
-    {
-      id: 4,
-      name: 'Interneship',
-    },
-  ];
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -93,6 +73,7 @@ const AddReview = ({
     const {
       currency,
       unit,
+      employment_type,
       ratings,
       is_currently_employed,
       review,
@@ -116,7 +97,7 @@ const AddReview = ({
     };
 
     const otherRates = {
-      NGN: 360,
+      'NGN': 360,
     };
 
     fx.base = currencyRates.base;
@@ -125,25 +106,26 @@ const AddReview = ({
       ...otherRates,
     };
 
-    console.log(Number(currency));
-
-    console.log(unit);
-    console.log(unit.key);
-    console.log(unit.label);
-    console.log(fx.base);
-
-    const convertedSalary = fx.convert(Number(currency), {
-      from: unit.key,
+    const convertedSalary = fx.convert(Number(unit), {
+      from: currency.key,
       to: fx.base,
     });
 
-    salaryReview['salary'] = Number(currency);
-    salaryReview['currency'] = unit.label;
+    salaryReview['employment_type'] = employment_type.key;
+    salaryReview['salary'] = Number(unit);
+    salaryReview['currency'] = currency.label;
     salaryReview['base_salary'] = Math.round(convertedSalary);
+
 
     console.log(`currencyRates`, currencyRates);
     console.log(`base`, fx.base);
     console.log(`rates`, fx.rates);
+    console.log(`currency`, currency);
+    console.log(`currency.key`, currency.key);
+    console.log(`currency.label`, currency.label);
+    console.log(`unit`, unit);
+    console.log(`employment_type`, employment_type);
+    console.log(`employment_type.key`, employment_type.key);
     console.log(`salaryReview`, salaryReview);
     console.log(`companyReview`, companyReview);
 
@@ -205,7 +187,10 @@ const AddReview = ({
   };
 
   const handleComponentChange = (name, value) => {
-    console.log(name);
+
+    // console.log(`evt`, evt);
+    // console.log(`name`, name);
+    console.log(`value`, value);
 
     setFormValues({
       ...formValues,
@@ -315,11 +300,12 @@ const AddReview = ({
         </Form.Item>
         <Form.Item label="Employment Type">
           <Select
+            labelInValue
             name="employment_type"
-            placeholder="Category"
+            placeholder="Employment Type"
             onChange={e => handleComponentChange('employment_type', e)}
           >
-            {employmentType.map((elem, i) => {
+            {employmentType.map(elem => {
               return (
                 <Option key={elem.id} value={elem.id}>
                   {elem.name}
@@ -356,18 +342,17 @@ const AddReview = ({
                 type="number"
                 step="0.01"
                 placeholder="Annual Salary"
-                name="currency"
+                name="unit"
                 onChange={handleChange}
               />
             </div>
             <div className="currency" style={{ width: '60%' }}>
               <Select
-                labelInValue
                 defaultValue={{ key: 'USD' }}
+                labelInValue
                 label="Currency"
                 placeholder="Pick currency"
-                optionLabelProp="value"
-                onChange={e => handleComponentChange('unit', e)}
+                onChange={e => handleComponentChange('currency', e)}
                 filterOption={(inputValue, option) => {
                   if (
                     option.key.toLowerCase().includes(inputValue.toLowerCase())
@@ -379,12 +364,37 @@ const AddReview = ({
               >
                 {currencies.map((elem, i) => {
                   return (
-                    <Option key={i} value={elem.code}>
+                    <Option key={i} value={elem.code} label={elem.name}>
                       {elem.name}
                     </Option>
                   );
                 })}
               </Select>
+
+              {/* <Select
+                
+                optionLabelProp="value"
+
+                // label="Currency"
+                // placeholder="Pick currency"
+                // onChange={e => handleComponentChange('unit', e)}
+                // filterOption={(inputValue, option) => {
+                //   if (
+                //     option.key.toLowerCase().includes(inputValue.toLowerCase())
+                //   ) {
+                //     return true;
+                //   }
+                //   return false;
+                // }}
+              >
+                {currencies.map((elem, i) => {
+                  return (
+                    <Option key={i} value={elem.code}>
+                      {elem.name}
+                    </Option>
+                  );
+                })}
+              </Select> */}
             </div>
           </div>
         </Form.Item>
@@ -429,7 +439,6 @@ const AddReview = ({
 
 export default withRouter(
   connect(state => state, {
-    getInterests,
     addCompanyReview,
     addSalaryReview,
     addInterviewReview,
