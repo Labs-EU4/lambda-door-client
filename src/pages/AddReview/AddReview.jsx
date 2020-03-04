@@ -116,19 +116,6 @@ const AddReview = ({
     salaryReview['currency'] = currency.label;
     salaryReview['base_salary'] = Math.round(convertedSalary);
 
-
-    console.log(`currencyRates`, currencyRates);
-    console.log(`base`, fx.base);
-    console.log(`rates`, fx.rates);
-    console.log(`currency`, currency);
-    console.log(`currency.key`, currency.key);
-    console.log(`currency.label`, currency.label);
-    console.log(`unit`, unit);
-    console.log(`employment_type`, employment_type);
-    console.log(`employment_type.key`, employment_type.key);
-    console.log(`salaryReview`, salaryReview);
-    console.log(`companyReview`, companyReview);
-
     await addCompanyReview(
       { ...companyReview, user_id: id, review_headline: '' },
       id,
@@ -187,11 +174,6 @@ const AddReview = ({
   };
 
   const handleComponentChange = (name, value) => {
-
-    // console.log(`evt`, evt);
-    // console.log(`name`, name);
-    console.log(`value`, value);
-
     setFormValues({
       ...formValues,
       [name]: value,
