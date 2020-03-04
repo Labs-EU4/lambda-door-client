@@ -9,14 +9,31 @@ import {
   getCompanyReviews,
   getSalaryReviews,
   getInterviewReviews,
+  addCompanyReview,
 } from '../reviews';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 const mock = new MockAdapter(axios);
-const review = {
-  message: 'This is agreat company to be with',
-};
+
+// const company = {
+//   id: 1,
+//   name: "Alterior Company",
+//   description: "At Bad Rabbit, we make the systems you have work better for you.",
+//   website: "https://www.badrabbit.com",
+//   location: "Portland, OR",
+//   type: "Technology",
+//   logo: "",
+//   latitude: 31,
+//   longitude: -80,
+//   average_rating: null
+// };
+
+const companyReview = [
+  {
+    review: "most rewarding job ever.",
+  }
+];
 
 const salaryReview = {
   message:
@@ -35,7 +52,8 @@ beforeEach(() => {
 });
 
 describe('Action/types company review testing', () => {
-  it('should execute get review data', async () => {
+
+  it('should execute get review data with user Id', async () => {
     const store = mockStore({});
     const actions = store.getActions();
 
@@ -43,21 +61,21 @@ describe('Action/types company review testing', () => {
     expect(actions[0]).toEqual({ type: types.GET_COMPANY_REVIEWS });
   });
 
-  it('should execute fetch review data with success', async () => {
+  it('should execute fetch company review success with user Id', async () => {
     await mock
       .onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/user/1`)
-      .reply(200, review);
-    const expectedActions = {
+      .reply(200, companyReview);
+    const expectedAction = {
       type: types.GET_COMPANY_REVIEWS_SUCCESS,
-      payload: review,
+      payload: companyReview,
     };
     const store = mockStore({});
     const actions = store.getActions();
     await store.dispatch(getCompanyReviews(1));
-    expect(actions[1]).toEqual(expectedActions);
+    expect(actions[1]).toEqual(expectedAction);
   });
 
-  it('should execute fetch Error data', async () => {
+  it('should return Error on fetch company review data with user Id', async () => {
     const code = 401;
     mock
       .onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/user/1`)
@@ -71,6 +89,11 @@ describe('Action/types company review testing', () => {
     await store.dispatch(getCompanyReviews(1));
     expect(actions[1]).toEqual(expectedAction);
   });
+
+  test('should execute get company reviews data with review Id', () => {
+    
+  })
+  
   //   it('Displays a snapshot for company review', () => {
   //     const { asFragment } = wrapper(<getCompanyReviews />);
   //     expect(wrapper(<getCompanyReviews />).container).toMatchSnapshot();
