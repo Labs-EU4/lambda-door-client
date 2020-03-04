@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Spin, Button } from 'antd';
 import TopRatedList from '../../components/UserDashboard/TopRated/TopRatedList';
+import TopRatedSalariesList from '../../components/UserDashboard/TopRated/TopRatedSaleriesList';
 import ClosestLocationList from '../../components/UserDashboard/UserLocationComp/ClosestLocationList';
 
 import { editProfile } from '../../state/actions/user';
@@ -103,12 +104,12 @@ export const UserDashboard = ({
         </div>
         <div>
           <h2 style={{ color: 'purple' }}>
-            Companies with best Salaries
+            Job Titles with best salaries 
             <Button className="view-button" type="link">
               view all
             </Button>
           </h2>
-          <TopRatedList color="purple" />
+          <TopRatedSalariesList color="purple" />
         </div>
       </div>
       {location && (

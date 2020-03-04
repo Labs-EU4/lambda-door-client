@@ -61,6 +61,14 @@ describe('ConnectedHome', () => {
         companies: [],
         isLoading: false,
       },
+      currencyRates: {
+        currencyRates: {},
+        isSearching: false,
+      },
+      highestSalaries: {
+        highestSalaries: [],
+        isFetching: false,
+      },
       allInterests: {
         interests: [],
         isLoading: false,
@@ -83,6 +91,10 @@ describe('ConnectedHome', () => {
       search: {
         isSearching: false,
         searchResults: [],
+      },
+      highestSalaries: {
+        highestSalaries: [],
+        isFetching: false,
       },
       singleCompanyReviews: {
         isFetching: false,

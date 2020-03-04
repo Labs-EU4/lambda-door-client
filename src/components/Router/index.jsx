@@ -30,6 +30,7 @@ import {
 } from '../../state/actions/reviews';
 import { getClosestCompanies } from '../../state/actions/closestCompanies';
 import { getCompanies } from '../../state/actions/companies';
+import { getHighestSalary } from '../../state/actions/highestSalaries';
 import SearchResults from '../Layout/Search/SearchResults';
 import DetailedSalarySearchCard from '../Layout/Search/DetailedSalarySearchCard';
 import DetailedInterviewSearchCard from '../Layout/Search/DetailedInterviewSearchCard';
@@ -41,6 +42,7 @@ const start = async () => {
     const { id } = decode(token);
     await store.dispatch(SetAuthenticated(id));
     await store.dispatch(getCompanies());
+    await store.dispatch(getHighestSalary());
     await store.dispatch(getCompanyReviews(id));
     await store.dispatch(getSalaryReviews(id));
     await store.dispatch(getInterviewReviews(id));
@@ -90,6 +92,11 @@ const AppRouter = ({
           path="/search-results"
           exact
           component={SearchResults}
+        />
+        <DashboardLayout
+          path="/salaryreviews/highest"
+          exact
+          component={SalaryReview}
         />
         <DashboardLayout
           path="/search-results/salary/:id"
