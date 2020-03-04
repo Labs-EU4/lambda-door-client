@@ -41,19 +41,19 @@ describe('Action/types for Closest companies', () => {
       type: types.GET_CLOSEST_COMPANIES,
     });
   });
-  // it('Should return an array of the closest companies', async () => {
-  //   await mock
-  //     .onGet(`${process.env.REACT_APP_BACKEND_URL}/companies/1/closest`)
-  //     .reply(200, closestCompanies);
-  //   const expectedActions = {
-  //     type: types.GET_CLOSEST_COMPANIES_SUCCESS,
-  //     payload: closestCompanies,
-  //   };
-  //   const store = mockStore({});
-  //   const actions = store.getActions();
-  //   await store.dispatch(getClosestCompanies());
-  //   expect(actions[1]).toEqual(expectedActions);
-  // });
+  it('Should return an array of the closest companies', async () => {
+    await mock
+      .onGet(`${process.env.REACT_APP_BACKEND_URL}/companies/1/closest`)
+      .reply(200, closestCompanies);
+    const expectedActions = {
+      type: types.GET_CLOSEST_COMPANIES_SUCCESS,
+      payload: closestCompanies,
+    };
+    const store = mockStore({});
+    const actions = store.getActions();
+    await store.dispatch(getClosestCompanies());
+    expect(actions[1]).toEqual(expectedActions);
+  });
   it('should execute fetch error', async () => {
     const code = 404;
     await mock
