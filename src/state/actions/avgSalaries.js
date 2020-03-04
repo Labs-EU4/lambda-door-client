@@ -2,8 +2,6 @@
 import axios from 'axios';
 import * as types from '../types';
 
-
-
 export const getAvgSalaries = id => async dispatch => {
   dispatch({
     type: types.GET_AVG_SALARIES,
