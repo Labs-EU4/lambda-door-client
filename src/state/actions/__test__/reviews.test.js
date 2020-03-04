@@ -35,7 +35,7 @@ beforeEach(() => {
 });
 
 describe('Action/types company review testing', () => {
-  it('should execute get review data data', async () => {
+  it('should execute get review data', async () => {
     const store = mockStore({});
     const actions = store.getActions();
 
