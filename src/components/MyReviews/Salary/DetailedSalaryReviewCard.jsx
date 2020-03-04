@@ -72,11 +72,11 @@ export const DetailedSalaryReviewCard = ({
   };
 
   const { Option } = Select;
-  const options = jobCategories.map(opt => (
-    <Option key={opt.id} value={opt.id}>
-      {opt.name}
-    </Option>
-  ));
+  // const options = jobCategories.map(opt => (
+  //   <Option key={opt.id} value={opt.id}>
+  //     {opt.name}
+  //   </Option>
+  // ));
 
   return !review ? (
     <Skeleton />
@@ -113,7 +113,7 @@ export const DetailedSalaryReviewCard = ({
             </Paragraph>
           </div>
 
-          <div className="interest">
+          {/* <div className="interest">
             <h3>Job Catergory</h3>
             {isEditing ? (
               <Select
@@ -127,7 +127,7 @@ export const DetailedSalaryReviewCard = ({
             ) : (
               review.interest
             )}
-          </div>
+          </div> */}
         </div>
 
         <div>
