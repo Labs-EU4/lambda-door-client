@@ -75,6 +75,7 @@ const AddReview = ({
       unit,
       employment_type,
       ratings,
+      is_current_employee,
       is_currently_employed,
       review,
       text,
@@ -115,6 +116,7 @@ const AddReview = ({
     salaryReview['salary'] = Number(unit);
     salaryReview['currency'] = currency.label;
     salaryReview['base_salary'] = Math.round(convertedSalary);
+    salaryReview['is_current_employee'] = is_currently_employed;
 
     await addCompanyReview(
       { ...companyReview, user_id: id, review_headline: '' },
@@ -330,7 +332,6 @@ const AddReview = ({
             </div>
             <div className="currency" style={{ width: '60%' }}>
               <Select
-                defaultValue={{ key: 'USD' }}
                 labelInValue
                 label="Currency"
                 placeholder="Pick currency"
