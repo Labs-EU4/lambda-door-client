@@ -14,13 +14,11 @@ const mock = new MockAdapter(axios);
 
 const avgSalaries = [
   {
-    interest_id: 2,
     interest: 'Front End',
     currency: 'USD',
     avg: 95000,
   },
   {
-    interest_id: 4,
     interest: 'Full Stack',
     currency: 'USD',
     avg: 67500,
