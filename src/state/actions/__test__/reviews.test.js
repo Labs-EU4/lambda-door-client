@@ -10,6 +10,7 @@ import {
   getCompanyReviews,
   getReviewsByCompanyId,
   getReviewsByReviewId,
+  deleteCompanyReview,
   getSalaryReviews,
   getInterviewReviews,
 } from '../reviews';
@@ -17,19 +18,6 @@ import {
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 const mock = new MockAdapter(axios);
-
-const company = {
-  id: 1,
-  name: "Alterior Company",
-  description: "At Bad Rabbit, we make the systems you have work better for you.",
-  website: "https://www.badrabbit.com",
-  location: "Portland, OR",
-  type: "Technology",
-  logo: "",
-  latitude: 31,
-  longitude: -80,
-  average_rating: null
-};
 
 const userCompanyReview = [
   {
@@ -95,160 +83,211 @@ beforeEach(() => {
 
 describe('Action/types company review testing', () => {
 
-  it('should execute get review data with user Id', async () => {
-    const store = mockStore({});
-    const actions = store.getActions();
+  describe('Get company review with user Id', () => {
+    it('should execute get review data with user Id', async () => {
+      const store = mockStore({});
+      const actions = store.getActions();
+  
+      await store.dispatch(getCompanyReviews());
+      expect(actions[0]).toEqual({ type: types.GET_COMPANY_REVIEWS });
+    });
+  
+    it('should execute fetch company review success with user Id', async () => {
+      await mock
+        .onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/user/1`)
+        .reply(200, userCompanyReview);
+      const expectedAction = {
+        type: types.GET_COMPANY_REVIEWS_SUCCESS,
+        payload: userCompanyReview,
+      };
+      const store = mockStore({});
+      const actions = store.getActions();
+      await store.dispatch(getCompanyReviews(1));
+      expect(actions[1]).toEqual(expectedAction);
+    });
+  
+    it('should return Error on fetch company review data with user Id', async () => {
+      const code = 401;
+      await mock
+        .onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/user/1`)
+        .reply(code);
+      const expectedAction = {
+        type: types.GET_COMPANY_REVIEWS_FAILURE,
+        payload: `Request failed with status code ${code}`,
+      };
+      const store = mockStore({});
+      const actions = store.getActions();
+      await store.dispatch(getCompanyReviews(1));
+      expect(actions[1]).toEqual(expectedAction);
+    });
+  })
 
-    await store.dispatch(getCompanyReviews());
-    expect(actions[0]).toEqual({ type: types.GET_COMPANY_REVIEWS });
-  });
+  describe('Get company review data with company Id', () => {
+    test('should execute get company reviews data with company Id', async () => {
+      const store = mockStore({});
+      const actions = store.getActions();
+  
+      await store.dispatch(getReviewsByCompanyId(1));
+      expect(actions[0]).toEqual({
+        type: types.GET_SINGLE_COMPANY_REVIEWS,
+      })
+    })
+  
+    test('should execute get company reviews data success with company Id', async () => {
+  
+      await mock
+        .onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/reviews/1`)
+        .reply(200, companyReviews)
+      const store = mockStore({});
+      const actions = store.getActions();
+  
+      await store.dispatch(getReviewsByCompanyId(1));
+      expect(actions[1]).toEqual({
+        type: types.GET_SINGLE_COMPANY_REVIEWS_SUCCESS,
+        payload: companyReviews,
+      })
+    })
+  
+    test('should execute get company reviews error with company Id', async () => {
+      const code = 404;
+      await mock.onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/reviews/1`).reply(code);
+  
+      const expectedAction = {
+        type: types.GET_SINGLE_COMPANY_REVIEWS_FAILURE,
+        payload: `Request failed with status code ${code}`,
+      }
+  
+      const store = mockStore({});
+      const actions = store.getActions();
+      await store.dispatch(getReviewsByCompanyId());
+      expect(actions[1]).toEqual(expectedAction);
+    });
+  })
 
-  it('should execute fetch company review success with user Id', async () => {
-    await mock
-      .onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/user/1`)
-      .reply(200, userCompanyReview);
-    const expectedAction = {
-      type: types.GET_COMPANY_REVIEWS_SUCCESS,
-      payload: userCompanyReview,
-    };
-    const store = mockStore({});
-    const actions = store.getActions();
-    await store.dispatch(getCompanyReviews(1));
-    expect(actions[1]).toEqual(expectedAction);
-  });
+  describe('Get company review data with review Id', () => {
+    test('should execute get company reviews data with review Id', async () => {
+      const store = mockStore({});
+      const actions = store.getActions();
+  
+      await store.dispatch(getReviewsByReviewId(1));
+      expect(actions[0]).toEqual({
+        type: types.GET_SINGLE_REVIEWS,
+      })
+    })
+  
+    test('should execute get company reviews data success with review Id', async () => {
+      await mock
+        .onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/1`)
+        .reply(200, singleCompanyReview)
+      const store = mockStore({});
+      const actions = store.getActions();
+  
+      await store.dispatch(getReviewsByReviewId(1));
+      expect(actions[1]).toEqual({
+        type: types.GET_SINGLE_REVIEWS_SUCCESS,
+        payload: singleCompanyReview,
+      })
+    })
+  
+    test('should execute get company reviews error with review Id', async () => {
+      const code = 404;
+      await mock.onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/1`).reply(code);
+  
+      const expectedAction = {
+        type: types.GET_SINGLE_REVIEWS_FAILURE,
+        payload: `Request failed with status code ${code}`,
+      }
+  
+      const store = mockStore({});
+      const actions = store.getActions();
+      await store.dispatch(getReviewsByReviewId());
+      expect(actions[1]).toEqual(expectedAction);
+    }) 
+  })
 
-  it('should return Error on fetch company review data with user Id', async () => {
-    const code = 401;
-    await mock
-      .onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/user/1`)
-      .reply(code);
-    const expectedAction = {
-      type: types.GET_COMPANY_REVIEWS_FAILURE,
-      payload: `Request failed with status code ${code}`,
-    };
-    const store = mockStore({});
-    const actions = store.getActions();
-    await store.dispatch(getCompanyReviews(1));
-    expect(actions[1]).toEqual(expectedAction);
-  });
+  describe('Add company review with company Id', () => {
+    test('should execute add company reviews data with company Id', async () => {
+      const store = mockStore({});
+      const actions = store.getActions();
 
-  test('should execute get company reviews data with company Id', async () => {
-    const store = mockStore({});
-    const actions = store.getActions();
+      await store.dispatch(addCompanyReview(singleCompanyReview));
+      expect(actions[0]).toEqual({
+        type: types.ADD_COMPANY_REVIEW,
+      })
+    })
 
-    await store.dispatch(getReviewsByCompanyId(1));
-    expect(actions[0]).toEqual({
-      type: types.GET_SINGLE_COMPANY_REVIEWS,
+    test('should execute add company reviews success data with company Id', async () => {
+      await mock
+        .onPost(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/1`)
+        .reply(201, singleCompanyReview)
+      const store = mockStore({});
+      const actions = store.getActions();
+
+      await store.dispatch(addCompanyReview(singleCompanyReview, 1));
+      expect(actions[1]).toEqual({
+        type: types.ADD_COMPANY_REVIEW_SUCCESS,
+        payload: singleCompanyReview,
+      })
+    })
+
+    test('should execute add company reviews error with company Id', async () => {
+      const code = 404;
+      await mock.onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/1`).reply(code);
+
+      const expectedAction = {
+        type: types.ADD_COMPANY_REVIEW_FAILURE,
+        payload: `Request failed with status code ${code}`,
+      }
+
+      const store = mockStore({});
+      const actions = store.getActions();
+      await store.dispatch(addCompanyReview(singleCompanyReview));
+      expect(actions[1]).toEqual(expectedAction);
+    })
+  })
+  
+  describe('Delete company review with company Id', () => {
+    test('should execute delete company with company Id', async () => {
+      const store = mockStore({});
+      const actions = store.getActions();
+  
+      await store.dispatch(deleteCompanyReview(1));
+      expect(actions[0]).toEqual({
+        type: types.DELETE_COMPANY_REVIEWS,
+      })
+    })
+  
+    test('should execute delete company reviews success data with company Id', async () => {
+      await mock
+        .onDelete(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/1`)
+        .reply(204)
+      const store = mockStore({});
+      const actions = store.getActions();
+  
+      await store.dispatch(deleteCompanyReview(1));
+      expect(actions[1]).toEqual({
+        type: types.DELETE_COMPANY_REVIEWS_SUCCESS,
+        payload: 1,
+      })
+    })
+  
+    test('should execute delete company reviews Error data with company Id', async () => {
+      const code = 404;
+      await mock.onDelete(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/1`).reply(code);
+  
+      const expectedAction = {
+        type: types.DELETE_COMPANY_REVIEWS_FAILURE,
+        payload: `Request failed with status code ${code}`,
+      }
+  
+      const store = mockStore({});
+      const actions = store.getActions();
+      await store.dispatch(deleteCompanyReview(1));
+      expect(actions[1]).toEqual(expectedAction);
     })
   })
 
-  test('should execute get company reviews data success with company Id', async () => {
-
-    await mock
-      .onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/reviews/1`)
-      .reply(200, companyReviews)
-    const store = mockStore({});
-    const actions = store.getActions();
-
-    await store.dispatch(getReviewsByCompanyId(1));
-    expect(actions[1]).toEqual({
-      type: types.GET_SINGLE_COMPANY_REVIEWS_SUCCESS,
-      payload: companyReviews,
-    })
-  })
-
-  test('should execute get company reviews error with company Id', async () => {
-    const code = 404;
-    await mock.onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/reviews/1`).reply(code);
-
-    const expectedAction = {
-      type: types.GET_SINGLE_COMPANY_REVIEWS_FAILURE,
-      payload: `Request failed with status code ${code}`,
-    }
-
-    const store = mockStore({});
-    const actions = store.getActions();
-    await store.dispatch(getReviewsByCompanyId());
-    expect(actions[1]).toEqual(expectedAction);
-  });
-
-  test('should execute get company reviews data with review Id', async () => {
-    const store = mockStore({});
-    const actions = store.getActions();
-
-    await store.dispatch(getReviewsByReviewId(1));
-    expect(actions[0]).toEqual({
-      type: types.GET_SINGLE_REVIEWS,
-    })
-  })
-
-  test('should execute get company reviews data success with review Id', async () => {
-    await mock
-      .onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/1`)
-      .reply(200, singleCompanyReview)
-    const store = mockStore({});
-    const actions = store.getActions();
-
-    await store.dispatch(getReviewsByReviewId(1));
-    expect(actions[1]).toEqual({
-      type: types.GET_SINGLE_REVIEWS_SUCCESS,
-      payload: singleCompanyReview,
-    })
-  })
-
-  test('should execute get company reviews error with review Id', async () => {
-    const code = 404;
-    await mock.onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/1`).reply(code);
-
-    const expectedAction = {
-      type: types.GET_SINGLE_REVIEWS_FAILURE,
-      payload: `Request failed with status code ${code}`,
-    }
-
-    const store = mockStore({});
-    const actions = store.getActions();
-    await store.dispatch(getReviewsByReviewId());
-    expect(actions[1]).toEqual(expectedAction);
-  })
-
-  test('should execute add company reviews data with company Id', async () => {
-    const store = mockStore({});
-    const actions = store.getActions();
-
-    await store.dispatch(addCompanyReview(singleCompanyReview));
-    expect(actions[0]).toEqual({
-      type: types.ADD_COMPANY_REVIEW,
-    })
-  })
-
-  test('should execute add company reviews success data with company Id', async () => {
-    await mock
-      .onPost(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/1`)
-      .reply(201, singleCompanyReview)
-    const store = mockStore({});
-    const actions = store.getActions();
-
-    await store.dispatch(addCompanyReview(singleCompanyReview, 1, ));
-    expect(actions[1]).toEqual({
-      type: types.ADD_COMPANY_REVIEW_SUCCESS,
-      payload: singleCompanyReview,
-    })
-  })
-
-  test('should execute get company reviews error with review Id', async () => {
-    const code = 404;
-    await mock.onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/1`).reply(code);
-
-    const expectedAction = {
-      type: types.ADD_COMPANY_REVIEW_FAILURE,
-      payload: `Request failed with status code ${code}`,
-    }
-
-    const store = mockStore({});
-    const actions = store.getActions();
-    await store.dispatch(addCompanyReview(singleCompanyReview));
-    expect(actions[1]).toEqual(expectedAction);
-  })
+  
   
 
 
