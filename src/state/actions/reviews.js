@@ -373,7 +373,6 @@ export const addInterviewReview = (review, id, history) => async dispatch => {
   dispatch({
     type: types.ADD_INTERVIEW_REVIEW,
   });
-
   try {
     const response = await axios.post(
       `${process.env.REACT_APP_BACKEND_URL}/interviewreviews/`,
