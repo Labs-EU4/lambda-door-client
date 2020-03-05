@@ -167,7 +167,7 @@ describe('Action/types company review testing', () => {
 
     const store = mockStore({});
     const actions = store.getActions();
-    await store.dispatch(getReviewsByCompanyId(1));
+    await store.dispatch(getReviewsByCompanyId());
     expect(actions[1]).toEqual(expectedAction);
   });
 
@@ -182,9 +182,8 @@ describe('Action/types company review testing', () => {
   })
 
   test('should execute get company reviews data success with review Id', async () => {
-    const credential = false;
     await mock
-      .onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/1`, { withCredentials: !credential, })
+      .onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/1`)
       .reply(200, singleCompanyReview)
     const store = mockStore({});
     const actions = store.getActions();
@@ -197,9 +196,8 @@ describe('Action/types company review testing', () => {
   })
 
   test('should execute get company reviews error with review Id', async () => {
-    const credential = false;
     const code = 404;
-    await mock.onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/1`, { withCredentials: credential, }).reply(code);
+    await mock.onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/1`).reply(code);
 
     const expectedAction = {
       type: types.GET_SINGLE_REVIEWS_FAILURE,
@@ -209,7 +207,7 @@ describe('Action/types company review testing', () => {
     const store = mockStore({});
     const actions = store.getActions();
     console.log(actions)
-    await store.dispatch(getReviewsByReviewId(1));
+    await store.dispatch(getReviewsByReviewId());
     expect(actions[1]).toEqual(expectedAction);
   })
 

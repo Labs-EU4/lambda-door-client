@@ -45,6 +45,7 @@
     "build": "react-app-rewired build",
     "test:watch": "react-app-rewired test",
     "test": "react-app-rewired test --updateSnapshot --coverage --watchAll=false && make-coverage-badge --output-path \"badges.svg\" ",
+    "test-faster": "react-app-rewired test --updateSnapshot --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
