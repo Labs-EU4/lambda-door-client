@@ -6,6 +6,7 @@ import MockAdapter from 'axios-mock-adapter';
 import thunk from 'redux-thunk';
 import * as types from '../../types/index';
 import {
+  addCompanyReview,
   getCompanyReviews,
   getReviewsByCompanyId,
   getReviewsByReviewId,
@@ -17,18 +18,18 @@ const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 const mock = new MockAdapter(axios);
 
-// const company = {
-//   id: 1,
-//   name: "Alterior Company",
-//   description: "At Bad Rabbit, we make the systems you have work better for you.",
-//   website: "https://www.badrabbit.com",
-//   location: "Portland, OR",
-//   type: "Technology",
-//   logo: "",
-//   latitude: 31,
-//   longitude: -80,
-//   average_rating: null
-// };
+const company = {
+  id: 1,
+  name: "Alterior Company",
+  description: "At Bad Rabbit, we make the systems you have work better for you.",
+  website: "https://www.badrabbit.com",
+  location: "Portland, OR",
+  type: "Technology",
+  logo: "",
+  latitude: 31,
+  longitude: -80,
+  average_rating: null
+};
 
 const userCompanyReview = [
   {
@@ -206,10 +207,49 @@ describe('Action/types company review testing', () => {
 
     const store = mockStore({});
     const actions = store.getActions();
-    console.log(actions)
     await store.dispatch(getReviewsByReviewId());
     expect(actions[1]).toEqual(expectedAction);
   })
+
+  test('should execute add company reviews data with company Id', async () => {
+    const store = mockStore({});
+    const actions = store.getActions();
+
+    await store.dispatch(addCompanyReview(singleCompanyReview));
+    expect(actions[0]).toEqual({
+      type: types.ADD_COMPANY_REVIEW,
+    })
+  })
+
+  test('should execute add company reviews success data with company Id', async () => {
+    await mock
+      .onPost(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/1`)
+      .reply(201, singleCompanyReview)
+    const store = mockStore({});
+    const actions = store.getActions();
+
+    await store.dispatch(addCompanyReview(singleCompanyReview, 1, ));
+    expect(actions[1]).toEqual({
+      type: types.ADD_COMPANY_REVIEW_SUCCESS,
+      payload: singleCompanyReview,
+    })
+  })
+
+  test('should execute get company reviews error with review Id', async () => {
+    const code = 404;
+    await mock.onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/1`).reply(code);
+
+    const expectedAction = {
+      type: types.ADD_COMPANY_REVIEW_FAILURE,
+      payload: `Request failed with status code ${code}`,
+    }
+
+    const store = mockStore({});
+    const actions = store.getActions();
+    await store.dispatch(addCompanyReview(singleCompanyReview));
+    expect(actions[1]).toEqual(expectedAction);
+  })
+  
 
 
 
