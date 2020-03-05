@@ -9,7 +9,7 @@ import {
   getCompanyReviews,
   getSalaryReviews,
   getInterviewReviews,
-  addCompanyReview,
+  getReviewsByCompanyId,
 } from '../reviews';
 
 const middlewares = [thunk];
@@ -34,6 +34,33 @@ const companyReview = [
     review: "most rewarding job ever.",
   }
 ];
+
+const companyReviews = [
+  {
+    id: 3,
+    ratings: 5,
+    review_headline: "Flexible Working Hours and Great Benefits.",
+    review: "They care about you",
+    name: "Accenture",
+    company_id: 1,
+    is_accepting_questions: true,
+    full_name: "Victor Arowo",
+    user_id: 3,
+    email_address: "arowove@g.com"
+  },
+  {
+    id: 4,
+    ratings: 4,
+    review_headline: "Very good",
+    review: "I work in Accenture",
+    name: "Accenture",
+    company_id: 1,
+    is_accepting_questions: false,
+    full_name: "Emily Abrahart",
+    user_id: 4,
+    email_address: "emilyabraharty@gmail.com"
+  },
+]
 
 const salaryReview = {
   message:
@@ -90,10 +117,36 @@ describe('Action/types company review testing', () => {
     expect(actions[1]).toEqual(expectedAction);
   });
 
-  test('should execute get company reviews data with review Id', () => {
+  test('should execute get company reviews data with review Id', async () => {
+    const store = mockStore({});
+    const actions = store.getActions();
+
+    await store.dispatch(getReviewsByCompanyId(1));
+    expect(actions[0]).toEqual({
+      type: types.GET_SINGLE_COMPANY_REVIEWS,
+    })
+  })
+
+  test('should execute get company reviews data success with review Id', async () => {
+
+    await mock
+      .onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/reviews/1`)
+      .reply(200, companyReviews)
+    const store = mockStore({});
+    const actions = store.getActions();
+
+    await store.dispatch(getReviewsByCompanyId(1));
+    expect(actions[1]).toEqual({
+      type: types.GET_SINGLE_COMPANY_REVIEWS_SUCCESS,
+      payload: companyReviews,
+    })
+  })
+
+  test('should execute get company reviews error with review Id', () => {
     
   })
   
+
   //   it('Displays a snapshot for company review', () => {
   //     const { asFragment } = wrapper(<getCompanyReviews />);
   //     expect(wrapper(<getCompanyReviews />).container).toMatchSnapshot();
