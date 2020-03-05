@@ -21,8 +21,6 @@ const testCompanies = [
     type: 'Business',
     logo: '',
     description: '',
-    created_at: null,
-    updated_at: null,
     latitude: 33.7537,
     longitude: -85,
     average_rating: '4.00000000000000000000',
@@ -41,13 +39,8 @@ const testNewCompany = {
 };
 
 afterEach(rtl.cleanup);
-let wrapper;
-beforeEach(
-  rtl.cleanup
-  //   () => {
-  //   wrapper = rtl.render;
-  // }
-);
+// let wrapper;
+beforeEach(rtl.cleanup);
 
 describe('Action/types for list of companies(get)', () => {
   it('should execute get_Companies', async () => {
@@ -108,7 +101,7 @@ describe('Action/types for adding new company(post)', () => {
       ...testNewCompany,
       id: 1,
     };
-    await mock.onPost().reply(201, responseObject);
+    await mock.onPost(URL).reply(201, responseObject);
 
     const expectedActions = {
       type: types.ADD_COMPANY_SUCCESS,
@@ -116,7 +109,7 @@ describe('Action/types for adding new company(post)', () => {
     };
     const store = mockStore({});
     const actions = store.getActions();
-    await store.dispatch(addCompany());
+    await store.dispatch(addCompany(testNewCompany));
     expect(actions[1]).toEqual(expectedActions);
 
     // wrapper.debug();
@@ -125,7 +118,7 @@ describe('Action/types for adding new company(post)', () => {
   it('should execute fetch error', async () => {
     const URL = `${process.env.REACT_APP_BACKEND_URL}/companies/`;
     const code = 404;
-    await mock.onPost().reply(code);
+    await mock.onPost(URL).reply(code);
     const expectedAction = {
       type: types.ADD_COMPANY_FAILURE,
       payload: `Request failed with status code ${code}`,
