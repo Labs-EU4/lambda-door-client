@@ -45,6 +45,7 @@
     "build": "react-app-rewired build",
     "test:watch": "react-app-rewired test",
     "test": "react-app-rewired test --updateSnapshot --coverage --watchAll=false && make-coverage-badge --output-path \"badges.svg\" ",
+    "test-faster": "react-app-rewired test --updateSnapshot --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -74,6 +75,7 @@
   },
   "devDependencies": {
     "@testing-library/react": "^9.4.0",
+    "@types/jest": "^25.1.3",
     "axios-mock-adapter": "^1.17.0",
     "eslint": "^6.7.2",
     "eslint-config-airbnb": "^18.0.1",
