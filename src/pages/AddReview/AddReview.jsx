@@ -18,7 +18,6 @@ import {
   getCurrencyRates,
 } from '../../state/actions/reviews';
 
-
 const { TextArea } = Input;
 const { Option } = Select;
 
@@ -98,7 +97,7 @@ const AddReview = ({
     };
 
     const otherRates = {
-      'NGN': 360,
+      NGN: 360,
     };
 
     fx.base = currencyRates.base;
