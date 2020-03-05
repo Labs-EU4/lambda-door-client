@@ -10,7 +10,6 @@ import InterviewSearchCard from './InterviewSearchCard';
 import {mobilePortrait} from '../../../styles/theme.styles';
 
 const SearchResults = ({ search: { isSearching, searchResults }, history }) => {
-  console.log('is searching', isSearching);
   return (
     <Container>
       <Button

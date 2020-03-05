@@ -6,7 +6,6 @@ const getSearchResults = request => async dispatch => {
     type: types.SEARCH,
   });
   try {
-    console.log(request);
     const results = await axios({
       method: 'get',
       url: `${process.env.REACT_APP_BACKEND_URL}/search/${request.search_category}`,
@@ -14,7 +13,6 @@ const getSearchResults = request => async dispatch => {
         search_query: request.search_query,
       },
     });
-    console.log(results);
     dispatch({
       type: types.SEARCH_SUCCESS,
       payload: [results.data, request.search_category, request.search_query],

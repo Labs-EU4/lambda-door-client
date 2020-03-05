@@ -10,6 +10,7 @@ import {highestSalaryReducer} from './highestSalary';
 import companyReviewsReducer from './singleCompany';
 import singleReviewReducer from './singleReview';
 import searchReducer from './search';
+import ratesReducer from './currencyRates';
 
 const rootReducer = combineReducers({
   reviews: reviewsReducer,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   singleReview: singleReviewReducer,
   search: searchReducer,
   highestSalaries: highestSalaryReducer,
+  currencyRates: ratesReducer,
 });
 
 export default rootReducer;

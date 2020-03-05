@@ -2,6 +2,7 @@ import axios from 'axios';
 import * as types from '../types';
 import openNotification from '../../utils/openNotification';
 import failureNotification from '../../utils/failureNotification';
+import ActionButton from 'antd/lib/modal/ActionButton';
 
 export const getReviewsByCompanyId = id => async dispatch => {
   dispatch({
@@ -254,11 +255,32 @@ export const getSalaryReviews = id => async dispatch => {
   }
 };
 
+export const getCurrencyRates = () => async dispatch => {
+  const exchangeApi = `https://api.exchangeratesapi.io/latest?base=USD`;
+
+  dispatch({
+    type: types.GET_CURRENCY_RATES,
+  })
+
+  try {
+    const response = await axios.get(exchangeApi);
+    dispatch({
+      type: types.GET_CURRENCY_RATES_SUCCESS,
+      payload: response.data,
+    })
+  } catch(error) {
+    dispatch({
+      type: types.GET_CURRENCY_RATES_FAILURE,
+      payload: error,
+    })
+  }
+};
+
 export const addSalaryReview = (review, id, history) => async dispatch => {
   dispatch({
     type: types.ADD_SALARY_REVIEW,
   });
-
+  
   try {
     const response = await axios.post(
       `${process.env.REACT_APP_BACKEND_URL}/salaryreviews/`,
@@ -279,6 +301,7 @@ export const addSalaryReview = (review, id, history) => async dispatch => {
     failureNotification('Review could not be added');
   }
 };
+
 export const deleteSalaryReview = (id, history) => async dispatch => {
   dispatch({
     type: types.DELETE_SALARY_REVIEWS,
@@ -304,7 +327,6 @@ export const deleteSalaryReview = (id, history) => async dispatch => {
       payload: error.message || 'Something went wrong.',
     });
     failureNotification('Review could not be deleted');
-    console.log(error.message);
   }
 };
 
