@@ -29,11 +29,25 @@ const testCompanies = [
   },
 ];
 
+const testNewCompany = {
+  name: 'Accenture',
+  website: 'www.accenture.com.',
+  location: 'Atlanta, GA',
+  longitude: -85.0,
+  latitude: 33.7537,
+  type: 'Business',
+  logo: '',
+  description: '',
+};
+
 afterEach(rtl.cleanup);
 let wrapper;
-beforeEach(() => {
-  wrapper = rtl.render;
-});
+beforeEach(
+  rtl.cleanup
+  //   () => {
+  //   wrapper = rtl.render;
+  // }
+);
 
 describe('Action/types for list of companies(get)', () => {
   it('should execute get_Companies', async () => {
@@ -77,44 +91,48 @@ describe('Action/types for list of companies(get)', () => {
   });
 });
 
-describe('Action/types for list of companies(get)', () => {
-  it('should execute get_Companies', async () => {
+describe('Action/types for adding new company(post)', () => {
+  it('should execute ADD_COMPANY', async () => {
     const store = mockStore({});
     const actions = store.getActions();
 
-    await store.dispatch(getCompanies());
+    await store.dispatch(addCompany());
     expect(actions[0]).toEqual({
-      type: types.GET_COMPANIES,
+      type: types.ADD_COMPANY,
     });
   });
 
-  it('Should return companies array', async () => {
-    await mock
-      .onGet(`${process.env.REACT_APP_BACKEND_URL}/companies/`)
-      .reply(200, testCompanies);
+  it('Should return details of newly added company', async () => {
+    const URL = `${process.env.REACT_APP_BACKEND_URL}/companies/`;
+    const responseObject = {
+      ...testNewCompany,
+      id: 1,
+    };
+    await mock.onPost().reply(201, responseObject);
 
     const expectedActions = {
-      type: types.GET_COMPANIES_SUCCESS,
-      payload: testCompanies,
+      type: types.ADD_COMPANY_SUCCESS,
+      payload: responseObject,
     };
     const store = mockStore({});
     const actions = store.getActions();
-    await store.dispatch(getCompanies());
+    await store.dispatch(addCompany());
     expect(actions[1]).toEqual(expectedActions);
+
+    // wrapper.debug();
   });
 
   it('should execute fetch error', async () => {
+    const URL = `${process.env.REACT_APP_BACKEND_URL}/companies/`;
     const code = 404;
-    await mock
-      .onGet(`${process.env.REACT_APP_BACKEND_URL}/companies/`)
-      .reply(code);
+    await mock.onPost().reply(code);
     const expectedAction = {
-      type: types.GET_COMPANIES_FAILURE,
+      type: types.ADD_COMPANY_FAILURE,
       payload: `Request failed with status code ${code}`,
     };
     const store = mockStore({});
     const actions = store.getActions();
-    await store.dispatch(getCompanies());
+    await store.dispatch(addCompany());
     expect(actions[1]).toEqual(expectedAction);
   });
 });
