@@ -10,6 +10,7 @@ import {
   getCompanyReviews,
   getReviewsByCompanyId,
   getReviewsByReviewId,
+  updateCompanyReview,
   deleteCompanyReview,
   getSalaryReviews,
   getInterviewReviews,
@@ -57,6 +58,19 @@ const singleCompanyReview = {
   ratings: 5,
   review_headline: "Flexible Working Hours and Great Benefits.",
   review: "They care about you",
+  name: "Accenture",
+  company_id: 1,
+  is_accepting_questions: true,
+  full_name: "Victor Arowo",
+  user_id: 3,
+  email_address: "arowove@g.com"
+}
+
+const updated = {
+  id: 3,
+  ratings: 5,
+  review_headline: "Updated Review!",
+  review: "This review has been updated!",
   name: "Accenture",
   company_id: 1,
   is_accepting_questions: true,
@@ -176,7 +190,7 @@ describe('Action/types company review testing', () => {
     })
   
     test('should execute get company reviews data success with review Id', async () => {
-      await mock
+      mock
         .onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/1`)
         .reply(200, singleCompanyReview)
       const store = mockStore({});
@@ -191,7 +205,7 @@ describe('Action/types company review testing', () => {
   
     test('should execute get company reviews error with review Id', async () => {
       const code = 404;
-      await mock.onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/1`).reply(code);
+      mock.onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/1`).reply(code);
   
       const expectedAction = {
         type: types.GET_SINGLE_REVIEWS_FAILURE,
@@ -217,8 +231,8 @@ describe('Action/types company review testing', () => {
     })
 
     test('should execute add company reviews success data with company Id', async () => {
-      await mock
-        .onPost(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/1`)
+      mock
+        .onPost(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/1`, singleCompanyReview)
         .reply(201, singleCompanyReview)
       const store = mockStore({});
       const actions = store.getActions();
@@ -232,7 +246,7 @@ describe('Action/types company review testing', () => {
 
     test('should execute add company reviews error with company Id', async () => {
       const code = 404;
-      await mock.onGet(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/1`).reply(code);
+      mock.onPost(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/1`, singleCompanyReview).reply(code);
 
       const expectedAction = {
         type: types.ADD_COMPANY_REVIEW_FAILURE,
@@ -241,10 +255,54 @@ describe('Action/types company review testing', () => {
 
       const store = mockStore({});
       const actions = store.getActions();
-      await store.dispatch(addCompanyReview(singleCompanyReview));
+      await store.dispatch(addCompanyReview(singleCompanyReview, 1));
       expect(actions[1]).toEqual(expectedAction);
     })
   })
+
+  describe('Update company review', () => {
+    test('should execute update company review', async () => {
+      const store = mockStore({});
+      const actions = store.getActions();
+
+      await store.dispatch(updateCompanyReview(updated));
+      expect(actions[0]).toEqual({
+        type: types.UPDATE_COMPANY_REVIEWS,
+      })
+    })
+
+    test('should execute update company review success', async () => {
+      mock
+        .onPatch(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/${updated.id}`, updated)
+        .reply(201, updated)
+      const store = mockStore({});
+      const actions = store.getActions();
+
+      await store.dispatch(updateCompanyReview(updated, 1));
+      expect(actions[1]).toEqual({
+        type: types.UPDATE_COMPANY_REVIEWS_SUCCESS,
+        payload: updated,
+      })
+    })
+
+    test('should execute update company review Error', async () => {
+      const code = 404;
+      mock
+        .onPatch(`${process.env.REACT_APP_BACKEND_URL}/companyreviews/${updated.id}`, updated)
+        .reply(code)
+      const store = mockStore({});
+      const actions = store.getActions();
+
+      const expectedAction = {
+        type: types.UPDATE_COMPANY_REVIEWS_FAILURE,
+        payload: `Request failed with status code ${code}`,
+      }
+
+      await store.dispatch(updateCompanyReview(updated, 1));
+      expect(actions[1]).toEqual(expectedAction)
+    })
+  })
+  
   
   describe('Delete company review with company Id', () => {
     test('should execute delete company with company Id', async () => {
@@ -286,12 +344,6 @@ describe('Action/types company review testing', () => {
       expect(actions[1]).toEqual(expectedAction);
     })
   })
-
-  
-  
-
-
-
 
   //   it('Displays a snapshot for company review', () => {
   //     const { asFragment } = wrapper(<getCompanyReviews />);
