@@ -43,7 +43,7 @@ exports[`ConnectedHome renders correctly 1`] = `
               </a>
             </div>
             <a
-              href="https://slack.com/oauth/authorize?scope=identity.basic,identity.email,identity.team,identity.avatar&client_id=154966377728.956200445043&redirect_uri=http://localhost:3000/dashboard"
+              href="https://slack.com/oauth/authorize?scope=identity.basic,identity.email,identity.team,identity.avatar&client_id=154966377728.878377460261&redirect_uri=http://localhost:3000/dashboard"
             >
               <img
                 alt="Sign in with Slack"
@@ -348,7 +348,7 @@ exports[`Home Displays a snapshot for the home page with it's image information 
             </a>
           </div>
           <a
-            href="https://slack.com/oauth/authorize?scope=identity.basic,identity.email,identity.team,identity.avatar&client_id=154966377728.956200445043&redirect_uri=http://localhost:3000/dashboard"
+            href="https://slack.com/oauth/authorize?scope=identity.basic,identity.email,identity.team,identity.avatar&client_id=154966377728.878377460261&redirect_uri=http://localhost:3000/dashboard"
           >
             <img
               alt="Sign in with Slack"
@@ -652,7 +652,7 @@ exports[`Home Displays a snapshot for the home page with it's image information 
             </a>
           </div>
           <a
-            href="https://slack.com/oauth/authorize?scope=identity.basic,identity.email,identity.team,identity.avatar&client_id=154966377728.956200445043&redirect_uri=http://localhost:3000/dashboard"
+            href="https://slack.com/oauth/authorize?scope=identity.basic,identity.email,identity.team,identity.avatar&client_id=154966377728.878377460261&redirect_uri=http://localhost:3000/dashboard"
           >
             <img
               alt="Sign in with Slack"
@@ -957,7 +957,7 @@ exports[`Home renders correctly 1`] = `
               </a>
             </div>
             <a
-              href="https://slack.com/oauth/authorize?scope=identity.basic,identity.email,identity.team,identity.avatar&client_id=154966377728.956200445043&redirect_uri=http://localhost:3000/dashboard"
+              href="https://slack.com/oauth/authorize?scope=identity.basic,identity.email,identity.team,identity.avatar&client_id=154966377728.878377460261&redirect_uri=http://localhost:3000/dashboard"
             >
               <img
                 alt="Sign in with Slack"

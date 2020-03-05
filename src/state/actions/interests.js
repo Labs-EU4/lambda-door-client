@@ -12,10 +12,13 @@ export const removeInterest = id => async dispatch => {
 };
 
 export const addInterest = (userId, interestId) => async dispatch => {
-  const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/interests`, {
-    user_id: userId,
-    interest_id: interestId,
-  });
+  const response = await axios.post(
+    `${process.env.REACT_APP_BACKEND_URL}/interests`,
+    {
+      user_id: userId,
+      interest_id: interestId,
+    }
+  );
 
   dispatch({
     type: types.ADD_INTEREST,
