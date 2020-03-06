@@ -23,6 +23,7 @@ export const ClosestLocationList = ({
                 id={closest.id}
                 website={closest.website}
                 rating={closest.rating}
+                color={closest.color}
               />
             ))
           ) : (
@@ -61,7 +62,7 @@ const StyledContainer = styled.div`
   .cards {
     position: relative;
     height: 150px;
-    max-width: 350px;
+    min-width: 520px;
 
     a.nav-link {
       position: absolute;
@@ -76,6 +77,8 @@ const StyledContainer = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+     
+      
 
       &:hover {
         border: 1px solid #bb1333;

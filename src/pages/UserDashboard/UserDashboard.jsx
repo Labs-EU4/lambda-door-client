@@ -4,12 +4,14 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
 import axios from 'axios';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { Spin } from 'antd';
+import { Spin, Button } from 'antd';
 import TopRatedList from '../../components/UserDashboard/TopRated/TopRatedList';
+import TopRatedSalariesList from '../../components/UserDashboard/TopRated/TopRatedSaleriesList';
 import ClosestLocationList from '../../components/UserDashboard/UserLocationComp/ClosestLocationList';
-import JobTitleVisualization from '../../components/UserDashboard/JobTitleVisualization';
+
 import { editProfile } from '../../state/actions/user';
 import { getLocation } from '../../utils/getLocation';
 import { LoginUser, SetAuthenticated } from '../../state/actions/auth';
@@ -90,12 +92,24 @@ export const UserDashboard = ({
     <StyledContainer>
       <div className="top-layout">
         <div>
-          <h2>Top Rated Companies</h2>
-          <TopRatedList />
+          <h2 style={{ color: 'dodgerblue' }}>
+            Top Rated Companies
+            <NavLink to="/highest">
+              <Button className="view-button" type="link">
+                view all
+              </Button>
+            </NavLink>
+          </h2>
+          <TopRatedList color="dodgerblue" />
         </div>
         <div>
-          <h2>Popular Job Roles</h2>
-          <JobTitleVisualization />
+          <h2 style={{ color: 'purple' }}>
+            Job Titles with best salaries 
+            <Button className="view-button" type="link">
+              view all
+            </Button>
+          </h2>
+          <TopRatedSalariesList color="purple" />
         </div>
       </div>
       {location && (
@@ -142,11 +156,16 @@ const StyledContainer = styled.div`
   h2 {
     font-size: 1.1rem;
     font-weight: 600;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .view-button {
+    color: grey;
   }
   .top-layout {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: baseline;
 
     & > div {
@@ -162,8 +181,11 @@ const StyledContainer = styled.div`
       flex-direction: column;
     }
   }
+  .top-rated {
+    color: dodgerblue;
+  }
 
-  .bottom-layout {
+  .bottom-layout h2 {
     margin-top: 3rem;
   }
 `;

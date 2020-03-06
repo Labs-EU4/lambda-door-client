@@ -2,6 +2,34 @@ import axios from 'axios';
 import * as types from '../types';
 import openNotification from '../../utils/openNotification';
 import failureNotification from '../../utils/failureNotification';
+import ActionButton from 'antd/lib/modal/ActionButton';
+
+
+// COMPANY REVIEWS
+export const getCompanyReviews = id => async dispatch => {
+  dispatch({
+    type: types.GET_COMPANY_REVIEWS,
+  });
+
+  try {
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/companyreviews/user/${id}`,
+      {
+        withCredentials: true,
+      }
+    );
+
+    dispatch({
+      type: types.GET_COMPANY_REVIEWS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: types.GET_COMPANY_REVIEWS_FAILURE,
+      payload: error.message || 'Something went wrong.',
+    });
+  }
+};
 
 export const getReviewsByCompanyId = id => async dispatch => {
   dispatch({
@@ -28,56 +56,6 @@ export const getReviewsByCompanyId = id => async dispatch => {
   }
 };
 
-export const getInterviewReviewsByCompanyId = id => async dispatch => {
-  dispatch({
-    type: types.GET_SINGLE_COMPANY_INTERVIEW_REVIEWS,
-  });
-
-  try {
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/interviewreviews/reviews/${id}`,
-      {
-        withCredentials: true,
-      }
-    );
-
-    dispatch({
-      type: types.GET_SINGLE_COMPANY_INTERVIEW_REVIEWS_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: types.GET_SINGLE_COMPANY_INTERVIEW_REVIEWS_FAILURE,
-      payload: error.message || 'Something went wrong.',
-    });
-  }
-};
-
-export const getSalaryReviewsByCompanyId = id => async dispatch => {
-  dispatch({
-    type: types.GET_SINGLE_COMPANY_SALARY_REVIEWS,
-  });
-
-  try {
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/salaryreviews/reviews/${id}`,
-      {
-        withCredentials: true,
-      }
-    );
-
-    dispatch({
-      type: types.GET_SINGLE_COMPANY_SALARY_REVIEWS_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: types.GET_SINGLE_COMPANY_SALARY_REVIEWS_FAILURE,
-      payload: error.message || 'Something went wrong.',
-    });
-  }
-};
-
 export const getReviewsByReviewId = id => async dispatch => {
   dispatch({
     type: types.GET_SINGLE_REVIEWS,
@@ -98,56 +76,6 @@ export const getReviewsByReviewId = id => async dispatch => {
   } catch (error) {
     dispatch({
       type: types.GET_SINGLE_REVIEWS_FAILURE,
-      payload: error.message || 'Something went wrong.',
-    });
-  }
-};
-
-export const getInterviewReviewsByReviewId = id => async dispatch => {
-  dispatch({
-    type: types.GET_SINGLE_INTERVIEW_REVIEWS,
-  });
-
-  try {
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/interviewreviews/${id}`,
-      {
-        withCredentials: true,
-      }
-    );
-
-    dispatch({
-      type: types.GET_SINGLE_INTERVIEW_REVIEWS_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: types.GET_SINGLE_INTERVIEW_REVIEWS_FAILURE,
-      payload: error.message || 'Something went wrong.',
-    });
-  }
-};
-
-export const getCompanyReviews = id => async dispatch => {
-  dispatch({
-    type: types.GET_COMPANY_REVIEWS,
-  });
-
-  try {
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/companyreviews/user/${id}`,
-      {
-        withCredentials: true,
-      }
-    );
-
-    dispatch({
-      type: types.GET_COMPANY_REVIEWS_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: types.GET_COMPANY_REVIEWS_FAILURE,
       payload: error.message || 'Something went wrong.',
     });
   }
@@ -233,6 +161,8 @@ export const updateCompanyReview = update => async dispatch => {
   }
 };
 
+
+// SALARY REVIEWS
 export const getSalaryReviews = id => async dispatch => {
   dispatch({
     type: types.GET_SALARY_REVIEWS,
@@ -249,6 +179,31 @@ export const getSalaryReviews = id => async dispatch => {
   } catch (error) {
     dispatch({
       type: types.GET_SALARY_REVIEWS_FAILURE,
+      payload: error.message || 'Something went wrong.',
+    });
+  }
+};
+
+export const getSalaryReviewsByCompanyId = id => async dispatch => {
+  dispatch({
+    type: types.GET_SINGLE_COMPANY_SALARY_REVIEWS,
+  });
+
+  try {
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/salaryreviews/reviews/${id}`,
+      {
+        withCredentials: true,
+      }
+    );
+
+    dispatch({
+      type: types.GET_SINGLE_COMPANY_SALARY_REVIEWS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: types.GET_SINGLE_COMPANY_SALARY_REVIEWS_FAILURE,
       payload: error.message || 'Something went wrong.',
     });
   }
@@ -279,6 +234,7 @@ export const addSalaryReview = (review, id, history) => async dispatch => {
     failureNotification('Review could not be added');
   }
 };
+
 export const deleteSalaryReview = (id, history) => async dispatch => {
   dispatch({
     type: types.DELETE_SALARY_REVIEWS,
@@ -304,7 +260,6 @@ export const deleteSalaryReview = (id, history) => async dispatch => {
       payload: error.message || 'Something went wrong.',
     });
     failureNotification('Review could not be deleted');
-    console.log(error.message);
   }
 };
 
@@ -337,6 +292,59 @@ export const updateSalaryReview = update => async dispatch => {
   }
 };
 
+
+// INTERVIEW REVIEWS
+export const getInterviewReviewsByCompanyId = id => async dispatch => {
+  dispatch({
+    type: types.GET_SINGLE_COMPANY_INTERVIEW_REVIEWS,
+  });
+
+  try {
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/interviewreviews/reviews/${id}`,
+      {
+        withCredentials: true,
+      }
+    );
+
+    dispatch({
+      type: types.GET_SINGLE_COMPANY_INTERVIEW_REVIEWS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: types.GET_SINGLE_COMPANY_INTERVIEW_REVIEWS_FAILURE,
+      payload: error.message || 'Something went wrong.',
+    });
+  }
+};
+
+export const getInterviewReviewsByReviewId = id => async dispatch => {
+  dispatch({
+    type: types.GET_SINGLE_INTERVIEW_REVIEWS,
+  });
+
+  try {
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/interviewreviews/${id}`,
+      {
+        withCredentials: true,
+      }
+    );
+
+    dispatch({
+      type: types.GET_SINGLE_INTERVIEW_REVIEWS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: types.GET_SINGLE_INTERVIEW_REVIEWS_FAILURE,
+      payload: error.message || 'Something went wrong.',
+    });
+  }
+};
+
+
 export const getInterviewReviews = id => async dispatch => {
   dispatch({
     type: types.GET_INTERVIEW_REVIEWS,
@@ -365,7 +373,6 @@ export const addInterviewReview = (review, id, history) => async dispatch => {
   dispatch({
     type: types.ADD_INTERVIEW_REVIEW,
   });
-
   try {
     const response = await axios.post(
       `${process.env.REACT_APP_BACKEND_URL}/interviewreviews/`,
@@ -436,5 +443,28 @@ export const updateInterviewReview = update => async dispatch => {
       payload: error.message || 'Something went wrong.',
     });
     failureNotification('Review could not be updated');
+  }
+};
+
+
+// GET CURRENCY RATES 
+export const getCurrencyRates = () => async dispatch => {
+  const exchangeApi = `https://api.exchangeratesapi.io/latest?base=USD`;
+
+  dispatch({
+    type: types.GET_CURRENCY_RATES,
+  })
+
+  try {
+    const response = await axios.get(exchangeApi);
+    dispatch({
+      type: types.GET_CURRENCY_RATES_SUCCESS,
+      payload: response.data,
+    })
+  } catch(error) {
+    dispatch({
+      type: types.GET_CURRENCY_RATES_FAILURE,
+      payload: error,
+    })
   }
 };

@@ -4,7 +4,7 @@ exports[`TopRatedList renders correctly 1`] = `
 <body>
   <div>
     <div
-      class="sc-bxivhb iaTuCm"
+      class="sc-bxivhb gQRJSe"
     >
       <div
         class="cards"
@@ -19,13 +19,13 @@ exports[`TopRatedList renders correctly 1`] = `
               class="sc-bwzfXH hKkmqJ"
             />
           </div>
+          <div
+            class="sc-htpNat hiPvMK"
+          >
+            <div />
+            <div />
+          </div>
         </a>
-        <div
-          class="sc-htpNat ckDsGN"
-        >
-          <div />
-          <div />
-        </div>
       </div>
     </div>
   </div>

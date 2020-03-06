@@ -14,12 +14,14 @@ export const TopRatedList = ({
   authState: {
     credentials: { location },
   },
+  color,
+  gridTemplate,
 }) => {
   useEffect(() => {
     getTopRatedReviews();
   }, []);
   return (
-    <StyledDiv>
+    <StyledDiv style={{ gridTemplateColumns: gridTemplate }}>
       {!isFetching ? (
         <>
           {topRatedReviews.length === 0 ? (
@@ -36,6 +38,7 @@ export const TopRatedList = ({
                 id={topRated.id}
                 rating={topRated.average_rating}
                 website={topRated.website}
+                color={color}
               />
             ))
           ) : (
@@ -48,6 +51,7 @@ export const TopRatedList = ({
                 id={topRated.id}
                 rating={topRated.average_rating}
                 website={topRated.website}
+                color={color}
               />
             ))
           )}
@@ -65,7 +69,7 @@ export default connect(state => state, { getTopRatedReviews })(TopRatedList);
 
 const StyledDiv = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   grid-gap: 1.5rem;
   position: relative;
   min-height: 300px;
@@ -74,10 +78,14 @@ const StyledDiv = styled.div`
     grid-template-columns: repeat(1, 1fr);
   }
 
+  @media (max-width: 500px) {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+
   .cards {
     position: relative;
     height: 150px;
-    max-width: 350px;
+    max-width: 505px;
 
     a {
       position: absolute;

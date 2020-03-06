@@ -4,7 +4,7 @@ exports[`ClosestLocationList renders correctly 1`] = `
 <body>
   <div>
     <div
-      class="sc-bxivhb iVKdRw"
+      class="sc-bxivhb jvIbaQ"
     >
       <div
         class="cards"
@@ -21,22 +21,22 @@ exports[`ClosestLocationList renders correctly 1`] = `
               class="sc-bwzfXH hKkmqJ"
             />
           </div>
-        </a>
-        <div
-          class="sc-htpNat ckDsGN"
-        >
-          <div />
-          <div>
-            <a
-              class="sc-bdVaJa jHdICt"
-              href="www.accenture.com."
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              www.accenture.com.
-            </a>
+          <div
+            class="sc-htpNat hiPvMK"
+          >
+            <div />
+            <div>
+              <a
+                class="sc-bdVaJa jHdICt"
+                href="www.accenture.com."
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                www.accenture.com.
+              </a>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </div>
