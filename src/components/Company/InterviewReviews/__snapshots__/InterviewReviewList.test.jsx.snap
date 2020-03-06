@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InterviewReviewList renders correctly 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-bwzfXH fBQjsC"
+    >
+      <div
+        class="ant-empty"
+      >
+        <div
+          class="ant-empty-image"
+          style="height: 60px;"
+        >
+          <img
+            alt="empty"
+            src="https://gw.alipayobjects.com/mdn/miniapp_social/afts/img/A*pevERLJC9v0AAAAAAAAAAABjAQAAAQ/original"
+          />
+        </div>
+        <p
+          class="ant-empty-description"
+        >
+          <span
+            class="text"
+          >
+            No review found yet, perhaps none has been given.
+          </span>
+        </p>
+        <div
+          class="ant-empty-footer"
+        >
+          <a
+            href="/add-review"
+          >
+            <button
+              class="ant-btn"
+              type="button"
+            >
+              <span>
+                Post a Review
+              </span>
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
