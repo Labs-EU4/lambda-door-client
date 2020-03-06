@@ -59,6 +59,10 @@
     ],
     "setupFiles": [
       "jest-localstorage-mock"
+    ],
+    "coveragePathIgnorePatterns": [
+      "src/index.js",
+      "src/serviceWorker.js"
     ]
   },
   "browserslist": {
