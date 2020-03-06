@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Interests.jsx renders correctly 1`] = `
+<body>
+  <div>
+    <div>
+      <p>
+        No interests yet
+      </p>
+      <br />
+      <span
+        class="ant-tag"
+        style="background: rgb(255, 255, 255); border-style: dashed;"
+      >
+        <i
+          aria-label="icon: plus"
+          class="anticon anticon-plus"
+        >
+          <svg
+            aria-hidden="true"
+            class=""
+            data-icon="plus"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"
+            />
+            <path
+              d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"
+            />
+          </svg>
+        </i>
+         Edit Interests
+      </span>
+    </div>
+  </div>
+</body>
+`;
