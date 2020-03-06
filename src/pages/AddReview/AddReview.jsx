@@ -395,9 +395,6 @@ const AddReview = ({
           />
           {errors.text && <Alert type="error" message={errors.text} showIcon />}
         </Form.Item>
-        {JSON.stringify(
-          Object.keys(formValues).filter(elem => formValues[elem] === '')
-        )}
         <Button
           type="primary"
           htmlType="submit"
