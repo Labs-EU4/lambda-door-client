@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CompanySummaryCard renders correctly 1`] = `
+<body>
+  <div>
+    <div
+      class="cards"
+    >
+      <a
+        class="nav-link"
+        href="/company-page/undefined"
+      >
+        <div>
+          <h3 />
+          <p
+            class="sc-bwzfXH hKkmqJ"
+          />
+        </div>
+        <div
+          class="sc-htpNat hiPvMK"
+        >
+          <div />
+          <div />
+        </div>
+      </a>
+    </div>
+  </div>
+</body>
+`;

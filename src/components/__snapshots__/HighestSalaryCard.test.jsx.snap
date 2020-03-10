@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`highestSalaryCard renders correctly 1`] = `
+<body>
+  <div>
+    <div
+      class="cards"
+    >
+      <a
+        class="nav-link"
+        href="/highest/"
+      >
+        <div>
+          <h3 />
+          <p
+            class="sc-bdVaJa bZwbuz"
+          />
+          <p
+            class="sc-bdVaJa bZwbuz"
+          >
+            $
+          </p>
+        </div>
+      </a>
+    </div>
+  </div>
+</body>
+`;

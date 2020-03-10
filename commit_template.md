@@ -1,4 +1,4 @@
-commit message format
+():commit message format
 ----------------------------
 ```
 <type>(<scope>): <subject>

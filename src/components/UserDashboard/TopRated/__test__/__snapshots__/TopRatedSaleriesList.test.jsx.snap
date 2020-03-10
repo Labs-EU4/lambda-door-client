@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TopRatedSalaries renders correctly 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-bwzfXH loPGcJ"
+    >
+      <div
+        class="cards"
+      >
+        <a
+          class="nav-link"
+          href="/highest/"
+        >
+          <div>
+            <h3>
+              Software Engineer
+            </h3>
+            <p
+              class="sc-bdVaJa bZwbuz"
+            >
+              Ahalogy
+            </p>
+            <p
+              class="sc-bdVaJa bZwbuz"
+            >
+              $
+              98000
+            </p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+`;

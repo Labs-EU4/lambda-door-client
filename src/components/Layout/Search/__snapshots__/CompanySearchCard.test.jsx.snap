@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CompanySearchCard renders correctly 1`] = `
+<body>
+  <div>
+    <div
+      class="ant-card sc-bdVaJa lnrxHJ ant-card-bordered"
+    >
+      <div
+        class="ant-card-body"
+      >
+        <h2 />
+        <p />
+        <a />
+        <p>
+          Type:  
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+`;

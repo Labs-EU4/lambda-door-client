@@ -23,6 +23,7 @@ export const ClosestLocationList = ({
                 id={closest.id}
                 website={closest.website}
                 rating={closest.rating}
+                color={closest.color}
               />
             ))
           ) : (
@@ -61,11 +62,8 @@ const StyledContainer = styled.div`
   .cards {
     position: relative;
     height: 150px;
-    max-width: 350px;
+    min-width: 520px;
 
-    &:hover {
-      border: 2px solid #bb1333;
-    }
     a.nav-link {
       position: absolute;
       left: 0;
@@ -75,10 +73,16 @@ const StyledContainer = styled.div`
       padding: 1rem;
       color: rgba(0, 0, 0, 0.65);
       border: 1px solid #e8e8e8;
-      border-radius: 2px;
+      border-radius: 4px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+     
+      
+
+      &:hover {
+        border: 1px solid #bb1333;
+      }
     }
 
     h3 {

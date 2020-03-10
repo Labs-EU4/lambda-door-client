@@ -6,13 +6,11 @@
 
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Route, NavLink } from 'react-router-dom';
-import { Button, Icon } from 'antd';
+import { Route, NavLink, Link } from 'react-router-dom';
+import { Button, Icon, Layout, Menu } from 'antd';
 import { connect } from 'react-redux';
-import SideNav from './SideNav/SideNav';
-import SearchForm from './Search/Search';
+import AddAReviewNav from './AddAReviewNav/AddAReviewNav';
 import {
-  primaryGrey,
   textGrey,
   mobilePortrait,
   tabletPortrait,
@@ -22,71 +20,136 @@ import { LogoutUser } from '../../state/actions/auth';
 
 import logo from '../../assets/lambda-logo.png';
 
+const { Header, Sider, Content } = Layout;
+
 const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
-  const [visible, setVisible] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
   const [searchVisible, setSearchVisible] = useState(false);
-  const hideDrawer = () => {
-    setVisible(false);
+
+  const toggle = () => {
+    setCollapsed(!collapsed);
   };
 
-  const toggleDrawer = e => {
-    e.stopPropagation();
-    setVisible(!visible);
-  };
-  const toggleSearch = e => {
-    e.stopPropagation();
+  const toggleSearch = evt => {
+    evt.stopPropagation();
     setSearchVisible(!searchVisible);
   };
+
   return (
     <Route
       {...rest}
       render={props => {
         return (
           <StyledContainer>
-            <SideNav visible={visible} />
-            <div className="main-container" onClick={hideDrawer}>
-              <div className="top-bar">
-                <button
-                  type="button"
-                  className="mobile-logo-btn"
-                  onClick={e => toggleDrawer(e)}
+            <Layout>
+              <Sider
+                trigger={null}
+                collapsible
+                collapsed={collapsed}
+                className="side-nav"
+                collapsedWidth={
+                  window.screen.width >= 1024 && window.screen.height >= 768
+                    ? 80
+                    : 0
+                }
+              >
+                <div className="logo">
+                  <img
+                    src={logo}
+                    alt="Lambda logo"
+                    className="lambda-logo"
+                    style={{ maxWidth: collapsed ? '30%' : '15%' }}
+                  />
+                  <h2 style={{ display: collapsed ? 'none' : 'initial' }}>
+                    Lambda Door
+                  </h2>
+                </div>
+                <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+                  <Menu.Item key="1">
+                    <NavLink exact to="/dashboard">
+                      <Icon type="home" />
+                      <span>Home</span>
+                    </NavLink>
+                  </Menu.Item>
+
+                  <Menu.Item key="2">
+                    <NavLink exact to="/reviews">
+                      <Icon type="file-done" />
+                      <span>Reviews</span>
+                    </NavLink>
+                  </Menu.Item>
+
+                  <Menu.Item key="3">
+                    <NavLink exact to="/">
+                      <Icon type="snippets" />
+                      <span>My Reviews</span>
+                    </NavLink>
+                  </Menu.Item>
+
+                  <Menu.Item key="4">
+                    <NavLink exact to="/users">
+                      <Icon type="user" />
+                      <span>User Profile</span>
+                    </NavLink>
+                  </Menu.Item>
+
+                  <Menu.Item key="5">
+                    <NavLink exact to="/">
+                      <Icon type="setting" />
+                      <span>Account Settings</span>
+                    </NavLink>
+                  </Menu.Item>
+                </Menu>
+
+                <Button
+                  type="link"
+                  onClick={LogoutUser}
+                  className="side-logout"
                 >
-                  <img className="lambda-logo" src={logo} alt="Lambda logo" />
-                  <Icon type="menu" className="hamburger" />
-                </button>
-                <SearchForm
+                  Sign Out
+                  <Icon type="right" />
+                </Button>
+              </Sider>
+              <Layout>
+                <Header style={{ background: '#fff', padding: 0 }}>
+                  <div className="header-content">
+                    <Button type="button" className="trigger" onClick={toggle}>
+                      <Icon type={collapsed ? 'menu-unfold' : 'menu-fold'} />
+                    </Button>
+
+                    <img src={logo} alt="Lambda logo" className="mobile-logo" />
+
+                    <Button
+                      type="link"
+                      onClick={LogoutUser}
+                      className="sign-out-btn"
+                    >
+                      Sign Out
+                      <Icon type="right" />
+                    </Button>
+                  </div>
+                </Header>
+                <AddAReviewNav
                   searchVisible={searchVisible}
                   setSearchVisible={setSearchVisible}
                 />
-                <div className="sign-out-btn">
-                  <Button type="link" onClick={LogoutUser}>
-                    Sign Out
-                    <Icon type="right" />
-                  </Button>
-                </div>
-                <NavLink
-                  exact
-                  to="/dashboard"
-                  className="link"
-                  activeClassName="active"
+                <Content
+                  style={{
+                    padding: 24,
+                    background: '#fff',
+                    minHeight: 280,
+                  }}
                 >
-                  <img
-                    className="right-hand-logo"
-                    src={logo}
-                    alt="Lambda logo"
-                  />
-                </NavLink>
-              </div>
-              <div className="main-content">
-                <Component {...props} />
-              </div>
-            </div>
-            <SearchButton onClick={toggleSearch}>
-              <Icon
-                type="search"
-                style={{ fontSize: '1.5rem', color: 'white' }}
-              />
-            </SearchButton>
+                  <Component {...props} />
+                  <SearchButton onClick={toggleSearch}>
+                    <Icon
+                      type="search"
+                      style={{ fontSize: '1.5rem', color: 'white' }}
+                    />
+                  </SearchButton>
+                </Content>
+              </Layout>
+            </Layout>
           </StyledContainer>
         );
       }}
@@ -100,110 +163,132 @@ const StyledContainer = styled.div`
   height: 100vh;
   overflow: hidden;
   display: flex;
+
   @media ${tabletPortrait} {
     height: 100%;
   }
-  .main-container {
+
+  .side-nav {
+    z-index: 100;
+
+    @media ${mobilePortrait} {
+      position: absolute;
+      height: 100vh;
+      padding-top: 4.5em;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2em 0 2em 0;
+
+      @media ${mobilePortrait} {
+        display: none;
+      }
+
+      .lambda-logo {
+        height: auto;
+      }
+
+      h2 {
+        color: #bb1333;
+        padding-left: 1em;
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+    }
+
+    .side-logout {
+      color: rgba(255, 255, 255, 0.65);
+      margin-left: 0.8em;
+      margin-top: 3em;
+      display: none;
+
+      @media ${mobilePortrait} {
+        display: unset;
+      }
+    }
+  }
+
+  .ant-layout {
     width: calc(100% - 250px);
     height: 100vh;
     overflow: hidden;
+
     @media ${mobilePortrait} {
       width: 100%;
       display: flex;
       flex-direction: column;
     }
-    .top-bar {
-      width: 100%;
-      padding: 1.5rem 1.5rem 2.5rem 0;
-      background: ${primaryGrey};
+
+    header.ant-layout-header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      @media ${mobilePortrait} {
-        height: 80px;
-        padding: 1rem;
-        background-color: #fafafa;
-        position: fixed;
-        top: 0;
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
         width: 100%;
-        z-index: 100;
-      }
-      .mobile-logo-btn {
-        display: none;
-        border: none;
-        outline: none;
-        background: transparent;
+
         @media ${mobilePortrait} {
-          display: inherit;
-          width: 50px;
-          margin-right: 0.75rem;
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: none;
-          }
-          .hamburger {
-            display: none;
+          padding: 1rem;
+          background-color: #fafafa;
+          width: 100%;
+          z-index: 100;
+        }
+
+        .trigger {
+          border: none;
+          background: none;
+
+          .anticon.anticon-menu-fold {
+            font-size: 1.3rem;
+
             @media ${mobilePortrait} {
-              display: block;
-              font-size: 1.9rem;
-              color: #bb1333;
+              font-size: 1.8rem;
+            }
+          }
+          .anticon.anticon-menu-unfold {
+            font-size: 1.3rem;
+
+            @media ${mobilePortrait} {
+              font-size: 1.8rem;
             }
           }
         }
-      }
-      .right-hand-logo {
-        display: none;
-        @media ${mobilePortrait} {
-          display: block;
-          width: 2.9rem;
-          padding-right: 1rem;
-          max-height: 2.9rem;
+
+        .mobile-logo {
+          width: 8%;
+          max-width: 100%;
+          height: 100%;
+          display: none;
+
+          @media ${mobilePortrait} {
+            display: unset;
+            margin-right: 1em;
+          }
+        }
+
+        .sign-out-btn {
+          padding-right: 4em;
+          color: ${textGrey};
+          font-weight: 500;
+
+          @media ${mobilePortrait} {
+            display: none;
+          }
+
+          &:hover {
+            color: #bb1333;
+          }
         }
       }
-      .ant-input {
-        background: transparent;
-      }
-      .ant-input-affix-wrapper {
-        font-size: 18px;
-      }
-      .ant-btn-link {
-        color: ${textGrey};
-        font-weight: 500;
-      }
     }
-    .main-content {
-      padding: 2rem 1.5rem;
-      height: calc(100vh - 70px);
-      overflow-y: auto;
-      @media ${mobilePortrait} {
-        padding-top: 100px;
-      }
-    }
-    .sign-out-btn {
-      @media ${mobilePortrait} {
-        display: none;
-      }
-    }
-    .empty-state {
-      min-height: 300px;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      max-width: 100%;
-    }
-    .footer {
-      display: none;
-      background-color: ${primaryGrey};
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      text-align: center;
-      height: 70px;
+
+    .ant-layout-content {
+      margin: 10px 16px;
+      overflow-y: scroll;
     }
   }
 `;
@@ -217,11 +302,13 @@ const SearchButton = styled.div`
   height: 3rem;
   width: 3rem;
   display: none;
+
   @media ${tabletPortrait} {
     display: flex;
     justify-content: center;
     align-items: center;
   }
+
   @media ${mobilePortrait} {
     display: flex;
     justify-content: center;
