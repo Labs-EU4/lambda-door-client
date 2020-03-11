@@ -19,6 +19,7 @@ import {
 import { LogoutUser } from '../../state/actions/auth';
 
 import logo from '../../assets/lambda-logo.png';
+import Chat from './Chat/Chat';
 
 const { Header, Sider, Content } = Layout;
 
@@ -149,6 +150,7 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
                   </SearchButton>
                 </Content>
               </Layout>
+              <Chat />
             </Layout>
           </StyledContainer>
         );

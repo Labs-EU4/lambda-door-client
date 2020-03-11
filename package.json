@@ -16,6 +16,7 @@
     "coveralls": "^3.0.9",
     "customize-cra": "^0.9.1",
     "dotenv": "^8.2.0",
+    "firebase": "^7.10.0",
     "formik": "^1.5.8",
     "history": "^4.10.1",
     "jest-localstorage-mock": "^2.4.0",

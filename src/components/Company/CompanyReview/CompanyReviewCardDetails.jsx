@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import { getReviewsByReviewId } from '../../../state/actions/reviews';
 import { mobilePortrait, tabletPortrait } from '../../../styles/theme.styles';
 import ContactReviewer from '../../ContactReviewerModal';
+import ChatButton from '../../Layout/Chat/ChatButton';
 
 const CompanyReviewCardDetailed = ({
   props,
@@ -82,6 +83,7 @@ const CompanyReviewCardDetailed = ({
                 <p>
                   Have questions? &nbsp;&nbsp;
                   <Button onClick={() => setOpen(true)}> Contact Me</Button>
+                  <ChatButton />
                 </p>
               </>
             ) : (

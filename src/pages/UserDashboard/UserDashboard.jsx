@@ -104,7 +104,7 @@ export const UserDashboard = ({
         </div>
         <div>
           <h2 style={{ color: 'purple' }}>
-            Job Titles with best salaries 
+            Job Titles with best salaries
             <Button className="view-button" type="link">
               view all
             </Button>
