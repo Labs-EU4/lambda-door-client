@@ -19,22 +19,52 @@ const ChatCon = styled.div`
   height: 300px;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(235, 235, 235, 1);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(235, 235, 235, 1);
+  box-shadow: 0px 0px 5px 0px rgba(235, 235, 235, 1);
 `;
 
 const ChatHeader = styled.div`
-  background: #ea252f;
+  background: #bb1333;
   position: relative;
   width: 100%;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
+
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(217, 217, 217, 1);
+
+  .top-chat {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: 1em;
+    align-content: center;
+    width: 120px;
+    justify-content: space-between;
+
+    h4 {
+      margin-right: 0.6em;
+      margin-bottom: 0;
+      font-weight: 600;
+      color: #fff;
+    }
+  }
+
+  .chat_header_icon {
+    display: flex;
+    margin-right: 1.5em;
+    align-items: center;
+  }
 `;
 
 const ChatBody = styled.div`
   position: relative;
-  /* background: #fff; */
   height: 100%;
   overflow-y: auto;
-  padding-bottom: 9em;
+  padding-bottom: 7em;
 
   &::-webkit-scrollbar {
     width: 0em;
@@ -49,11 +79,11 @@ const ChatBody = styled.div`
   }
 
   .chat_message {
-    background: #534f59;
-    margin: 0.5em 0.4em;
+    background: #ebebeb;
+    margin: 0.5em 0.4em 0.5em 0.6em;
     border-radius: 5px;
     font-size: 0.8rem;
-    color: #fff;
+    color: rgba(117, 117, 117, 1);
     width: 65%;
 
     p {
@@ -91,7 +121,6 @@ const ChatFooter = styled.div`
   }
 `;
 
-
 const Chat = ({ chatState }) => {
   const chatClick = e => {};
 
@@ -100,13 +129,19 @@ const Chat = ({ chatState }) => {
       {chatState.isChatOpen ? (
         <ChatCon onClick={e => chatClick()}>
           <ChatHeader>
-            <Avatar />
-            <h4>User Name</h4>
-            <Icon
-              type="message"
-              style={{ fontSize: '16px', color: '#08c' }}
-              theme="outlined"
-            />
+            <div className="top-chat">
+              <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>
+                U
+              </Avatar>
+              <h4>User Name</h4>
+            </div>
+            <div className="chat_header_icon">
+              <Icon
+                type="message"
+                style={{ fontSize: '22px', color: '#fff' }}
+                theme="outlined"
+              />
+            </div>
           </ChatHeader>
 
           <ChatBody>
