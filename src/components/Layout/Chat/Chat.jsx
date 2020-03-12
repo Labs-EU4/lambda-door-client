@@ -33,7 +33,7 @@ const ChatBody = styled.div`
   position: relative;
   background: #188c07;
   height: 100%;
-  overflow: hidden;
+  overflow: auto;
 `;
 
 const ChatFooter = styled.div`
@@ -42,9 +42,10 @@ const ChatFooter = styled.div`
   bottom: 0;
   width: inherit;
   height: 40px;
+  text-align: center;
 
   .ant-input {
-    width: inherit;
+    width: 95%;
     height: auto;
     margin: 0.3em;
   }
@@ -112,7 +113,10 @@ const Chat = ({ chatState }) => {
           </ChatBody>
 
           <ChatFooter>
-            <Input placeholder="Type a message..."/>
+            <Input
+              placeholder="Type a message..."
+              suffix={<SendOutlined />}
+            />
           </ChatFooter>
         </ChatCon>
       ) : (
