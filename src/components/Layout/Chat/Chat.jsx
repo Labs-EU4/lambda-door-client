@@ -9,11 +9,11 @@ import styled from 'styled-components';
 
 const ChatCon = styled.div`
   position: fixed;
+  background: #fff;
   bottom: 0;
   right: 0;
   margin-right: 2em;
   z-index: 5;
-  background: #25ddea;
   max-width: 300px;
   width: 280px;
   height: 300px;
@@ -31,9 +31,38 @@ const ChatHeader = styled.div`
 
 const ChatBody = styled.div`
   position: relative;
-  background: #188c07;
+  /* background: #fff; */
   height: 100%;
-  overflow: auto;
+  overflow-y: auto;
+  padding-bottom: 9em;
+
+  &::-webkit-scrollbar {
+    width: 0em;
+  }
+
+  &::-moz-scrollbar-width {
+    width: 0em;
+  }
+
+  &::-ms-scrollbar-width {
+    width: 0em;
+  }
+
+  .chat_message {
+    background: #534f59;
+    margin: 0.5em 0.4em;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    color: #fff;
+    width: 65%;
+
+    p {
+      width: auto;
+      margin: 0.8em 0.4em;
+      padding-top: 0.3em;
+      padding-bottom: 0.3em;
+    }
+  }
 `;
 
 const ChatFooter = styled.div`
@@ -42,6 +71,9 @@ const ChatFooter = styled.div`
   bottom: 0;
   width: inherit;
   height: 42px;
+  -webkit-box-shadow: 0px -7px 13px -13px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px -7px 13px -13px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px -7px 13px -13px rgba(0, 0, 0, 0.75);
 
   .ant-input-affix-wrapper {
     display: flex;
@@ -79,36 +111,47 @@ const Chat = ({ chatState }) => {
 
           <ChatBody>
             {console.log(`chatState messages`, chatState.messages)}
-            <p>
-              something written that is too long to identify do anything about
-            </p>
-            <p>
-              something written that is too long to identify do anything about
-            </p>
-            <p>
-              something written that is too long to identify do anything about
-            </p>
-            <p>
-              something written that is too long to identify do anything about
-            </p>
-            <p>
-              something written that is too long to identify do anything about
-            </p>
-            <p>
-              something written that is too long to identify do anything about
-            </p>
-            <p>
-              something written that is too long to identify do anything about
-            </p>
-            <p>
-              something written that is too long to identify do anything about
-            </p>
-            <p>
-              something written that is too long to identify do anything about
-            </p>
-            <p>
-              something written that is too long to identify do anything about
-            </p>
+            <div className="chat_message">
+              <p>
+                something written that is too long to identify do anything about
+              </p>
+            </div>
+            <div className="chat_message">
+              <p>
+                something written that is too long to identify do anything about
+              </p>
+            </div>
+            <div className="chat_message">
+              <p>
+                something written that is too long to identify do anything about
+              </p>
+            </div>
+            <div className="chat_message">
+              <p>
+                something written that is too long to identify do anything about
+              </p>
+            </div>
+            <div className="chat_message">
+              <p>
+                something written that is too long to identify do anything about
+              </p>
+            </div>
+            <div className="chat_message">
+              <p>
+                something written that is too long to identify do anything about
+              </p>
+            </div>
+            <div className="chat_message">
+              <p>
+                something written that is too long to identify do anything about
+              </p>
+            </div>
+            <div className="chat_message">
+              <p>
+                something written that is too long to identify do anything about
+              </p>
+            </div>
+
             {chatState.messages.map(message => {
               console.log(message);
               return (
@@ -121,10 +164,7 @@ const Chat = ({ chatState }) => {
           </ChatBody>
 
           <ChatFooter>
-            <Input
-              placeholder="Type a message..."
-              suffix={<SendOutlined />}
-            />
+            <Input placeholder="Type a message..." suffix={<SendOutlined />} />
           </ChatFooter>
         </ChatCon>
       ) : (
