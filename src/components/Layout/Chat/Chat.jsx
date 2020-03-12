@@ -3,6 +3,35 @@ import React from 'react';
 // import { getMessages } from '../../../state/actions/chat';
 
 import { connect } from 'react-redux';
+import { Avatar, Icon, Input } from 'antd';
+import styled from 'styled-components';
+
+const ChatCon = styled.div`
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin-right: 2em;
+  z-index: 5;
+  background: #25ddea;
+  max-width: 300px;
+  width: 280px;
+  height: 300px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+`;
+
+const ChatHeader = styled.div`
+  position: relative;
+  background: #ea252f;
+  width: 100%;
+`;
+
+const ChatBody = styled.div`
+  background: #188c07;
+`;
+
+const ChatFooter = styled.div``;
+
 
 const Chat = ({ chatState }) => {
   const chatClick = e => {};
@@ -10,23 +39,22 @@ const Chat = ({ chatState }) => {
   return (
     <>
       {chatState.isChatOpen ? (
-        <div
-          style={{
-            position: 'fixed',
-            bottom: 0,
-            right: 0,
-            zIndex: 5,
-            background: '#ccc',
-            width: '300px',
-            height: '300px',
-          }}
-          onClick={e => chatClick()}
-        >
-          {console.log('chatState.messages')}
-          {console.log(chatState.messages)}
+        <ChatCon onClick={e => chatClick()}>
+          <ChatHeader>
+            <Avatar />
+            <h4>User Name</h4>
+            <Icon
+              type="message"
+              style={{ fontSize: '16px', color: '#08c' }}
+              theme="outlined"
+            />
+          </ChatHeader>
+
+          <ChatBody>
+          {console.log(`chatState messages`, chatState.messages)}
+          <p>something written</p>
           {chatState.messages.map(message => {
             console.log(message);
-
             return (
               <>
                 <br />
@@ -34,7 +62,9 @@ const Chat = ({ chatState }) => {
               </>
             );
           })}
-        </div>
+          </ChatBody>
+
+        </ChatCon>
       ) : (
         <></>
       )}
