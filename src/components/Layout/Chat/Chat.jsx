@@ -37,17 +37,25 @@ const ChatBody = styled.div`
 `;
 
 const ChatFooter = styled.div`
-  background: #530caf;
+  background: #ffffff;
   position: inherit;
   bottom: 0;
   width: inherit;
-  height: 40px;
-  text-align: center;
+  height: 42px;
 
-  .ant-input {
-    width: 95%;
-    height: auto;
-    margin: 0.3em;
+  .ant-input-affix-wrapper {
+    display: flex;
+    justify-content: center;
+
+    .ant-input {
+      width: 95%;
+      height: auto;
+      margin: 0.3em;
+    }
+  }
+
+  .ant-input-suffix {
+    padding: 0 0.3em;
   }
 `;
 
