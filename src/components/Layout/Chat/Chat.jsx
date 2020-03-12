@@ -28,20 +28,27 @@ const ChatHeader = styled.div`
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 
   .top-chat {
     display: flex;
-    background: blue;
-    margin-right: 8em;
-    margin-top: auto;
+    align-items: center;
+    border: 1px solid blue;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: 1em;
+    align-content: center;
+    width: 120px;
+    justify-content: space-between;
+    h4 {
+      margin-right: 0.6em;
+      margin-bottom: 0;
+    }
   }
   .Icon {
     display: flex;
-    margin-top: 0.5em;
-    margin-right: 0.75em;
-    align-content: center;
-    
+    margin-right: 1.5em;
+    align-items: center;
   }
 `;
 
@@ -76,14 +83,14 @@ const Chat = ({ chatState }) => {
       {chatState.isChatOpen ? (
         <ChatCon onClick={e => chatClick()}>
           <ChatHeader>
-            <Avatar />
             <div className="top-chat">
+              <Avatar />
               <h4>User Name</h4>
             </div>
             <div className="Icon">
               <Icon
                 type="message"
-                style={{ fontSize: '16px', color: '#08c' }}
+                style={{ fontSize: '22px', color: '#08c' }}
                 theme="outlined"
               />
             </div>
