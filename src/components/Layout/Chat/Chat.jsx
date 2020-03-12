@@ -27,6 +27,21 @@ const ChatHeader = styled.div`
   width: 100%;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+
+  .top-chat {
+    display: flex;
+    background: blue;
+    margin-right: 8em;
+    margin-top: auto;
+  }
+  .Icon {
+    display: flex;
+    margin-top: 0.5em;
+    margin-right: 0.75em;
+    align-content: center;
+  }
 `;
 
 const ChatBody = styled.div`
@@ -43,6 +58,7 @@ const ChatFooter = styled.div`
   width: inherit;
   height: 40px;
   text-align: center;
+  overflow: hidden;
 
   .ant-input {
     width: 95%;
@@ -50,7 +66,6 @@ const ChatFooter = styled.div`
     margin: 0.3em;
   }
 `;
-
 
 const Chat = ({ chatState }) => {
   const chatClick = e => {};
@@ -61,12 +76,16 @@ const Chat = ({ chatState }) => {
         <ChatCon onClick={e => chatClick()}>
           <ChatHeader>
             <Avatar />
-            <h4>User Name</h4>
-            <Icon
-              type="message"
-              style={{ fontSize: '16px', color: '#08c' }}
-              theme="outlined"
-            />
+            <div className="top-chat">
+              <h4>User Name</h4>
+            </div>
+            <div className="Icon">
+              <Icon
+                type="message"
+                style={{ fontSize: '16px', color: '#08c' }}
+                theme="outlined"
+              />
+            </div>
           </ChatHeader>
 
           <ChatBody>
@@ -113,10 +132,7 @@ const Chat = ({ chatState }) => {
           </ChatBody>
 
           <ChatFooter>
-            <Input
-              placeholder="Type a message..."
-              suffix={<SendOutlined />}
-            />
+            <Input placeholder="Type a message..." suffix={<SendOutlined />} />
           </ChatFooter>
         </ChatCon>
       ) : (
