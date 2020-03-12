@@ -4,6 +4,7 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 import { Avatar, Icon, Input } from 'antd';
+import { SendOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 
 const ChatCon = styled.div`
@@ -21,16 +22,33 @@ const ChatCon = styled.div`
 `;
 
 const ChatHeader = styled.div`
-  position: relative;
   background: #ea252f;
+  position: relative;
   width: 100%;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
 `;
 
 const ChatBody = styled.div`
+  position: relative;
   background: #188c07;
+  height: 100%;
+  overflow: hidden;
 `;
 
-const ChatFooter = styled.div``;
+const ChatFooter = styled.div`
+  background: #530caf;
+  position: inherit;
+  bottom: 0;
+  width: inherit;
+  height: 40px;
+
+  .ant-input {
+    width: inherit;
+    height: auto;
+    margin: 0.3em;
+  }
+`;
 
 
 const Chat = ({ chatState }) => {
@@ -51,19 +69,51 @@ const Chat = ({ chatState }) => {
           </ChatHeader>
 
           <ChatBody>
-          {console.log(`chatState messages`, chatState.messages)}
-          <p>something written</p>
-          {chatState.messages.map(message => {
-            console.log(message);
-            return (
-              <>
-                <br />
-                {message.message}
-              </>
-            );
-          })}
+            {console.log(`chatState messages`, chatState.messages)}
+            <p>
+              something written that is too long to identify do anything about
+            </p>
+            <p>
+              something written that is too long to identify do anything about
+            </p>
+            <p>
+              something written that is too long to identify do anything about
+            </p>
+            <p>
+              something written that is too long to identify do anything about
+            </p>
+            <p>
+              something written that is too long to identify do anything about
+            </p>
+            <p>
+              something written that is too long to identify do anything about
+            </p>
+            <p>
+              something written that is too long to identify do anything about
+            </p>
+            <p>
+              something written that is too long to identify do anything about
+            </p>
+            <p>
+              something written that is too long to identify do anything about
+            </p>
+            <p>
+              something written that is too long to identify do anything about
+            </p>
+            {chatState.messages.map(message => {
+              console.log(message);
+              return (
+                <>
+                  <br />
+                  {message.message}
+                </>
+              );
+            })}
           </ChatBody>
 
+          <ChatFooter>
+            <Input placeholder="Type a message..."/>
+          </ChatFooter>
         </ChatCon>
       ) : (
         <></>
