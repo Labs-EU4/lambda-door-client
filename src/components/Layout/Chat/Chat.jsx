@@ -41,6 +41,7 @@ const ChatHeader = styled.div`
     margin-top: 0.5em;
     margin-right: 0.75em;
     align-content: center;
+    
   }
 `;
 
