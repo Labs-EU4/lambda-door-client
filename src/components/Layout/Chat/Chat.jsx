@@ -193,6 +193,7 @@ const Chat = ({
               onBlur={handleBlur}
               value={values.message}
               type="text"
+              autoComplete="off"
             />
           </form>
         </ChatFooter>
