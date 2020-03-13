@@ -14,7 +14,8 @@ const ChatButton = ({
   toUserID,
 }) => {
   const chatClick = e => {
-    getMessages(id, toUserID);
+    // getMessages(id, toUserID);
+    // create new chat
   };
 
   return <div onClick={e => chatClick()}>Chat with me</div>;

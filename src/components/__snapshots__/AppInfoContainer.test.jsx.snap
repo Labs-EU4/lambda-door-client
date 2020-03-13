@@ -1,0 +1,148 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppInfoContainer renders correctly 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-bdVaJa bDDlKO"
+    >
+      <div
+        class="sc-bwzfXH iHWQJR"
+      >
+        <div
+          class="heading"
+        >
+          <h2>
+            Features
+          </h2>
+        </div>
+        <div
+          class="sc-htpNat iFaotm"
+        >
+          <p
+            class="left-outer"
+          >
+            <i
+              aria-label="icon: slack-circle"
+              class="anticon anticon-slack-circle icon"
+            >
+              <svg
+                aria-hidden="true"
+                class=""
+                data-icon="slack-circle"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zM361.5 580.2c0 27.8-22.5 50.4-50.3 50.4a50.35 50.35 0 0 1-50.3-50.4c0-27.8 22.5-50.4 50.3-50.4h50.3v50.4zm134 134.4c0 27.8-22.5 50.4-50.3 50.4-27.8 0-50.3-22.6-50.3-50.4V580.2c0-27.8 22.5-50.4 50.3-50.4a50.35 50.35 0 0 1 50.3 50.4v134.4zm-50.2-218.4h-134c-27.8 0-50.3-22.6-50.3-50.4 0-27.8 22.5-50.4 50.3-50.4h134c27.8 0 50.3 22.6 50.3 50.4-.1 27.9-22.6 50.4-50.3 50.4zm0-134.4c-13.3 0-26.1-5.3-35.6-14.8S395 324.8 395 311.4c0-27.8 22.5-50.4 50.3-50.4 27.8 0 50.3 22.6 50.3 50.4v50.4h-50.3zm83.7-50.4c0-27.8 22.5-50.4 50.3-50.4 27.8 0 50.3 22.6 50.3 50.4v134.4c0 27.8-22.5 50.4-50.3 50.4-27.8 0-50.3-22.6-50.3-50.4V311.4zM579.3 765c-27.8 0-50.3-22.6-50.3-50.4v-50.4h50.3c27.8 0 50.3 22.6 50.3 50.4 0 27.8-22.5 50.4-50.3 50.4zm134-134.4h-134c-13.3 0-26.1-5.3-35.6-14.8S529 593.6 529 580.2c0-27.8 22.5-50.4 50.3-50.4h134c27.8 0 50.3 22.6 50.3 50.4 0 27.8-22.5 50.4-50.3 50.4zm0-134.4H663v-50.4c0-27.8 22.5-50.4 50.3-50.4s50.3 22.6 50.3 50.4c0 27.8-22.5 50.4-50.3 50.4z"
+                />
+              </svg>
+            </i>
+            No need to sign up: Lambda students have automatic access. Just sign in via Slack.
+          </p>
+          <p
+            class="left-center"
+          >
+            <i
+              aria-label="icon: edit"
+              class="anticon anticon-edit icon"
+            >
+              <svg
+                aria-hidden="true"
+                class=""
+                data-icon="edit"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32zm-622.3-84c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 0 0 0-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 0 0 9.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9z"
+                />
+              </svg>
+            </i>
+            Leave company reviews, salary reviews and interview reviews, publicly or anonymously.
+          </p>
+          <p
+            class="right-center"
+          >
+            <i
+              aria-label="icon: info-circle"
+              class="anticon anticon-info-circle icon"
+            >
+              <svg
+                aria-hidden="true"
+                class=""
+                data-icon="info-circle"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm32 664c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V456c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272zm-32-344a48.01 48.01 0 0 1 0-96 48.01 48.01 0 0 1 0 96z"
+                />
+              </svg>
+            </i>
+            Access up to date information about companies in your area or around the world.
+          </p>
+          <p
+            class="right-outer"
+          >
+            <i
+              aria-label="icon: mail"
+              class="anticon anticon-mail icon"
+            >
+              <svg
+                aria-hidden="true"
+                class=""
+                data-icon="mail"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-80.8 108.9L531.7 514.4c-7.8 6.1-18.7 6.1-26.5 0L189.6 268.9A7.2 7.2 0 0 1 194 256h648.8a7.2 7.2 0 0 1 4.4 12.9z"
+                />
+              </svg>
+            </i>
+            Email referrals: ask questions at the click of a button about the companies you're interested in.
+          </p>
+        </div>
+        <a
+          class="back-link"
+        >
+          Go back  
+          <i
+            aria-label="icon: up-circle"
+            class="anticon anticon-up-circle"
+            style="font-size: 22px; color: rgb(187, 19, 51);"
+          >
+            <svg
+              aria-hidden="true"
+              class=""
+              data-icon="up-circle"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm178 555h-46.9c-10.2 0-19.9-4.9-25.9-13.2L512 460.4 406.8 605.8c-6 8.3-15.6 13.2-25.9 13.2H334c-6.5 0-10.3-7.4-6.5-12.7l178-246c3.2-4.4 9.7-4.4 12.9 0l178 246c3.9 5.3.1 12.7-6.4 12.7z"
+              />
+            </svg>
+          </i>
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+`;

@@ -117,6 +117,9 @@ describe('ConnectedHome', () => {
         isFetching: false,
       },
       closestCompanies: { isFetching: false, closestCompanies: [] },
+      chatState: {
+        chats: [],
+      },
     });
   });
   // it('decodes the token of a previously authenticated user and passes them to the dashboard', async () => {

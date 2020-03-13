@@ -32,10 +32,10 @@ export const getMessages = (fromUserID, toUserID) => dispatch => {
         messages.push(doc.data());
       });
 
-      dispatch({
-        type: types.GET_CHAT_MESSAGES,
-        payload: messages,
-      });
+      // dispatch({
+      //   type: types.GET_CHAT_MESSAGES,
+      //   payload: messages,
+      // });
     });
 };
 

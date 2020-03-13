@@ -1,8 +1,6 @@
 import * as types from '../types';
 
 const initialState = {
-  isChatOpen: false,
-  messages: [],
   chats: [],
 };
 
@@ -13,11 +11,11 @@ export const chatState = (state = initialState, action) => {
       return {
         ...state,
       };
-    case types.GET_CHAT_MESSAGES:
-      return {
-        ...state,
-        messages: action.payload,
-      };
+    // case types.GET_CHAT_MESSAGES:
+    //   return {
+    //     ...state,
+    //     messages: action.payload,
+    //   };
     case types.GET_OPEN_CHATS:
       return {
         ...state,
