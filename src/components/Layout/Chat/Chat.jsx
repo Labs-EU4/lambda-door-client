@@ -19,9 +19,9 @@ const ChatCon = styled.div`
   height: 300px;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(235, 235, 235, 1);
-  -moz-box-shadow: 0px 0px 5px 0px rgba(235, 235, 235, 1);
-  box-shadow: 0px 0px 5px 0px rgba(235, 235, 235, 1);
+  -webkit-box-shadow: -1px 0px 9px 0px rgba(235, 235, 235, 1);
+  -moz-box-shadow: -1px 0px 9px 0px rgba(235, 235, 235, 1);
+  box-shadow: -1px 0px 9px 0px rgba(235, 235, 235, 1);
 `;
 
 const ChatHeader = styled.div`
@@ -63,8 +63,12 @@ const ChatHeader = styled.div`
 const ChatBody = styled.div`
   position: relative;
   height: 100%;
-  overflow-y: auto;
+  overflow-y: scroll;
   padding-bottom: 7em;
+
+  /* isScrolledToBottom = out.scrollHeight - out.clientHeight <= out.scrollTop + 1; */
+
+  /* document.getElementById('scroll').scrollTop = message.offsetHeight + message.offsetTop;  */
 
   &::-webkit-scrollbar {
     width: 0em;
@@ -136,11 +140,18 @@ const Chat = ({
   messages,
   chatID,
 }) => {
-  const chatClick = e => {};
+  const chatClick = (evt) => {};
+
+  // const autoScrollMessage = () => {
+  //   const chat_body = document.getElementById('chat_body');
+  //   console.log(`chatBody`, chat_body);
+
+  //   chat_body.scrollTop = chat_body.scrollHeight - chat_body.clientHeight;
+  // }
 
   return (
     <>
-      <ChatCon onClick={e => chatClick()}>
+      <ChatCon onClick={e => chatClick(e)}>
         <ChatHeader>
           <div className="top-chat">
             <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>
@@ -157,10 +168,13 @@ const Chat = ({
           </div>
         </ChatHeader>
 
-        <ChatBody>
+        <ChatBody id="chat_body">
           {console.log(`chatState messages`, chatState.messages)}
           {messages.map(message => {
             // return <div ></div>;
+            // if(message){
+            //   autoScrollMessage()
+            // }
             return (
               <div className="chat_message" key={message.sentAt}>
                 <p>{message.message}</p>
