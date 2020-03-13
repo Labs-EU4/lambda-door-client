@@ -5,11 +5,16 @@ import { getMessages } from '../../../state/actions/chat';
 
 import { connect } from 'react-redux';
 
-const ChatButton = ({ chatState, getMessages }) => {
+const ChatButton = ({
+  chatState,
+  getMessages,
+  authState: {
+    credentials: { id },
+  },
+  toUserID,
+}) => {
   const chatClick = e => {
-    console.log('his');
-    console.log(chatState);
-    getMessages(123, 456);
+    getMessages(id, toUserID);
   };
 
   return <div onClick={e => chatClick()}>Chat with me</div>;
