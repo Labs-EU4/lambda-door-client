@@ -19,9 +19,9 @@ const ChatCon = styled.div`
   height: 300px;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
-  -webkit-box-shadow: -1px 0px 9px 0px rgba(235, 235, 235, 1);
-  -moz-box-shadow: -1px 0px 9px 0px rgba(235, 235, 235, 1);
-  box-shadow: -1px 0px 9px 0px rgba(235, 235, 235, 1);
+  -webkit-box-shadow: -1px 0px 13px -4px rgba(0, 21, 41, 0.51);
+  -moz-box-shadow: -1px 0px 13px -4px rgba(0, 21, 41, 0.51);
+  box-shadow: -1px 0px 13px -4px rgba(0, 21, 41, 0.51);
 `;
 
 const ChatHeader = styled.div`
