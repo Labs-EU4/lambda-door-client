@@ -171,9 +171,6 @@ const DashboardLayout = ({
                   height: '300px',
                 }}
               >
-                {JSON.stringify(Object.keys(chatState.chats))}
-                {JSON.stringify(chatState.chats)}
-                {JSON.stringify(chatState.chats.length)}
                 {Object.keys(chatState.chats).map(key => {
                   return (
                     <Chat
