@@ -896,7 +896,6 @@ exports[`AddReview renders correctly 1`] = `
             </div>
           </div>
         </div>
-        ["company_id","employment_type","job_title","description","currency","unit","review","text"]
         <button
           class="ant-btn ant-btn-primary"
           disabled=""

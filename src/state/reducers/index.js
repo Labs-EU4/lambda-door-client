@@ -6,11 +6,12 @@ import { topRatedReviewsReducer } from './topRatedReviews';
 import { closestCompaniesReducer } from './closestCompanies';
 import { companiesReducer } from './companies';
 import { avgSalariesReducer } from './avgSalaries';
-import {highestSalaryReducer} from './highestSalary';
+import { highestSalaryReducer } from './highestSalary';
 import companyReviewsReducer from './singleCompany';
 import singleReviewReducer from './singleReview';
 import searchReducer from './search';
 import ratesReducer from './currencyRates';
+import chatReducer from './chat';
 
 const rootReducer = combineReducers({
   reviews: reviewsReducer,
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   search: searchReducer,
   highestSalaries: highestSalaryReducer,
   currencyRates: ratesReducer,
+  chatState: chatReducer,
 });
 
 export default rootReducer;

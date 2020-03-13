@@ -17,18 +17,30 @@ import {
 } from '../../styles/theme.styles';
 
 import { LogoutUser } from '../../state/actions/auth';
+import { getChats } from '../../state/actions/chat';
 
 import logo from '../../assets/lambda-logo.png';
+import Chat from './Chat/Chat';
 
 const { Header, Sider, Content } = Layout;
 
-const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
+const DashboardLayout = ({
+  component: Component,
+  LogoutUser,
+  getChats,
+  chatState,
+  ...rest
+}) => {
   const [collapsed, setCollapsed] = useState(false);
   const [searchVisible, setSearchVisible] = useState(false);
 
   const toggle = () => {
     setCollapsed(!collapsed);
   };
+
+  React.useEffect(() => {
+    getChats();
+  }, []);
 
   const toggleSearch = evt => {
     evt.stopPropagation();
@@ -149,6 +161,26 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
                   </SearchButton>
                 </Content>
               </Layout>
+
+              <div
+                style={{
+                  position: 'fixed',
+                  bottom: 0,
+                  right: 0,
+                  zIndex: 5,
+                  height: '300px',
+                }}
+              >
+                {Object.keys(chatState.chats).map(key => {
+                  return (
+                    <Chat
+                      key={key}
+                      chatID={key}
+                      messages={chatState.chats[key].messages}
+                    />
+                  );
+                })}
+              </div>
             </Layout>
           </StyledContainer>
         );
@@ -157,7 +189,9 @@ const DashboardLayout = ({ component: Component, LogoutUser, ...rest }) => {
   );
 };
 
-export default connect(null, { LogoutUser })(DashboardLayout);
+export default connect(state => state, { LogoutUser, getChats })(
+  DashboardLayout
+);
 
 const StyledContainer = styled.div`
   height: 100vh;

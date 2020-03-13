@@ -101,7 +101,7 @@ export const Home = ({ history, SetAuthenticated }) => {
   );
 };
 
-export default connect(null, { LoginUser, SetAuthenticated })(Home);
+export default connect(state => state, { LoginUser, SetAuthenticated })(Home);
 
 const HomeContainer = styled.div`
   background-image: url(${background});

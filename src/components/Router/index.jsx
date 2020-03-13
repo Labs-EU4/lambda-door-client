@@ -35,6 +35,7 @@ import SearchResults from '../Layout/Search/SearchResults';
 import DetailedSalarySearchCard from '../Layout/Search/DetailedSalarySearchCard';
 import DetailedInterviewSearchCard from '../Layout/Search/DetailedInterviewSearchCard';
 import { HighestRated } from '../UserDashboard/TopRated/HighestRated';
+import Chat from '../Layout/Chat/Chat';
 
 const start = async () => {
   const token = localStorage.getItem('token');
