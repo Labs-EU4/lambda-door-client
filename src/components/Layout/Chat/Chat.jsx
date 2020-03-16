@@ -122,53 +122,7 @@ const ChatFooter = styled.div`
 
 const Chat = props => {
   console.log(`props`, props);
-
-  // const [isMinimized, setIsMinimized] = useState(false);
   const myRef = createRef();
-
-  // const minimizeChat = () => {
-  //   setIsMinimized(!isMinimized);
-  //   // const chat_con = document.querySelector('#chat_con');
-  //   // const chat_header = document.querySelector('#chat_header');
-  //   // const chat_body = document.querySelector('#chat_body');
-  //   // const chat_footer = document.querySelector('#chat_footer');
-
-  //   // if (!isMinimized) {
-  //   //   // chat_con.style.height = '0 !important';
-
-  //   //   // chat_header.style.position = 'fixed !important';
-  //   //   // chat_header.style.bottom = 0;
-  //   //   // chat_header.style.width = '280px';
-
-  //   //   // chat_body.style.display = 'none';
-
-  //   //   // chat_footer.style.display = 'none';
-  //   // } else {
-  //   //   // chat_con.style.height = '300px';
-  //   //   // else
-  //   //   // chat_header.style.position = 'relative !important';
-  //   //   // chat_header.style.bottom = 'unset';
-  //   //   // chat_header.style.width = '100%';
-
-  //   //   // chat_body.style.display = 'unset';
-
-  //   //   // chat_footer.style.display = 'unset';
-  //   // }
-
-  //   // ON MINIMIZE (ChatCon)
-  //   // height: 0 !important; or height: auto;
-
-  //   // ON MINIMIZE (ChatHeader)
-  //   // position to fixed
-  //   // bottom to 0
-  //   // width to 280px
-
-  //   // ON MINIMIZE (ChatBody)
-  //   // display: none;
-
-  //   // ON MINIMIZE (ChatFooter)
-  //   // display: none;
-  // };
 
   const handleSubmit = e => {
     e.preventDefault();

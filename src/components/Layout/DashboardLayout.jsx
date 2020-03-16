@@ -173,7 +173,7 @@ const DashboardLayout = ({
                   bottom: 0,
                   right: 0,
                   zIndex: 5,
-                  height: '300px',
+                  height: isMinimized ? 'auto' : '300px',
                 }}
               >
                 {Object.keys(chatState.chats).map(key => {
