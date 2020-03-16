@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chat renders correctly 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-bdVaJa hIoXXQ"
+    >
+      <div
+        class="sc-bwzfXH ilLWZm"
+      >
+        <div
+          class="top-chat"
+        >
+          <span
+            class="ant-avatar ant-avatar-circle"
+            style="color: rgb(245, 106, 0); background-color: rgb(253, 227, 207);"
+          >
+            <span
+              class="ant-avatar-string"
+              style="transform: scale(1) translateX(-50%);"
+            >
+              U
+            </span>
+          </span>
+          <h4>
+            User Name
+          </h4>
+        </div>
+        <div
+          class="chat_header_icon"
+        >
+          <i
+            aria-label="icon: message"
+            class="anticon anticon-message"
+            style="font-size: 22px; color: rgb(255, 255, 255);"
+          >
+            <svg
+              aria-hidden="true"
+              class=""
+              data-icon="message"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M464 512a48 48 0 1 0 96 0 48 48 0 1 0-96 0zm200 0a48 48 0 1 0 96 0 48 48 0 1 0-96 0zm-400 0a48 48 0 1 0 96 0 48 48 0 1 0-96 0zm661.2-173.6c-22.6-53.7-55-101.9-96.3-143.3a444.35 444.35 0 0 0-143.3-96.3C630.6 75.7 572.2 64 512 64h-2c-60.6.3-119.3 12.3-174.5 35.9a445.35 445.35 0 0 0-142 96.5c-40.9 41.3-73 89.3-95.2 142.8-23 55.4-34.6 114.3-34.3 174.9A449.4 449.4 0 0 0 112 714v152a46 46 0 0 0 46 46h152.1A449.4 449.4 0 0 0 510 960h2.1c59.9 0 118-11.6 172.7-34.3a444.48 444.48 0 0 0 142.8-95.2c41.3-40.9 73.8-88.7 96.5-142 23.6-55.2 35.6-113.9 35.9-174.5.3-60.9-11.5-120-34.8-175.6zm-151.1 438C704 845.8 611 884 512 884h-1.7c-60.3-.3-120.2-15.3-173.1-43.5l-8.4-4.5H188V695.2l-4.5-8.4C155.3 633.9 140.3 574 140 513.7c-.4-99.7 37.7-193.3 107.6-263.8 69.8-70.5 163.1-109.5 262.8-109.9h1.7c50 0 98.5 9.7 144.2 28.9 44.6 18.7 84.6 45.6 119 80 34.3 34.3 61.3 74.4 80 119 19.4 46.2 29.1 95.2 28.9 145.8-.6 99.6-39.7 192.9-110.1 262.7z"
+              />
+            </svg>
+          </i>
+        </div>
+      </div>
+      <div
+        class="sc-htpNat krLEyi"
+      >
+        <div
+          class="chat_message"
+        >
+          <p>
+            Jalingo Gombe zombie popopo
+          </p>
+        </div>
+        <div
+          class="chat_message"
+        >
+          <p>
+            Ada mode futon jalon dididi
+          </p>
+        </div>
+      </div>
+      <div
+        class="sc-bxivhb dWoIjZ"
+      >
+        <form>
+          <span
+            class="ant-input-affix-wrapper"
+          >
+            <input
+              class="ant-input"
+              name="message"
+              placeholder="Type a message..."
+              type="text"
+              value=""
+            />
+            <span
+              class="ant-input-suffix"
+            >
+              <span
+                aria-label="send"
+                class="anticon anticon-send"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  class=""
+                  data-icon="send"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <defs>
+                    <style />
+                  </defs>
+                  <path
+                    d="M931.4 498.9L94.9 79.5c-3.4-1.7-7.3-2.1-11-1.2a15.99 15.99 0 00-11.7 19.3l86.2 352.2c1.3 5.3 5.2 9.6 10.4 11.3l147.7 50.7-147.6 50.7c-5.2 1.8-9.1 6-10.3 11.3L72.2 926.5c-.9 3.7-.5 7.6 1.2 10.9 3.9 7.9 13.5 11.1 21.5 7.2l836.5-417c3.1-1.5 5.6-4.1 7.2-7.1 3.9-8 .7-17.6-7.2-21.6zM170.8 826.3l50.3-205.6 295.2-101.3c2.3-.8 4.2-2.6 5-5 1.4-4.2-.8-8.7-5-10.2L221.1 403 171 198.2l628 314.9-628.2 313.2z"
+                  />
+                </svg>
+              </span>
+            </span>
+          </span>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+`;
