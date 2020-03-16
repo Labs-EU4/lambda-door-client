@@ -65,7 +65,7 @@ const ChatBody = styled.div`
   position: relative;
   height: 70%;
   overflow-y: scroll;
-  padding-bottom: 3em;
+  padding-bottom: 1em;
 
   &::-webkit-scrollbar {
     width: 0em;
@@ -124,10 +124,10 @@ const ChatFooter = styled.div`
 `;
 
 const Chat = props => {
+  console.log(`props`, props);
+
   const [isMinimized, setIsMinimized] = useState(false);
   const myRef = createRef();
-
-  console.log(`props`, props);
 
   const minimizeChat = () => {
     setIsMinimized(!isMinimized);
@@ -153,14 +153,11 @@ const Chat = props => {
     });
   };
 
-  // const autoScrollMessage = () => {
-  //   const chat_body = document.getElementById('chat_body');
-  //   console.log(`chatBody`, chat_body);
+  const autoScrollMessage = () => {
+    const chat_body = document.getElementById('chat_body');
 
-  //   chat_body.scrollTop = chat_body.scrollHeight - chat_body.clientHeight;
-  // };
-
-  // const chatClick = (evt) => {};
+    chat_body.scrollTop = chat_body.scrollHeight - chat_body.clientHeight;
+  };
 
   const { getFieldDecorator } = props.form;
 
@@ -175,11 +172,6 @@ const Chat = props => {
             <h4>User Name</h4>
           </div>
           <div className="chat_header_icon">
-            {/* <Icon
-              type="message"
-              style={{ fontSize: '22px', color: '#fff' }}
-              theme="outlined"
-            /> */}
             {isMinimized ? (
               <ArrowsAltOutlined
                 onClick={minimizeChat}
@@ -197,10 +189,9 @@ const Chat = props => {
         <ChatBody id="chat_body">
           {console.log(`chatState messages`, props.chatState.messages)}
           {props.messages.map(message => {
-            // return <div ></div>;
-            // if (message) {
-            //   autoScrollMessage();
-            // }
+            if (message) {
+              autoScrollMessage();
+            }
             return (
               <div className="chat_message" key={message.sentAt}>
                 <p>{message.message}</p>
@@ -234,52 +225,12 @@ const Chat = props => {
               )}
             </Form.Item>
           </Form>
-
-          {/* <form onSubmit={handleSubmit}>
-            <Input
-              placeholder="Type a message..."
-              suffix={<SendOutlined onClick={handleSubmit} />}
-              name="message"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.message}
-              type="text"
-              autoComplete="off"
-            />
-          </form> */}
         </ChatFooter>
       </ChatCon>
     </>
   );
 };
 
-// const ChatForm = withFormik({
-//   mapPropsToValues: () => ({ message: '' }),
-
-//   // Custom sync validation
-//   validate: values => {
-//     const errors = {};
-
-//     if (!values.message) {
-//       errors.message = 'Required';
-//     }
-
-//     return errors;
-//   },
-
-//   handleSubmit: (values, { setSubmitting, setFieldValue, props }) => {
-//     props.sendMessage(
-//       values.message,
-//       props.chatID,
-//       props.authState.credentials.id
-//     );
-//     console.log(props.chatID);
-
-//     setFieldValue('message', '');
-//   },
-
-//   displayName: 'BasicForm',
-// })(Chat);
 const ChatForm = Form.create({ name: 'text' })(Chat);
 
 export default connect(state => state, { sendMessage })(ChatForm);
