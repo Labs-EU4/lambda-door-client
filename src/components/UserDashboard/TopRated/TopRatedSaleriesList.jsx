@@ -19,6 +19,8 @@ export const TopRatedSalary = ({
   useEffect(() => {
     getHighestSalary();
   }, []);
+  console.log(`highestSalaries`, highestSalaries);
+
   return (
     <StyledDiv>
       {!isFetching ? (
@@ -28,21 +30,22 @@ export const TopRatedSalary = ({
               <p>No data to display</p>
             </div>
           ) : !location ? (
-            highestSalaries.slice(0, 4).map(topRated => (
-              // eslint-disable-next-line react/no-array-index-key
-              <HighestSalaryCard
-                key={`${topRated.id}`}
-                company={topRated.companyName}
-                job_title={topRated.job_title}
-                salary={`${topRated.base_salary}`}
-                color={color}
-              />
-            ))
+            highestSalaries
+              .slice(0, 4)
+              .map((topRated, index) => (
+                <HighestSalaryCard
+                  key={index}
+                  company={topRated.companyName}
+                  job_title={topRated.job_title}
+                  salary={`${topRated.base_salary}`}
+                  color={color}
+                />
+              ))
           ) : (
-            highestSalaries.slice(0, 4).map(topRated => (
+            highestSalaries.slice(0, 4).map((topRated, index) => (
               // eslint-disable-next-line react/no-array-index-key
               <HighestSalaryCard
-                key={`${topRated.id}`}
+                key={index}
                 company={topRated.companyName}
                 job_title={topRated.job_title}
                 salary={`${topRated.base_salary}`}

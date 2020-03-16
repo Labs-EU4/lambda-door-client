@@ -16,6 +16,7 @@ const ChatCon = styled.div`
   margin-right: 2em;
   max-width: 300px;
   width: 280px;
+  height: 300px;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   -webkit-box-shadow: -1px 0px 13px -4px rgba(0, 21, 41, 0.51);
@@ -122,6 +123,12 @@ const ChatFooter = styled.div`
 
 const Chat = props => {
   console.log(`props`, props);
+  const [isMinimized, setIsMinimized] = useState(false);
+
+  const minimizeChat = () => {
+    setIsMinimized(!isMinimized);
+  };
+
   const myRef = createRef();
 
   const handleSubmit = e => {
@@ -144,13 +151,15 @@ const Chat = props => {
     });
   };
 
-  const autoScrollMessage = () => {
-    const chat_body = document.getElementById('chat_body');
+  // const autoScrollMessage = () => {
+  //   const chat_body = document.getElementById('chat_body');
 
-    chat_body.scrollTop = chat_body.scrollHeight - chat_body.clientHeight;
-  };
+  //   chat_body.scrollTop = chat_body.scrollHeight - chat_body.clientHeight;
+  // };
 
   const { getFieldDecorator } = props.form;
+
+  // UUID (Generate unique ids for parent containers)
 
   return (
     <>
@@ -158,11 +167,9 @@ const Chat = props => {
         <ChatHeader
           id="chat_header"
           style={{
-            position: props.isMinimized
-              ? 'fixed !important'
-              : 'relative !important',
-            bottom: props.isMinimized ? '0' : 'unset',
-            width: props.isMinimized ? '280px' : '100%',
+            position: isMinimized ? 'fixed !important' : 'relative !important',
+            bottom: isMinimized ? '0' : 'unset',
+            width: isMinimized ? '280px' : '100%',
           }}
         >
           <div className="top-chat">
@@ -172,14 +179,14 @@ const Chat = props => {
             <h4>User Name</h4>
           </div>
           <div className="chat_header_icon">
-            {props.isMinimized ? (
+            {isMinimized ? (
               <ArrowsAltOutlined
-                onClick={props.minimizeChat}
+                onClick={minimizeChat}
                 style={{ fontSize: '22px', color: '#fff' }}
               />
             ) : (
               <ShrinkOutlined
-                onClick={props.minimizeChat}
+                onClick={minimizeChat}
                 style={{ fontSize: '22px', color: '#fff' }}
               />
             )}
@@ -189,14 +196,14 @@ const Chat = props => {
         <ChatBody
           id="chat_body"
           style={{
-            display: props.isMinimized ? 'none' : 'unset',
+            display: isMinimized ? 'none' : 'unset',
           }}
         >
           {console.log(`chatState messages`, props.chatState.messages)}
           {props.messages.map(message => {
-            if (message) {
-              autoScrollMessage();
-            }
+            // if (message) {
+            //   autoScrollMessage();
+            // }
             return (
               <div className="chat_message" key={message.sentAt}>
                 <p>{message.message}</p>
@@ -209,7 +216,7 @@ const Chat = props => {
         <ChatFooter
           id="chat_footer"
           style={{
-            display: props.isMinimized ? 'none' : 'unset',
+            display: isMinimized ? 'none' : 'unset',
           }}
         >
           <Form onSubmit={handleSubmit}>
