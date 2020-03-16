@@ -62,8 +62,8 @@ const ChatHeader = styled.div`
 
 const ChatBody = styled.div`
   position: relative;
-  height: 250px;
-  overflow-y: scroll;
+  height: 100%;
+  overflow-y: auto;
   padding-bottom: 7em;
 
   &::-webkit-scrollbar {
