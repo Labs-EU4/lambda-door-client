@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { sendMessage } from '../../../state/actions/chat';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
 import { Avatar, Icon, Input } from 'antd';
-import { SendOutlined } from '@ant-design/icons';
+import {
+  SendOutlined,
+  ArrowsAltOutlined,
+  ShrinkOutlined,
+} from '@ant-design/icons';
 import styled from 'styled-components';
 
 const ChatCon = styled.div`
@@ -140,18 +144,23 @@ const Chat = ({
   messages,
   chatID,
 }) => {
-  const chatClick = (evt) => {};
+  const [isMinimized, setIsMinimized] = useState(false);
 
-  // const autoScrollMessage = () => {
-  //   const chat_body = document.getElementById('chat_body');
-  //   console.log(`chatBody`, chat_body);
+  const minimizeChat = () => {
+    setIsMinimized(!isMinimized);
+  };
+  // const chatClick = (evt) => {};
 
-  //   chat_body.scrollTop = chat_body.scrollHeight - chat_body.clientHeight;
-  // }
+  const autoScrollMessage = () => {
+    const chat_body = document.getElementById('chat_body');
+    console.log(`chatBody`, chat_body);
+
+    chat_body.scrollTop = chat_body.scrollHeight - chat_body.clientHeight;
+  };
 
   return (
     <>
-      <ChatCon onClick={e => chatClick(e)}>
+      <ChatCon>
         <ChatHeader>
           <div className="top-chat">
             <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>
@@ -160,11 +169,22 @@ const Chat = ({
             <h4>User Name</h4>
           </div>
           <div className="chat_header_icon">
-            <Icon
+            {/* <Icon
               type="message"
               style={{ fontSize: '22px', color: '#fff' }}
               theme="outlined"
-            />
+            /> */}
+            {isMinimized ? (
+              <ArrowsAltOutlined
+                onClick={minimizeChat}
+                style={{ fontSize: '22px', color: '#fff' }}
+              />
+            ) : (
+              <ShrinkOutlined
+                onClick={minimizeChat}
+                style={{ fontSize: '22px', color: '#fff' }}
+              />
+            )}
           </div>
         </ChatHeader>
 
@@ -172,9 +192,9 @@ const Chat = ({
           {console.log(`chatState messages`, chatState.messages)}
           {messages.map(message => {
             // return <div ></div>;
-            // if(message){
-            //   autoScrollMessage()
-            // }
+            if (message) {
+              autoScrollMessage();
+            }
             return (
               <div className="chat_message" key={message.sentAt}>
                 <p>{message.message}</p>
