@@ -12,10 +12,7 @@ import styled from 'styled-components';
 
 const ChatCon = styled.div`
   display: inline-block;
-  /* position: fixed; */
   background: #fff;
-  /* bottom: 0;
-  right: 0; */
   margin-right: 2em;
   z-index: 5;
   max-width: 300px;
@@ -69,10 +66,6 @@ const ChatBody = styled.div`
   height: 100%;
   overflow-y: scroll;
   padding-bottom: 7em;
-
-  /* isScrolledToBottom = out.scrollHeight - out.clientHeight <= out.scrollTop + 1; */
-
-  /* document.getElementById('scroll').scrollTop = message.offsetHeight + message.offsetTop;  */
 
   &::-webkit-scrollbar {
     width: 0em;
@@ -149,7 +142,6 @@ const Chat = ({
   const minimizeChat = () => {
     setIsMinimized(!isMinimized);
   };
-  // const chatClick = (evt) => {};
 
   const autoScrollMessage = () => {
     const chat_body = document.getElementById('chat_body');
@@ -158,10 +150,12 @@ const Chat = ({
     chat_body.scrollTop = chat_body.scrollHeight - chat_body.clientHeight;
   };
 
+  // const chatClick = (evt) => {};
+
   return (
     <>
-      <ChatCon>
-        <ChatHeader>
+      <ChatCon id="chat_con">
+        <ChatHeader id="chat_header">
           <div className="top-chat">
             <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>
               U
@@ -203,9 +197,10 @@ const Chat = ({
           })}
         </ChatBody>
 
-        <ChatFooter>
+        <ChatFooter id="chat_footer">
           <form onSubmit={handleSubmit}>
             <Input
+              onClick={handleSubmit}
               placeholder="Type a message..."
               suffix={<SendOutlined />}
               name="message"
