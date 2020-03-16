@@ -119,6 +119,7 @@ const ChatFooter = styled.div`
 
   .ant-input-suffix {
     padding: 0 0.3em;
+    color: #bb1333;
   }
 `;
 
@@ -143,12 +144,12 @@ const Chat = ({
     setIsMinimized(!isMinimized);
   };
 
-  const autoScrollMessage = () => {
-    const chat_body = document.getElementById('chat_body');
-    console.log(`chatBody`, chat_body);
+  // const autoScrollMessage = () => {
+  //   const chat_body = document.getElementById('chat_body');
+  //   console.log(`chatBody`, chat_body);
 
-    chat_body.scrollTop = chat_body.scrollHeight - chat_body.clientHeight;
-  };
+  //   chat_body.scrollTop = chat_body.scrollHeight - chat_body.clientHeight;
+  // };
 
   // const chatClick = (evt) => {};
 
@@ -186,9 +187,9 @@ const Chat = ({
           {console.log(`chatState messages`, chatState.messages)}
           {messages.map(message => {
             // return <div ></div>;
-            if (message) {
-              autoScrollMessage();
-            }
+            // if (message) {
+            //   autoScrollMessage();
+            // }
             return (
               <div className="chat_message" key={message.sentAt}>
                 <p>{message.message}</p>
@@ -200,9 +201,8 @@ const Chat = ({
         <ChatFooter id="chat_footer">
           <form onSubmit={handleSubmit}>
             <Input
-              onClick={handleSubmit}
               placeholder="Type a message..."
-              suffix={<SendOutlined />}
+              suffix={<SendOutlined onClick={handleSubmit} />}
               name="message"
               onChange={handleChange}
               onBlur={handleBlur}
