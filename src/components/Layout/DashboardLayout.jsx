@@ -168,7 +168,9 @@ const DashboardLayout = ({
                   bottom: 0,
                   right: 0,
                   zIndex: 5,
-                  // height: '300px',
+                  height: '300px',
+                  display: 'flex',
+                  alignItems: 'flex-end',
                 }}
               >
                 {Object.keys(chatState.chats).map(key => {

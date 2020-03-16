@@ -5,19 +5,29 @@ const initialState = {
     {
       toUserID: 1,
       fromUserID: 6,
-      messages: [{
-        message: "this is a new message",
-      }],
-      open: true
+      messages: [
+        {
+          message: 'this is a new message',
+        },
+        {
+          message: 'this is a new message',
+        },
+      ],
+      open: true,
     },
     {
       toUserID: 1,
       fromUserID: 6,
-      messages: [{
-        message: "second message",
-      }],
-      open: true
-    }
+      messages: [
+        {
+          message: 'second message',
+        },
+        {
+          message: 'second message',
+        },
+      ],
+      open: true,
+    },
   ],
 };
 

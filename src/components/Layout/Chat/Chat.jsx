@@ -12,21 +12,28 @@ import styled from 'styled-components';
 
 const ChatCon = styled.div`
   display: inline-block;
-  background: none;
+  background: white;
   margin-right: 2em;
   max-width: 300px;
   width: 280px;
-  height: 300px;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   -webkit-box-shadow: -1px 0px 13px -4px rgba(0, 21, 41, 0.51);
   -moz-box-shadow: -1px 0px 13px -4px rgba(0, 21, 41, 0.51);
   box-shadow: -1px 0px 13px -4px rgba(0, 21, 41, 0.51);
+
+  &.isMinimized {
+    #chat_body {
+      display: none;
+    }
+    #chat_footer {
+      display: none;
+    }
+  }
 `;
 
 const ChatHeader = styled.div`
   background: #bb1333;
-  position: relative;
   width: 100%;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
@@ -61,9 +68,9 @@ const ChatHeader = styled.div`
 
 const ChatBody = styled.div`
   position: relative;
-  height: 70%;
+  height: 250px;
   overflow-y: scroll;
-  padding-bottom: 1em;
+  padding-bottom: 42px;
 
   &::-webkit-scrollbar {
     width: 0em;
@@ -163,15 +170,8 @@ const Chat = props => {
 
   return (
     <>
-      <ChatCon id="chat_con">
-        <ChatHeader
-          id="chat_header"
-          style={{
-            position: isMinimized ? 'fixed !important' : 'relative !important',
-            bottom: isMinimized ? '0' : 'unset',
-            width: isMinimized ? '280px' : '100%',
-          }}
-        >
+      <ChatCon id="chat_con" className={isMinimized ? 'isMinimized' : ''}>
+        <ChatHeader id="chat_header" style={{}}>
           <div className="top-chat">
             <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>
               U
@@ -193,12 +193,7 @@ const Chat = props => {
           </div>
         </ChatHeader>
 
-        <ChatBody
-          id="chat_body"
-          style={{
-            display: isMinimized ? 'none' : 'unset',
-          }}
-        >
+        <ChatBody id="chat_body">
           {console.log(`chatState messages`, props.chatState.messages)}
           {props.messages.map(message => {
             // if (message) {
@@ -213,12 +208,7 @@ const Chat = props => {
           })}
         </ChatBody>
 
-        <ChatFooter
-          id="chat_footer"
-          style={{
-            display: isMinimized ? 'none' : 'unset',
-          }}
-        >
+        <ChatFooter id="chat_footer">
           <Form onSubmit={handleSubmit}>
             <Form.Item>
               {getFieldDecorator('message', {
