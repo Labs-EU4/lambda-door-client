@@ -12,12 +12,10 @@ import styled from 'styled-components';
 
 const ChatCon = styled.div`
   display: inline-block;
-  background: #fff;
+  background: none;
   margin-right: 2em;
-  z-index: 5;
   max-width: 300px;
   width: 280px;
-  height: 300px;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   -webkit-box-shadow: -1px 0px 13px -4px rgba(0, 21, 41, 0.51);
@@ -31,7 +29,6 @@ const ChatHeader = styled.div`
   width: 100%;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
-
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid rgba(217, 217, 217, 1);
@@ -126,12 +123,52 @@ const ChatFooter = styled.div`
 const Chat = props => {
   console.log(`props`, props);
 
-  const [isMinimized, setIsMinimized] = useState(false);
+  // const [isMinimized, setIsMinimized] = useState(false);
   const myRef = createRef();
 
-  const minimizeChat = () => {
-    setIsMinimized(!isMinimized);
-  };
+  // const minimizeChat = () => {
+  //   setIsMinimized(!isMinimized);
+  //   // const chat_con = document.querySelector('#chat_con');
+  //   // const chat_header = document.querySelector('#chat_header');
+  //   // const chat_body = document.querySelector('#chat_body');
+  //   // const chat_footer = document.querySelector('#chat_footer');
+
+  //   // if (!isMinimized) {
+  //   //   // chat_con.style.height = '0 !important';
+
+  //   //   // chat_header.style.position = 'fixed !important';
+  //   //   // chat_header.style.bottom = 0;
+  //   //   // chat_header.style.width = '280px';
+
+  //   //   // chat_body.style.display = 'none';
+
+  //   //   // chat_footer.style.display = 'none';
+  //   // } else {
+  //   //   // chat_con.style.height = '300px';
+  //   //   // else
+  //   //   // chat_header.style.position = 'relative !important';
+  //   //   // chat_header.style.bottom = 'unset';
+  //   //   // chat_header.style.width = '100%';
+
+  //   //   // chat_body.style.display = 'unset';
+
+  //   //   // chat_footer.style.display = 'unset';
+  //   // }
+
+  //   // ON MINIMIZE (ChatCon)
+  //   // height: 0 !important; or height: auto;
+
+  //   // ON MINIMIZE (ChatHeader)
+  //   // position to fixed
+  //   // bottom to 0
+  //   // width to 280px
+
+  //   // ON MINIMIZE (ChatBody)
+  //   // display: none;
+
+  //   // ON MINIMIZE (ChatFooter)
+  //   // display: none;
+  // };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -164,7 +201,16 @@ const Chat = props => {
   return (
     <>
       <ChatCon id="chat_con">
-        <ChatHeader id="chat_header">
+        <ChatHeader
+          id="chat_header"
+          style={{
+            position: props.isMinimized
+              ? 'fixed !important'
+              : 'relative !important',
+            bottom: props.isMinimized ? '0' : 'unset',
+            width: props.isMinimized ? '280px' : '100%',
+          }}
+        >
           <div className="top-chat">
             <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>
               U
@@ -172,21 +218,26 @@ const Chat = props => {
             <h4>User Name</h4>
           </div>
           <div className="chat_header_icon">
-            {isMinimized ? (
+            {props.isMinimized ? (
               <ArrowsAltOutlined
-                onClick={minimizeChat}
+                onClick={props.minimizeChat}
                 style={{ fontSize: '22px', color: '#fff' }}
               />
             ) : (
               <ShrinkOutlined
-                onClick={minimizeChat}
+                onClick={props.minimizeChat}
                 style={{ fontSize: '22px', color: '#fff' }}
               />
             )}
           </div>
         </ChatHeader>
 
-        <ChatBody id="chat_body">
+        <ChatBody
+          id="chat_body"
+          style={{
+            display: props.isMinimized ? 'none' : 'unset',
+          }}
+        >
           {console.log(`chatState messages`, props.chatState.messages)}
           {props.messages.map(message => {
             if (message) {
@@ -201,7 +252,12 @@ const Chat = props => {
           })}
         </ChatBody>
 
-        <ChatFooter id="chat_footer">
+        <ChatFooter
+          id="chat_footer"
+          style={{
+            display: props.isMinimized ? 'none' : 'unset',
+          }}
+        >
           <Form onSubmit={handleSubmit}>
             <Form.Item>
               {getFieldDecorator('message', {

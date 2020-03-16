@@ -33,6 +33,11 @@ const DashboardLayout = ({
 }) => {
   const [collapsed, setCollapsed] = useState(false);
   const [searchVisible, setSearchVisible] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
+
+  const minimizeChat = () => {
+    setIsMinimized(!isMinimized);
+  };
 
   const toggle = () => {
     setCollapsed(!collapsed);
@@ -177,6 +182,8 @@ const DashboardLayout = ({
                       key={key}
                       chatID={key}
                       messages={chatState.chats[key].messages}
+                      isMinimized={isMinimized}
+                      minimizeChat={minimizeChat}
                     />
                   );
                 })}
