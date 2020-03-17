@@ -11,20 +11,14 @@ export const chatState = (state = initialState, action) => {
       return {
         ...state,
       };
-    // case types.GET_CHAT_MESSAGES:
-    //   return {
-    //     ...state,
-    //     messages: action.payload,
-    //   };
     case types.GET_OPEN_CHATS:
+      state.chats[action.payload.docID] = action.payload;
+
       return {
         ...state,
-        chats: action.payload,
+        chats: state.chats,
       };
     case types.SET_CHAT_MESSAGES:
-      console.log('...state.chats');
-      console.log(state.chats);
-
       // mutating! no good!
       state.chats[action.payload.docID] = {
         ...state.chats[action.payload.docID],
@@ -35,6 +29,14 @@ export const chatState = (state = initialState, action) => {
         ...state,
         chats: state.chats,
       };
+    case types.CLOSE_CHAT:
+      // mutating! no good!
+      delete state.chats[action.payload];
+      return {
+        ...state,
+        chats: state.chats,
+      };
+      break;
     default:
       return state;
   }

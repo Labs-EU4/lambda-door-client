@@ -1,24 +1,21 @@
 import React from 'react';
-// import { getMessages } from '../../../utils/firebase';
-
-import { getMessages } from '../../../state/actions/chat';
-
+import { openChat } from '../../../state/actions/chat';
 import { connect } from 'react-redux';
+import { Button } from 'antd';
 
 const ChatButton = ({
-  chatState,
-  getMessages,
+  openChat,
   authState: {
-    credentials: { id },
+    credentials: { id, full_name },
   },
   toUserID,
+  toUserName,
 }) => {
   const chatClick = e => {
-    // getMessages(id, toUserID);
-    // create new chat
+    openChat(id, full_name, toUserID, toUserName);
   };
 
-  return <div onClick={e => chatClick()}>Chat with me</div>;
+  return <Button onClick={e => chatClick()}>Chat with me</Button>;
 };
 
-export default connect(state => state, { getMessages })(ChatButton);
+export default connect(state => state, { openChat })(ChatButton);
