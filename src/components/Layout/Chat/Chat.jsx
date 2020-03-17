@@ -1,8 +1,7 @@
 import React, { useState, createRef } from 'react';
 import { sendMessage } from '../../../state/actions/chat';
-import { withFormik } from 'formik';
 import { connect } from 'react-redux';
-import { Avatar, Icon, Input, Form } from 'antd';
+import { Avatar, Input, Form } from 'antd';
 import {
   SendOutlined,
   ArrowsAltOutlined,
@@ -67,10 +66,12 @@ const ChatHeader = styled.div`
 `;
 
 const ChatBody = styled.div`
-  position: relative;
+  /* position: relative; */
   height: 250px;
   overflow-y: scroll;
-  padding-bottom: 42px;
+  padding-bottom: 5em;
+  display: flex;
+  flex-direction: column;
 
   &::-webkit-scrollbar {
     width: 0em;
@@ -85,20 +86,36 @@ const ChatBody = styled.div`
   }
 
   .chat_message {
+    display: flex;
     background: #ebebeb;
-    margin: 0.5em 0.4em 0.5em 0.6em;
+    margin: 0.5em 0.6em;
     border-radius: 5px;
     font-size: 0.8rem;
     color: rgba(117, 117, 117, 1);
-    width: 65%;
+    width: fit-content;
+    max-width: 70%;
+    /* scroll-margin-bottom: 1em; */
+
+    /* &.move_left {
+      align-items: flex-start;
+    } */
 
     p {
-      width: auto;
-      margin: 0.8em 0.4em;
-      padding-top: 0.3em;
-      padding-bottom: 0.3em;
+      margin: 0.5em 0.7em;
+    }
+
+    &.move_right {
+      align-self: flex-end;
     }
   }
+
+  /* .chat_message .move_right */
+  /* padding-top: 0.3em;
+  padding-bottom: 0.3em;
+  align-self: flex-end;
+  width: auto;
+  max-width: 65%;
+  margin: 0.8em 0.4em; */
 `;
 
 const ChatFooter = styled.div`
@@ -129,7 +146,8 @@ const ChatFooter = styled.div`
 `;
 
 const Chat = props => {
-  console.log(`props`, props);
+  const { authState } = props;
+
   const [isMinimized, setIsMinimized] = useState(false);
 
   const minimizeChat = () => {
@@ -158,15 +176,7 @@ const Chat = props => {
     });
   };
 
-  // const autoScrollMessage = () => {
-  //   const chat_body = document.getElementById('chat_body');
-
-  //   chat_body.scrollTop = chat_body.scrollHeight - chat_body.clientHeight;
-  // };
-
   const { getFieldDecorator } = props.form;
-
-  // UUID (Generate unique ids for parent containers)
 
   return (
     <>
@@ -195,12 +205,23 @@ const Chat = props => {
 
         <ChatBody id="chat_body">
           {console.log(`chatState messages`, props.chatState.messages)}
-          {props.messages.map(message => {
-            // if (message) {
-            //   autoScrollMessage();
-            // }
+          {props.messages.map((message, index) => {
+            // Set key in return jsx to {message.sentAt} after confirming chats work properly to different individuals;
+
+            // fromUserID === currentUserID align-self:right else align-self: left
+
+            // id={`move_right`}
+            // props.authState.credentials.id;
+            // message.fromUserID;
             return (
-              <div className="chat_message" key={message.sentAt}>
+              <div
+                className={`chat_message ${
+                  message.fromUserID === authState.credentials.id
+                    ? 'move_right'
+                    : null
+                }`}
+                key={index}
+              >
                 <p>{message.message}</p>
                 <div ref={myRef}></div>
               </div>

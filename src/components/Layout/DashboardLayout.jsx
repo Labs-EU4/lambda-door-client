@@ -4,7 +4,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Route, NavLink, Link } from 'react-router-dom';
 import { Button, Icon, Layout, Menu } from 'antd';
@@ -38,7 +38,7 @@ const DashboardLayout = ({
     setCollapsed(!collapsed);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     getChats();
   }, []);
 
