@@ -1,7 +1,7 @@
 import * as types from '../types';
 
 const initialState = {
-  chats: [],
+  chats: []
 };
 
 // eslint-disable-next-line import/prefer-default-export

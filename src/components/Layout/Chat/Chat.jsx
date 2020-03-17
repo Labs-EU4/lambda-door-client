@@ -1,36 +1,41 @@
-import React from 'react';
+import React, { useState, createRef } from 'react';
 import { sendMessage } from '../../../state/actions/chat';
-import { withFormik } from 'formik';
 import { connect } from 'react-redux';
-import { Avatar, Icon, Input } from 'antd';
-import { SendOutlined } from '@ant-design/icons';
+import { Avatar, Input, Form } from 'antd';
+import {
+  SendOutlined,
+  ArrowsAltOutlined,
+  ShrinkOutlined,
+} from '@ant-design/icons';
 import styled from 'styled-components';
 
 const ChatCon = styled.div`
   display: inline-block;
-  /* position: fixed; */
-  background: #fff;
-  /* bottom: 0;
-  right: 0; */
+  background: white;
   margin-right: 2em;
-  z-index: 5;
   max-width: 300px;
   width: 280px;
-  height: 300px;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(235, 235, 235, 1);
-  -moz-box-shadow: 0px 0px 5px 0px rgba(235, 235, 235, 1);
-  box-shadow: 0px 0px 5px 0px rgba(235, 235, 235, 1);
+  -webkit-box-shadow: -1px 0px 13px -4px rgba(0, 21, 41, 0.51);
+  -moz-box-shadow: -1px 0px 13px -4px rgba(0, 21, 41, 0.51);
+  box-shadow: -1px 0px 13px -4px rgba(0, 21, 41, 0.51);
+
+  &.isMinimized {
+    #chat_body {
+      display: none;
+    }
+    #chat_footer {
+      display: none;
+    }
+  }
 `;
 
 const ChatHeader = styled.div`
   background: #bb1333;
-  position: relative;
   width: 100%;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
-
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid rgba(217, 217, 217, 1);
@@ -61,10 +66,11 @@ const ChatHeader = styled.div`
 `;
 
 const ChatBody = styled.div`
-  position: relative;
-  height: 100%;
-  overflow-y: auto;
-  padding-bottom: 7em;
+  height: 250px;
+  overflow-y: scroll;
+  padding-bottom: 5em;
+  display: flex;
+  flex-direction: column;
 
   &::-webkit-scrollbar {
     width: 0em;
@@ -79,18 +85,21 @@ const ChatBody = styled.div`
   }
 
   .chat_message {
+    display: flex;
     background: #ebebeb;
-    margin: 0.5em 0.4em 0.5em 0.6em;
+    margin: 0.5em 0.6em;
     border-radius: 5px;
     font-size: 0.8rem;
     color: rgba(117, 117, 117, 1);
-    width: 65%;
+    width: fit-content;
+    max-width: 70%;
 
     p {
-      width: auto;
-      margin: 0.8em 0.4em;
-      padding-top: 0.3em;
-      padding-bottom: 0.3em;
+      margin: 0.5em 0.7em;
+    }
+
+    &.move_right {
+      align-self: flex-end;
     }
   }
 `;
@@ -118,30 +127,47 @@ const ChatFooter = styled.div`
 
   .ant-input-suffix {
     padding: 0 0.3em;
+    color: #bb1333;
   }
 `;
 
-const Chat = ({
-  chatState,
-  values,
-  touched,
-  errors,
-  handleChange,
-  handleBlur,
-  handleSubmit,
-  sendMessage,
-  authState: {
-    credentials: { id },
-  },
-  messages,
-  chatID,
-}) => {
-  const chatClick = e => {};
+const Chat = props => {
+  const { authState } = props;
+
+  const [isMinimized, setIsMinimized] = useState(false);
+
+  const minimizeChat = () => {
+    setIsMinimized(!isMinimized);
+  };
+
+  const myRef = createRef();
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    props.form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        props.sendMessage(
+          values.message,
+          props.chatID,
+          props.authState.credentials.id
+        );
+        props.form.resetFields();
+        myRef.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      } else {
+        console.log('Enter Required Fields');
+      }
+    });
+  };
+
+  const { getFieldDecorator } = props.form;
 
   return (
     <>
-      <ChatCon onClick={e => chatClick()}>
-        <ChatHeader>
+      <ChatCon id="chat_con" className={isMinimized ? 'isMinimized' : ''}>
+        <ChatHeader id="chat_header" style={{}}>
           <div className="top-chat">
             <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>
               U
@@ -149,70 +175,68 @@ const Chat = ({
             <h4>User Name</h4>
           </div>
           <div className="chat_header_icon">
-            <Icon
-              type="message"
-              style={{ fontSize: '22px', color: '#fff' }}
-              theme="outlined"
-            />
+            {isMinimized ? (
+              <ArrowsAltOutlined
+                onClick={minimizeChat}
+                style={{ fontSize: '22px', color: '#fff' }}
+              />
+            ) : (
+              <ShrinkOutlined
+                onClick={minimizeChat}
+                style={{ fontSize: '22px', color: '#fff' }}
+              />
+            )}
           </div>
         </ChatHeader>
 
-        <ChatBody>
-          {console.log(`chatState messages`, chatState.messages)}
-          {messages.map(message => {
-            // return <div ></div>;
+        <ChatBody id="chat_body">
+          {props.messages.map((message, index) => {
             return (
-              <div className="chat_message" key={message.sentAt}>
+              <div
+                className={`chat_message ${
+                  message.fromUserID === authState.credentials.id
+                    ? 'move_right'
+                    : null
+                }`}
+                key={index}
+              >
                 <p>{message.message}</p>
+                <div ref={myRef}></div>
               </div>
             );
           })}
         </ChatBody>
 
-        <ChatFooter>
-          <form onSubmit={handleSubmit}>
-            <Input
-              placeholder="Type a message..."
-              suffix={<SendOutlined />}
-              name="message"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.message}
-              type="text"
-            />
-          </form>
+        <ChatFooter id="chat_footer">
+          <Form onSubmit={handleSubmit}>
+            <Form.Item>
+              {getFieldDecorator('message', {
+                rules: [
+                  {
+                    message: 'Enter valid message',
+                  },
+                  {
+                    required: true,
+                    message: 'Enter valid message',
+                  },
+                ],
+              })(
+                <Input
+                  placeholder="Type a message..."
+                  suffix={<SendOutlined onClick={handleSubmit} />}
+                  name="message"
+                  type="text"
+                  autoComplete="off"
+                />
+              )}
+            </Form.Item>
+          </Form>
         </ChatFooter>
       </ChatCon>
     </>
   );
 };
 
-const ChatForm = withFormik({
-  mapPropsToValues: () => ({ message: '' }),
-
-  // Custom sync validation
-  validate: values => {
-    const errors = {};
-
-    if (!values.message) {
-      errors.message = 'Required';
-    }
-
-    return errors;
-  },
-
-  handleSubmit: (values, { setSubmitting, setFieldValue, props }) => {
-    props.sendMessage(
-      values.message,
-      props.chatID,
-      props.authState.credentials.id
-    );
-    console.log(props.chatID);
-
-    setFieldValue('message', '');
-  },
-
-  displayName: 'BasicForm',
-})(Chat);
+const ChatForm = Form.create({ name: 'text' })(Chat);
 
 export default connect(state => state, { sendMessage })(ChatForm);
