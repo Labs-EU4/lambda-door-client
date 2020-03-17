@@ -1,34 +1,7 @@
 import * as types from '../types';
 
 const initialState = {
-  chats: [
-    {
-      toUserID: 1,
-      fromUserID: 6,
-      messages: [
-        {
-          message: 'this is a new message',
-        },
-        {
-          message: 'this is a new message',
-        },
-      ],
-      open: true,
-    },
-    {
-      toUserID: 1,
-      fromUserID: 6,
-      messages: [
-        {
-          message: 'second message',
-        },
-        {
-          message: 'second message',
-        },
-      ],
-      open: true,
-    },
-  ],
+  chats: []
 };
 
 // eslint-disable-next-line import/prefer-default-export

@@ -56,8 +56,6 @@ describe('Action for average salaries', () => {
     const actions = store.getActions();
     await store.dispatch(getAvgSalaries(1));
     expect(actions[1]).toEqual(expectedAction);
-
-    // console.log(`/***`, actions);
   });
 
   it('should excute fetch error', async () => {

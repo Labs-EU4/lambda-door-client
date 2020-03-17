@@ -66,7 +66,6 @@ const ChatHeader = styled.div`
 `;
 
 const ChatBody = styled.div`
-  /* position: relative; */
   height: 250px;
   overflow-y: scroll;
   padding-bottom: 5em;
@@ -94,11 +93,6 @@ const ChatBody = styled.div`
     color: rgba(117, 117, 117, 1);
     width: fit-content;
     max-width: 70%;
-    /* scroll-margin-bottom: 1em; */
-
-    /* &.move_left {
-      align-items: flex-start;
-    } */
 
     p {
       margin: 0.5em 0.7em;
@@ -108,14 +102,6 @@ const ChatBody = styled.div`
       align-self: flex-end;
     }
   }
-
-  /* .chat_message .move_right */
-  /* padding-top: 0.3em;
-  padding-bottom: 0.3em;
-  align-self: flex-end;
-  width: auto;
-  max-width: 65%;
-  margin: 0.8em 0.4em; */
 `;
 
 const ChatFooter = styled.div`
@@ -204,15 +190,7 @@ const Chat = props => {
         </ChatHeader>
 
         <ChatBody id="chat_body">
-          {console.log(`chatState messages`, props.chatState.messages)}
           {props.messages.map((message, index) => {
-            // Set key in return jsx to {message.sentAt} after confirming chats work properly to different individuals;
-
-            // fromUserID === currentUserID align-self:right else align-self: left
-
-            // id={`move_right`}
-            // props.authState.credentials.id;
-            // message.fromUserID;
             return (
               <div
                 className={`chat_message ${

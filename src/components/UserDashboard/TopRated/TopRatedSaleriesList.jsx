@@ -19,7 +19,6 @@ export const TopRatedSalary = ({
   useEffect(() => {
     getHighestSalary();
   }, []);
-  console.log(`highestSalaries`, highestSalaries);
 
   return (
     <StyledDiv>
