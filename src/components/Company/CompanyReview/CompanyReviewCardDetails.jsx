@@ -82,10 +82,11 @@ const CompanyReviewCardDetailed = ({
               <>
                 <p>
                   Have questions? &nbsp;&nbsp;
-                  <Button onClick={() => setOpen(true)}> Contact Me</Button>
+                  <ChatButton
+                    toUserID={review.user_id}
+                    toUserName={review.full_name}
+                  />
                 </p>
-
-                <ChatButton toUserID={review.user_id} />
               </>
             ) : (
               ''

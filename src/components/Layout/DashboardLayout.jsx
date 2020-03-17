@@ -178,6 +178,7 @@ const DashboardLayout = ({
                     <Chat
                       key={key}
                       chatID={key}
+                      chat={chatState.chats[key]}
                       messages={chatState.chats[key].messages}
                     />
                   );

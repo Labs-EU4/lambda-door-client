@@ -1,7 +1,8 @@
 import React, { useState, createRef } from 'react';
-import { sendMessage } from '../../../state/actions/chat';
+import { sendMessage, closeChat } from '../../../state/actions/chat';
+import { withFormik } from 'formik';
 import { connect } from 'react-redux';
-import { Avatar, Input, Form } from 'antd';
+import { Avatar, Input, Form, Icon } from 'antd';
 import {
   SendOutlined,
   ArrowsAltOutlined,
@@ -47,12 +48,10 @@ const ChatHeader = styled.div`
     margin-bottom: 0.5em;
     margin-left: 1em;
     align-content: center;
-    width: 120px;
     justify-content: space-between;
 
     h4 {
-      margin-right: 0.6em;
-      margin-bottom: 0;
+      margin: 0 0.6em;
       font-weight: 600;
       color: #fff;
     }
@@ -60,7 +59,7 @@ const ChatHeader = styled.div`
 
   .chat_header_icon {
     display: flex;
-    margin-right: 1.5em;
+    margin-right: 1em;
     align-items: center;
   }
 `;
@@ -131,9 +130,23 @@ const ChatFooter = styled.div`
   }
 `;
 
-const Chat = props => {
-  const { authState } = props;
-
+const Chat = ({
+  chatState,
+  values,
+  touched,
+  errors,
+  handleChange,
+  handleBlur,
+  sendMessage,
+  authState: {
+    credentials: { id },
+  },
+  messages,
+  chatID,
+  closeChat,
+  chat,
+  form,
+}) => {
   const [isMinimized, setIsMinimized] = useState(false);
 
   const minimizeChat = () => {
@@ -144,14 +157,10 @@ const Chat = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    props.form.validateFieldsAndScroll((err, values) => {
+    form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        props.sendMessage(
-          values.message,
-          props.chatID,
-          props.authState.credentials.id
-        );
-        props.form.resetFields();
+        sendMessage(values.message, chatID, id);
+        form.resetFields();
         myRef.current.scrollIntoView({
           behavior: 'smooth',
           block: 'start',
@@ -162,7 +171,7 @@ const Chat = props => {
     });
   };
 
-  const { getFieldDecorator } = props.form;
+  const { getFieldDecorator } = form;
 
   return (
     <>
@@ -172,7 +181,9 @@ const Chat = props => {
             <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>
               U
             </Avatar>
-            <h4>User Name</h4>
+            <h4>
+              {chat.fromUserID === id ? chat.toUserName : chat.fromUserName}
+            </h4>
           </div>
           <div className="chat_header_icon">
             {isMinimized ? (
@@ -186,17 +197,26 @@ const Chat = props => {
                 style={{ fontSize: '22px', color: '#fff' }}
               />
             )}
+            <Icon
+              type="close"
+              style={{
+                fontSize: '22px',
+                color: '#fff',
+                cursor: 'pointer',
+                marginLeft: '10px',
+              }}
+              theme="outlined"
+              onClick={e => closeChat(chatID)}
+            />
           </div>
         </ChatHeader>
 
         <ChatBody id="chat_body">
-          {props.messages.map((message, index) => {
+          {messages.map((message, index) => {
             return (
               <div
                 className={`chat_message ${
-                  message.fromUserID === authState.credentials.id
-                    ? 'move_right'
-                    : null
+                  message.fromUserID === id ? 'move_right' : null
                 }`}
                 key={index}
               >
@@ -239,4 +259,30 @@ const Chat = props => {
 
 const ChatForm = Form.create({ name: 'text' })(Chat);
 
-export default connect(state => state, { sendMessage })(ChatForm);
+// const ChatForm = withFormik({
+//   mapPropsToValues: () => ({ message: '' }),
+
+//   // Custom sync validation
+//   validate: values => {
+//     const errors = {};
+
+//     if (!values.message) {
+//       errors.message = 'Required';
+//     }
+
+//     return errors;
+//   },
+
+//   handleSubmit: (values, { setSubmitting, setFieldValue, props }) => {
+//     props.sendMessage(
+//       values.message,
+//       props.chatID,
+//       props.authState.credentials.id
+//     );
+//     setFieldValue('message', '');
+//   },
+
+//   displayName: 'BasicForm',
+// })(Chat);
+
+export default connect(state => state, { sendMessage, closeChat })(ChatForm);
