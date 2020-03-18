@@ -64,10 +64,10 @@ export const openChat = (
           open: true,
           createdAt: new Date(),
         })
-        .then(function(docRef) {
+        .then(function (docRef) {
           console.log('Document written with ID: ', docRef.id);
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.error('Error adding document: ', error);
         });
     }
@@ -79,7 +79,7 @@ export const getChats = (fromUserID, toUserID) => dispatch => {
     .where('toUserID', '==', 6)
     .where('open', '==', true)
 
-    .onSnapshot(function(querySnapshot) {
+    .onSnapshot(function (querySnapshot) {
       putInState(querySnapshot, dispatch);
     });
 
@@ -87,18 +87,18 @@ export const getChats = (fromUserID, toUserID) => dispatch => {
     .where('fromUserID', '==', 6)
     .where('open', '==', true)
 
-    .onSnapshot(function(querySnapshot) {
+    .onSnapshot(function (querySnapshot) {
       putInState(querySnapshot, dispatch);
     });
 };
 
 const putInState = (querySnapshot, dispatch) => {
   const chats = [];
-  querySnapshot.forEach(function(doc) {
+  querySnapshot.forEach(function (doc) {
     doc.ref
       .collection('messages')
       .orderBy('sentAt', 'asc')
-      .onSnapshot(function(messageSnapshot) {
+      .onSnapshot(function (messageSnapshot) {
         const messages = [];
 
         messageSnapshot.forEach(message => {
@@ -135,13 +135,14 @@ export const sendMessage = (
       message: message,
       sentAt: new Date(),
     })
-    .then(function(docRef) {
+    .then(function (docRef) {
       console.log('Document written with ID: ', docRef.id);
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.error('Error adding document: ', error);
     });
 };
+
 export const closeChat = chatID => dispatch => {
   db.collection('chats')
     .doc(chatID)
@@ -149,14 +150,14 @@ export const closeChat = chatID => dispatch => {
     .update({
       open: false, // was here
     })
-    .then(function() {
+    .then(function () {
       dispatch({
         type: types.CLOSE_CHAT,
         payload: chatID,
       });
       console.log('Document successfully updated!');
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.error('Error adding document: ', error);
     });
 };

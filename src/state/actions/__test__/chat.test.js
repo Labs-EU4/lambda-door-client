@@ -1,4 +1,9 @@
 
+// putInState (Test to ensure the correct data is sent to redux)
+// getChats (Test to ensure the correct chats data is received)
+// SendMessage (Test to ensure a message has been successfully sent)
+// closeChat (Test when )
+// openChat (Test when )
 
 const chats = [
   {
