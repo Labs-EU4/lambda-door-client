@@ -17,7 +17,6 @@ import {
 } from '../../styles/theme.styles';
 
 import { LogoutUser } from '../../state/actions/auth';
-import { getChats } from '../../state/actions/chat';
 
 import logo from '../../assets/lambda-logo.png';
 import Chat from './Chat/Chat';
@@ -27,7 +26,6 @@ const { Header, Sider, Content } = Layout;
 const DashboardLayout = ({
   component: Component,
   LogoutUser,
-  getChats,
   chatState,
   ...rest
 }) => {
@@ -37,10 +35,6 @@ const DashboardLayout = ({
   const toggle = () => {
     setCollapsed(!collapsed);
   };
-
-  useEffect(() => {
-    getChats();
-  }, []);
 
   const toggleSearch = evt => {
     evt.stopPropagation();
@@ -192,9 +186,7 @@ const DashboardLayout = ({
   );
 };
 
-export default connect(state => state, { LogoutUser, getChats })(
-  DashboardLayout
-);
+export default connect(state => state, { LogoutUser })(DashboardLayout);
 
 const StyledContainer = styled.div`
   height: 100vh;
