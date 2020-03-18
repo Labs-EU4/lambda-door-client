@@ -1,5 +1,5 @@
 /* eslint-disable import/no-named-as-default */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { decode } from 'jsonwebtoken';
 import { connect } from 'react-redux';
@@ -37,11 +37,14 @@ import DetailedInterviewSearchCard from '../Layout/Search/DetailedInterviewSearc
 import { HighestRated } from '../UserDashboard/TopRated/HighestRated';
 import Chat from '../Layout/Chat/Chat';
 
+import { getChats } from '../../state/actions/chat';
+
 const start = async () => {
   const token = localStorage.getItem('token');
   if (token) {
     const { id } = decode(token);
     await store.dispatch(SetAuthenticated(id));
+    await store.dispatch(getChats());
     await store.dispatch(getCompanies());
     await store.dispatch(getHighestSalary());
     await store.dispatch(getCompanyReviews(id));
@@ -113,4 +116,4 @@ const AppRouter = ({
   );
 };
 
-export default connect(state => state)(AppRouter);
+export default connect(state => state, { getChats })(AppRouter);

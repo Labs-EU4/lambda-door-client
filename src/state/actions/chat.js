@@ -4,25 +4,31 @@ import * as types from '../types';
 
 import firebase from 'firebase';
 
-firebase.initializeApp({
-  apiKey: 'AIzaSyAZsLzEsGjOdUeWVj7Z7vu2tqv6tBpIzfU',
-  authDomain: 'lambda-door.firebaseapp.com',
-  databaseURL: 'https://lambda-door.firebaseio.com',
-  projectId: 'lambda-door',
-  storageBucket: 'lambda-door.appspot.com',
-  messagingSenderId: '1083433035630',
-  appId: '1:1083433035630:web:4dd012a984da9b39b4437f',
-  measurementId: 'G-NV9850LZBG',
+const config =
+  process.env.NODE_ENV === 'production'
+    ? {
+        apiKey: 'AIzaSyAj67NaIY02EMbV3_EfxXo7ZgK3DZRE8a8',
+        authDomain: 'lambda-door-production.firebaseapp.com',
+        databaseURL: 'https://lambda-door-production.firebaseio.com',
+        projectId: 'lambda-door-production',
+        storageBucket: 'lambda-door-production.appspot.com',
+        messagingSenderId: '927209006367',
+        appId: '1:927209006367:web:14101371db0091bb01fc2a',
+        measurementId: 'G-T13VD107V1',
+      }
+    : {
+        // test environment
+        apiKey: 'AIzaSyAZsLzEsGjOdUeWVj7Z7vu2tqv6tBpIzfU',
+        authDomain: 'lambda-door.firebaseapp.com',
+        databaseURL: 'https://lambda-door.firebaseio.com',
+        projectId: 'lambda-door',
+        storageBucket: 'lambda-door.appspot.com',
+        messagingSenderId: '1083433035630',
+        appId: '1:1083433035630:web:4dd012a984da9b39b4437f',
+        measurementId: 'G-NV9850LZBG',
+      };
 
-  // apiKey: 'AIzaSyBFL_tGeDK3NSX3tIl15jqqGQ42j8IOerk',
-  // authDomain: 'lambda-door-rodrigo.firebaseapp.com',
-  // databaseURL: 'https://lambda-door-rodrigo.firebaseio.com',
-  // projectId: 'lambda-door-rodrigo',
-  // storageBucket: 'lambda-door-rodrigo.appspot.com',
-  // messagingSenderId: '121959076298',
-  // appId: '1:121959076298:web:cb70f10972b960cced3f33',
-  // measurementId: 'G-CLR79T2DMD',
-});
+firebase.initializeApp(config);
 
 const db = firebase.firestore();
 
@@ -74,9 +80,9 @@ export const openChat = (
   });
 };
 
-export const getChats = (fromUserID, toUserID) => dispatch => {
+export const getChats = (fromUserID, toUserID) => (dispatch, getState) => {
   db.collection('chats')
-    .where('toUserID', '==', 6)
+    .where('toUserID', '==', getState().authState.credentials.id)
     .where('open', '==', true)
 
     .onSnapshot(function(querySnapshot) {
@@ -84,7 +90,7 @@ export const getChats = (fromUserID, toUserID) => dispatch => {
     });
 
   db.collection('chats')
-    .where('fromUserID', '==', 6)
+    .where('fromUserID', '==', getState().authState.credentials.id)
     .where('open', '==', true)
 
     .onSnapshot(function(querySnapshot) {
