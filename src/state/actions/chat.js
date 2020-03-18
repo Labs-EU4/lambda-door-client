@@ -56,8 +56,13 @@ export const openChat = (
     results.forEach(result => {
       if (result.size) {
         found = true;
-        // should update "open:true" instead and it would auto show up?
-        putInState(result, dispatch);
+
+        db.collection('chats')
+          .doc(result.docs[0].id)
+          .update({
+            open: true,
+          });
+        // putInState(result, dispatch);
       }
     });
     if (!found) {
