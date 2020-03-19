@@ -80,12 +80,7 @@ describe('Chat Interface', () => {
         chat={chats}
       />
     ).queryAllByText(/wowza/i);
-    console.log(`chatElement`, chatElement);
 
-    // expect(chatElement[0].textContent).toBeInTheDocument();
-
-    // const message = .queryAllByText(/message 1.1/i);
-    // // expect(message[0].textContent).toBe('');
-    // expect(message[0].textContent).toBeInTheDocument();
+    expect(chatElement[0].textContent).toEqual('wowza');
   });
 });
