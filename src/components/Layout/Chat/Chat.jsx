@@ -179,7 +179,10 @@ const Chat = ({
         <ChatHeader id="chat_header" style={{}}>
           <div className="top-chat">
             <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>
-              U
+              {(chat.fromUserID === id
+                ? chat.toUserName
+                : chat.fromUserName
+              ).substring(0, 1)}
             </Avatar>
             <h4>
               {chat.fromUserID === id ? chat.toUserName : chat.fromUserName}
