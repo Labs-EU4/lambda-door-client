@@ -232,6 +232,15 @@ const Chat = ({
               </div>
             );
           })}
+          <span
+            style={{
+              textAlign: 'right',
+              margin: '-7px 10px',
+              fontSize: '0.6em',
+            }}
+          >
+            {chat.read ? 'Read' : ''}
+          </span>
         </ChatBody>
 
         <ChatFooter id="chat_footer">
