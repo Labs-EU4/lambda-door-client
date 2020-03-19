@@ -4,7 +4,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Route, NavLink, Link } from 'react-router-dom';
 import { Button, Icon, Layout, Menu } from 'antd';
@@ -17,7 +17,6 @@ import {
 } from '../../styles/theme.styles';
 
 import { LogoutUser } from '../../state/actions/auth';
-import { getChats } from '../../state/actions/chat';
 
 import logo from '../../assets/lambda-logo.png';
 import Chat from './Chat/Chat';
@@ -27,7 +26,6 @@ const { Header, Sider, Content } = Layout;
 const DashboardLayout = ({
   component: Component,
   LogoutUser,
-  getChats,
   chatState,
   ...rest
 }) => {
@@ -37,10 +35,6 @@ const DashboardLayout = ({
   const toggle = () => {
     setCollapsed(!collapsed);
   };
-
-  React.useEffect(() => {
-    getChats();
-  }, []);
 
   const toggleSearch = evt => {
     evt.stopPropagation();
@@ -169,6 +163,8 @@ const DashboardLayout = ({
                   right: 0,
                   zIndex: 5,
                   height: '300px',
+                  display: 'flex',
+                  alignItems: 'flex-end',
                 }}
               >
                 {Object.keys(chatState.chats).map(key => {
@@ -176,6 +172,7 @@ const DashboardLayout = ({
                     <Chat
                       key={key}
                       chatID={key}
+                      chat={chatState.chats[key]}
                       messages={chatState.chats[key].messages}
                     />
                   );
@@ -189,9 +186,7 @@ const DashboardLayout = ({
   );
 };
 
-export default connect(state => state, { LogoutUser, getChats })(
-  DashboardLayout
-);
+export default connect(state => state, { LogoutUser })(DashboardLayout);
 
 const StyledContainer = styled.div`
   height: 100vh;
