@@ -1,5 +1,9 @@
 import React, { useState, createRef } from 'react';
-import { sendMessage, closeChat } from '../../../state/actions/chat';
+import {
+  sendMessage,
+  closeChat,
+  markAsRead,
+} from '../../../state/actions/chat';
 import { withFormik } from 'formik';
 import { connect } from 'react-redux';
 import { Avatar, Input, Form, Icon } from 'antd';
@@ -132,11 +136,6 @@ const ChatFooter = styled.div`
 
 const Chat = ({
   chatState,
-  values,
-  touched,
-  errors,
-  handleChange,
-  handleBlur,
   sendMessage,
   authState: {
     credentials: { id },
@@ -144,6 +143,7 @@ const Chat = ({
   messages,
   chatID,
   closeChat,
+  markAsRead,
   chat,
   form,
 }) => {
@@ -172,6 +172,13 @@ const Chat = ({
   };
 
   const { getFieldDecorator } = form;
+
+  const markAsReadOnClick = () => {
+    // If the last message `fromUserID` is not from the current user mark it as read
+    if (chat.messages[chat.messages.length - 1].fromUserID !== id) {
+      markAsRead(chatID);
+    }
+  };
 
   return (
     <>
@@ -247,6 +254,7 @@ const Chat = ({
                   name="message"
                   type="text"
                   autoComplete="off"
+                  onClick={e => markAsReadOnClick()}
                 />
               )}
             </Form.Item>
@@ -259,30 +267,6 @@ const Chat = ({
 
 const ChatForm = Form.create({ name: 'text' })(Chat);
 
-// const ChatForm = withFormik({
-//   mapPropsToValues: () => ({ message: '' }),
-
-//   // Custom sync validation
-//   validate: values => {
-//     const errors = {};
-
-//     if (!values.message) {
-//       errors.message = 'Required';
-//     }
-
-//     return errors;
-//   },
-
-//   handleSubmit: (values, { setSubmitting, setFieldValue, props }) => {
-//     props.sendMessage(
-//       values.message,
-//       props.chatID,
-//       props.authState.credentials.id
-//     );
-//     setFieldValue('message', '');
-//   },
-
-//   displayName: 'BasicForm',
-// })(Chat);
-
-export default connect(state => state, { sendMessage, closeChat })(ChatForm);
+export default connect(state => state, { sendMessage, closeChat, markAsRead })(
+  ChatForm
+);

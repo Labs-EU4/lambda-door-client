@@ -74,6 +74,7 @@ export const openChat = (
           toUserName: toUserName,
           open: true,
           createdAt: new Date(),
+          read: true,
         })
         .then(function(docRef) {
           console.log('Document written with ID: ', docRef.id);
@@ -142,7 +143,6 @@ export const sendMessage = (
     .collection('messages')
     .add({
       fromUserID: fromUserID,
-      toUserID: 1,
       message: message,
       sentAt: new Date(),
     })
@@ -152,13 +152,18 @@ export const sendMessage = (
     .catch(function(error) {
       console.error('Error adding document: ', error);
     });
+
+  db.collection('chats')
+    .doc(chatID)
+    .update({
+      read: false,
+    });
 };
 export const closeChat = chatID => dispatch => {
   db.collection('chats')
     .doc(chatID)
-    //  .collection('messages')
     .update({
-      open: false, // was here
+      open: false,
     })
     .then(function() {
       dispatch({
@@ -169,5 +174,13 @@ export const closeChat = chatID => dispatch => {
     })
     .catch(function(error) {
       console.error('Error adding document: ', error);
+    });
+};
+
+export const markAsRead = chatID => dispatch => {
+  db.collection('chats')
+    .doc(chatID)
+    .update({
+      read: true,
     });
 };
