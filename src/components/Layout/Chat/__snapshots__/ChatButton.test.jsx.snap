@@ -3,9 +3,14 @@
 exports[`ChatButton renders correctly 1`] = `
 <body>
   <div>
-    <div>
-      Chat with me
-    </div>
+    <button
+      class="ant-btn"
+      type="button"
+    >
+      <span>
+        Chat with me
+      </span>
+    </button>
   </div>
 </body>
 `;
