@@ -76,7 +76,6 @@ const AddReview = ({
   }, []);
 
   const onSalaryCheckChange = evt => {
-    console.log('salary checked = ', evt.target.checked);
     setCheckSalary(evt.target.checked);
   };
 
@@ -151,7 +150,13 @@ const AddReview = ({
     // else call of them...
 
     try {
-      if (checkInterview) {
+      if (checkInterview && checkSalary) {
+        addCompanyReview(
+          { ...companyReview, user_id: id, review_headline: '' },
+          id,
+          history
+        );
+      } else if (checkInterview) {
         addSalaryReview(salaryReview, id, history);
         addCompanyReview(
           { ...companyReview, user_id: id, review_headline: '' },
@@ -270,7 +275,6 @@ const AddReview = ({
           }
         >
           <AutoCompleteCompany
-            label="Company Name"
             placeholder="Company name"
             onChange={e => {
               handleCompanyName(e);
@@ -324,11 +328,11 @@ const AddReview = ({
           <TextArea
             rows={10}
             placeholder="Please share some of the pros and cons of working at this company"
-            name="review"
             onChange={handleChange}
             maxLength="255"
             minLength="5"
             required
+            name="review"
           />
           {errors.review && (
             <Alert type="error" message={errors.review} showIcon />
