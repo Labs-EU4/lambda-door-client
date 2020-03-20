@@ -75,22 +75,38 @@ const AddReview = ({
     getCurrencyRates();
   }, []);
 
-  // const toggleCheckInterview = () => {
-  //   setCheckInterview(!checkInterview);
-  // };
-
-  // const toggleCheckSalary = () => {
-  //   setCheckSalary(!checkSalary);
-  // };
-
   const onSalaryCheckChange = evt => {
     console.log('salary checked = ', evt.target.checked);
     setCheckSalary(evt.target.checked);
   };
 
   const onInterviewCheckChange = evt => {
-    console.log('interview checked = ', evt.target.checked);
     setCheckInterview(evt.target.checked);
+  };
+
+  const convertCurrency = () => {
+    const { unit, currency } = formValues;
+    const otherRates = {
+      NGN: 360,
+    };
+
+    fx.base = currencyRates.base;
+    fx.rates = {
+      ...currencyRates.rates,
+      ...otherRates,
+    };
+
+    let convertedSalary;
+
+    if (checkSalary) {
+      return null;
+    } else {
+      convertedSalary = fx.convert(Number(unit), {
+        from: currency.key,
+        to: fx.base,
+      });
+    }
+    return convertedSalary;
   };
 
   const handleSubmit = e => {
@@ -124,25 +140,10 @@ const AddReview = ({
       is_accepting_questions,
     };
 
-    const otherRates = {
-      NGN: 360,
-    };
-
-    fx.base = currencyRates.base;
-    fx.rates = {
-      ...currencyRates.rates,
-      ...otherRates,
-    };
-
-    const convertedSalary = fx.convert(Number(unit), {
-      from: currency.key,
-      to: fx.base,
-    });
-
     salaryReview['employment_type'] = employment_type.key;
     salaryReview['salary'] = Number(unit);
     salaryReview['currency'] = currency.label;
-    salaryReview['base_salary'] = Math.round(convertedSalary);
+    salaryReview['base_salary'] = Math.round(convertCurrency());
     salaryReview['is_current_employee'] = is_currently_employed;
 
     // if interview is hidden, call salary and company
@@ -188,7 +189,7 @@ const AddReview = ({
         );
       }
     } catch (error) {
-      alert(error);
+      console.log(error);
     }
 
     setLoading(false);
@@ -247,11 +248,6 @@ const AddReview = ({
       is_anonymous: value,
     });
   };
-
-  const label = `Disable Salary Review`;
-
-  // Initially form should be !disabled (enabled)
-  // if form is not applicable then click checkbox to make form disabled (disabled)
 
   return (
     <div>
@@ -344,7 +340,7 @@ const AddReview = ({
           </h3>
           <p style={{ marginBottom: '20px' }}>
             <Checkbox checked={checkSalary} onChange={onSalaryCheckChange}>
-              {label}
+              {`Disable Salary Review`}
             </Checkbox>
           </p>
         </ReviewHeader>
@@ -438,7 +434,7 @@ const AddReview = ({
               checked={checkInterview}
               onChange={onInterviewCheckChange}
             >
-              {label}
+              {`Disable Interview Review`}
             </Checkbox>
           </p>
         </ReviewHeader>
