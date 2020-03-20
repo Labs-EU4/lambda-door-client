@@ -2,7 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Alert, Input, Rate, Switch, Form, Button, Icon, Select } from 'antd';
+import {
+  Alert,
+  Input,
+  Rate,
+  Switch,
+  Form,
+  Button,
+  Icon,
+  Select,
+  Checkbox,
+} from 'antd';
 import styled from 'styled-components';
 import { fx } from 'money';
 
@@ -52,8 +62,9 @@ const AddReview = ({
   });
 
   const [errors, setErrors] = useState({});
-
   const [loading, setLoading] = useState(false);
+  const [checkSalary, setCheckSalary] = useState(false);
+  const [checkInterview, setCheckInterview] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -64,7 +75,25 @@ const AddReview = ({
     getCurrencyRates();
   }, []);
 
-  const handleSubmit = async e => {
+  // const toggleCheckInterview = () => {
+  //   setCheckInterview(!checkInterview);
+  // };
+
+  // const toggleCheckSalary = () => {
+  //   setCheckSalary(!checkSalary);
+  // };
+
+  const onSalaryCheckChange = evt => {
+    console.log('salary checked = ', evt.target.checked);
+    setCheckSalary(evt.target.checked);
+  };
+
+  const onInterviewCheckChange = evt => {
+    console.log('interview checked = ', evt.target.checked);
+    setCheckInterview(evt.target.checked);
+  };
+
+  const handleSubmit = e => {
     e.preventDefault();
     setLoading(true);
 
@@ -116,20 +145,52 @@ const AddReview = ({
     salaryReview['base_salary'] = Math.round(convertedSalary);
     salaryReview['is_current_employee'] = is_currently_employed;
 
-    await addCompanyReview(
-      { ...companyReview, user_id: id, review_headline: '' },
-      id,
-      history
-    );
-    await addSalaryReview(salaryReview, id, history);
-    await addInterviewReview(
-      {
-        ...formValues,
-        is_current_employee: formValues.is_currently_employed,
-      },
-      id,
-      history
-    );
+    // if interview is hidden, call salary and company
+    // else if salary is hidden call interview and company
+    // else call of them...
+
+    try {
+      if (checkInterview) {
+        addSalaryReview(salaryReview, id, history);
+        addCompanyReview(
+          { ...companyReview, user_id: id, review_headline: '' },
+          id,
+          history
+        );
+      } else if (checkSalary) {
+        addInterviewReview(
+          {
+            ...formValues,
+            is_current_employee: formValues.is_currently_employed,
+          },
+          id,
+          history
+        );
+        addCompanyReview(
+          { ...companyReview, user_id: id, review_headline: '' },
+          id,
+          history
+        );
+      } else {
+        addCompanyReview(
+          { ...companyReview, user_id: id, review_headline: '' },
+          id,
+          history
+        );
+        addSalaryReview(salaryReview, id, history);
+        addInterviewReview(
+          {
+            ...formValues,
+            is_current_employee: formValues.is_currently_employed,
+          },
+          id,
+          history
+        );
+      }
+    } catch (error) {
+      alert(error);
+    }
+
     setLoading(false);
   };
 
@@ -187,6 +248,11 @@ const AddReview = ({
     });
   };
 
+  const label = `Disable Salary Review`;
+
+  // Initially form should be !disabled (enabled)
+  // if form is not applicable then click checkbox to make form disabled (disabled)
+
   return (
     <div>
       <h1>
@@ -194,9 +260,11 @@ const AddReview = ({
       </h1>
       <br />
       <Form layout="vertical">
-        <h3>
-          <b>General Review</b>
-        </h3>
+        <div>
+          <h3>
+            <b>General Review</b>
+          </h3>
+        </div>
         <Form.Item
           hasFeedback={Number(formValues.company_id) !== formValues.company_id}
           help={
@@ -270,9 +338,16 @@ const AddReview = ({
             <Alert type="error" message={errors.review} showIcon />
           )}
         </Form.Item>
-        <h3>
-          <b>Salary Review</b>
-        </h3>
+        <ReviewHeader>
+          <h3>
+            <b>Salary Review</b>
+          </h3>
+          <p style={{ marginBottom: '20px' }}>
+            <Checkbox checked={checkSalary} onChange={onSalaryCheckChange}>
+              {label}
+            </Checkbox>
+          </p>
+        </ReviewHeader>
         <Form.Item label="Job Title">
           <Input
             name="job_title"
@@ -354,9 +429,19 @@ const AddReview = ({
             </div>
           </div>
         </Form.Item>
-        <h3>
-          <b>Interview Process Review</b>
-        </h3>
+        <ReviewHeader>
+          <h3>
+            <b>Interview Process Review</b>
+          </h3>
+          <p style={{ marginBottom: '20px' }}>
+            <Checkbox
+              checked={checkInterview}
+              onChange={onInterviewCheckChange}
+            >
+              {label}
+            </Checkbox>
+          </p>
+        </ReviewHeader>
         <Form.Item label="Review">
           <Input.TextArea
             rows={10}
@@ -466,4 +551,9 @@ const SwitchContainer = styled.div`
       }
     }
   }
+`;
+
+const ReviewHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
