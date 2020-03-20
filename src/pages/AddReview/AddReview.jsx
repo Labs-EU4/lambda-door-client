@@ -23,7 +23,6 @@ const { Option } = Select;
 
 const AddReview = ({
   history,
-  location,
   companies: { companies },
   authState: {
     credentials: { id },
@@ -352,31 +351,6 @@ const AddReview = ({
                   );
                 })}
               </Select>
-
-              {/* <Select
-                
-                optionLabelProp="value"
-
-                // label="Currency"
-                // placeholder="Pick currency"
-                // onChange={e => handleComponentChange('unit', e)}
-                // filterOption={(inputValue, option) => {
-                //   if (
-                //     option.key.toLowerCase().includes(inputValue.toLowerCase())
-                //   ) {
-                //     return true;
-                //   }
-                //   return false;
-                // }}
-              >
-                {currencies.map((elem, i) => {
-                  return (
-                    <Option key={i} value={elem.code}>
-                      {elem.name}
-                    </Option>
-                  );
-                })}
-              </Select> */}
             </div>
           </div>
         </Form.Item>
@@ -400,14 +374,14 @@ const AddReview = ({
           htmlType="submit"
           loading={loading}
           onClick={handleSubmit}
-          disabled={
-            Boolean(
-              Object.keys(formValues).filter(elem => formValues[elem] === '')
-                .length
-            ) ||
-            Number(formValues.company_id) !== formValues.company_id ||
-            Object.values(errors).filter(elem => elem !== '').length // if there is more than 0 non empty properties on the errors object
-          }
+          // disabled={
+          //   Boolean(
+          //     Object.keys(formValues).filter(elem => formValues[elem] === '')
+          //       .length
+          //   ) ||
+          //   Number(formValues.company_id) !== formValues.company_id ||
+          //   Object.values(errors).filter(elem => elem !== '').length // if there is more than 0 non empty properties on the errors object
+          // }
         >
           Submit
         </Button>
