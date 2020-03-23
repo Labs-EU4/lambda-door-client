@@ -263,7 +263,19 @@ const AddReview = ({
       <Form layout="vertical">
         <div>
           <h3>
-            <b>General Review</b>
+            <b>
+              General Review{' '}
+              <span
+                style={{
+                  fontSize: '0.8rem',
+                  color: '#999999',
+                  fontStyle: 'italic',
+                  fontWeight: '300',
+                }}
+              >
+                (This section is required)
+              </span>
+            </b>
           </h3>
         </div>
         <Form.Item
@@ -282,7 +294,7 @@ const AddReview = ({
             dataSource={companies}
           />
         </Form.Item>
-        <Form.Item label="Overall Rating">
+        <Form.Item label="Overall Rating" className="asterisk">
           <Rate
             defaultValue={0}
             name="ratings"
@@ -324,6 +336,7 @@ const AddReview = ({
             </div>
           </SwitchContainer>
         </Form.Item>
+
         <Form.Item label="Review">
           <TextArea
             rows={10}
@@ -331,8 +344,8 @@ const AddReview = ({
             onChange={handleChange}
             maxLength="255"
             minLength="5"
-            required
             name="review"
+            required
           />
           {errors.review && (
             <Alert type="error" message={errors.review} showIcon />
