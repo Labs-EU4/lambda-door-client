@@ -254,6 +254,14 @@ const AddReview = ({
     });
   };
 
+  const salaryLabel = `${`(This section is ${
+    checkSalary ? 'not required' : 'required'
+  })`}`;
+
+  const interviewLabel = `${`(This section is ${
+    checkInterview ? 'not required' : 'required'
+  })`}`;
+
   return (
     <div>
       <h1>
@@ -265,16 +273,7 @@ const AddReview = ({
           <h3>
             <b>
               General Review{' '}
-              <span
-                style={{
-                  fontSize: '0.8rem',
-                  color: '#999999',
-                  fontStyle: 'italic',
-                  fontWeight: '300',
-                }}
-              >
-                (This section is required)
-              </span>
+              <span className="req-style">(This section is required)</span>
             </b>
           </h3>
         </div>
@@ -294,7 +293,7 @@ const AddReview = ({
             dataSource={companies}
           />
         </Form.Item>
-        <Form.Item label="Overall Rating" className="asterisk">
+        <Form.Item label="Overall Rating">
           <Rate
             defaultValue={0}
             name="ratings"
@@ -353,7 +352,9 @@ const AddReview = ({
         </Form.Item>
         <ReviewHeader>
           <h3>
-            <b>Salary Review</b>
+            <b>
+              Salary Review <span className="req-style"> {salaryLabel} </span>
+            </b>
           </h3>
           <p style={{ marginBottom: '20px' }}>
             <Checkbox checked={checkSalary} onChange={onSalaryCheckChange}>
@@ -444,7 +445,10 @@ const AddReview = ({
         </Form.Item>
         <ReviewHeader>
           <h3>
-            <b>Interview Process Review</b>
+            <b>
+              Interview Process Review{' '}
+              <span className="req-style"> {interviewLabel} </span>
+            </b>
           </h3>
           <p style={{ marginBottom: '20px' }}>
             <Checkbox
@@ -472,14 +476,6 @@ const AddReview = ({
           htmlType="submit"
           loading={loading}
           onClick={handleSubmit}
-          // disabled={
-          //   Boolean(
-          //     Object.keys(formValues).filter(elem => formValues[elem] === '')
-          //       .length
-          //   ) ||
-          //   Number(formValues.company_id) !== formValues.company_id ||
-          //   Object.values(errors).filter(elem => elem !== '').length // if there is more than 0 non empty properties on the errors object
-          // }
         >
           Submit
         </Button>

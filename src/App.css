@@ -22,3 +22,10 @@ body {
   line-height: 1;
   content: '*';
 }
+
+.req-style {
+  font-size: 0.8rem;
+  color: #999999;
+  font-style: italic;
+  font-weight: 300;
+}
