@@ -273,7 +273,9 @@ const AddReview = ({
           <h3>
             <b>
               General Review{' '}
-              <span className="req-style">(This section is required)</span>
+              <span className="req-style" style={{ color: '#ff4d4f' }}>
+                (This section is required)
+              </span>
             </b>
           </h3>
         </div>
