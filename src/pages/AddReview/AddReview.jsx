@@ -345,7 +345,7 @@ const AddReview = ({
           </SwitchContainer>
         </Form.Item>
 
-        <Form.Item label="Review">
+        <Form.Item label="Review" required>
           <TextArea
             rows={10}
             placeholder="Please share some of the pros and cons of working at this company"
@@ -499,11 +499,31 @@ const AddReview = ({
           />
           {errors.text && <Alert type="error" message={errors.text} showIcon />}
         </Form.Item>
+        {JSON.stringify(formValues)}
         <Button
           type="primary"
           htmlType="submit"
           loading={loading}
           onClick={handleSubmit}
+          disabled={
+            (!checkInterview && errors.text !== '') ||
+            (!checkSalary &&
+              (formValues.job_title === '' ||
+                formValues.employment_type === '' ||
+                errors.description !== '' ||
+                formValues.unit === '' ||
+                formValues.currency === ''))
+            // Number(formValues.company_id) !== formValues.company_id ||
+            // job_title, employment_type, description, unit, currency
+          }
+
+          // disabled={
+          //   Boolean(
+          //     Object.keys(formValues).filter(elem => formValues[elem] === '')
+          //       .length
+          //   ) ||
+          //   Number(formValues.company_id) !== formValues.company_id ||
+          //   Object.values(errors).filter(elem => elem !== '').length // if there is more than 0 non empty properties on the errors object
         >
           Submit
         </Button>
@@ -559,7 +579,6 @@ const SwitchContainer = styled.div`
     div {
       width: 100%;
       margin-bottom: 5%;
-      /* justify-content: center; */
       p {
         justify-content: flex-start;
         margin-bottom: 0;
@@ -577,7 +596,6 @@ const SwitchContainer = styled.div`
     div {
       width: 100%;
       margin-bottom: 5%;
-      /* justify-content: center; */
       p {
         justify-content: flex-start;
         margin-bottom: 0;
