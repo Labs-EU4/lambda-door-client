@@ -13,16 +13,6 @@ body {
   border-radius: 4px;
 }
 
-.asterisk::after {
-  display: inline-block;
-  margin-left: 4px;
-  color: #ff4d4f;
-  font-size: 14px;
-  font-family: SimSun, sans-serif;
-  line-height: 1;
-  content: '*';
-}
-
 .req-style {
   font-size: 0.8rem;
   font-style: italic;
