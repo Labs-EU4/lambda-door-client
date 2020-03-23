@@ -255,12 +255,19 @@ const AddReview = ({
   };
 
   const salaryLabel = `${`(This section is ${
-    checkSalary ? 'not required' : 'required'
+    checkSalary ? 'not required,' : 'required,'
+  }`}${` `}${`click on the checkbox to ${
+    checkSalary ? 'enable' : 'disable'
   })`}`;
 
   const interviewLabel = `${`(This section is ${
-    checkInterview ? 'not required' : 'required'
+    checkInterview ? 'not required,' : 'required,'
+  }`}${` `}${`click on the checkbox to ${
+    checkInterview ? 'enable' : 'disable'
   })`}`;
+
+  const checkSalaryLabel = `${checkSalary ? 'Disabled' : 'Enabled'}`;
+  const checkInterviewLabel = `${checkInterview ? 'Disabled' : 'Enabled'}`;
 
   return (
     <div>
@@ -367,7 +374,7 @@ const AddReview = ({
           </h3>
           <p style={{ marginBottom: '20px' }}>
             <Checkbox checked={checkSalary} onChange={onSalaryCheckChange}>
-              {`Disable Salary Review`}
+              {checkSalaryLabel}
             </Checkbox>
           </p>
         </ReviewHeader>
@@ -470,7 +477,7 @@ const AddReview = ({
               checked={checkInterview}
               onChange={onInterviewCheckChange}
             >
-              {`Disable Interview Review`}
+              {checkInterviewLabel}
             </Checkbox>
           </p>
         </ReviewHeader>
