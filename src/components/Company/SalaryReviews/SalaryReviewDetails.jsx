@@ -83,7 +83,7 @@ const SalaryReviewDetails = ({
 
         <div className="bottom">
           <div className="contact">
-            {review.is_accepting_questions ? (
+            {review.is_accepting_questions && !review.is_anonymous ? (
               <>
                 <p>
                   Have questions? &nbsp;&nbsp;
