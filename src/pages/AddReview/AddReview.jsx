@@ -353,7 +353,14 @@ const AddReview = ({
         <ReviewHeader>
           <h3>
             <b>
-              Salary Review <span className="req-style"> {salaryLabel} </span>
+              Salary Review{' '}
+              <span
+                className="req-style"
+                style={{ color: checkSalary ? '#999999' : '#ff4d4f' }}
+              >
+                {' '}
+                {salaryLabel}{' '}
+              </span>
             </b>
           </h3>
           <p style={{ marginBottom: '20px' }}>
@@ -447,7 +454,13 @@ const AddReview = ({
           <h3>
             <b>
               Interview Process Review{' '}
-              <span className="req-style"> {interviewLabel} </span>
+              <span
+                className="req-style"
+                style={{ color: checkInterview ? '#999999' : '#ff4d4f' }}
+              >
+                {' '}
+                {interviewLabel}{' '}
+              </span>
             </b>
           </h3>
           <p style={{ marginBottom: '20px' }}>
