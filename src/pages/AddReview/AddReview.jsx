@@ -383,6 +383,7 @@ const AddReview = ({
             name="job_title"
             placeholder="Job Title"
             onChange={handleChange}
+            disabled={checkSalary}
           />
         </Form.Item>
         <Form.Item label="Employment Type">
@@ -391,6 +392,7 @@ const AddReview = ({
             name="employment_type"
             placeholder="Employment Type"
             onChange={e => handleComponentChange('employment_type', e)}
+            disabled={checkSalary}
           >
             {employmentType.map(elem => {
               return (
@@ -411,6 +413,7 @@ const AddReview = ({
             maxLength="255"
             minLength="5"
             required
+            disabled={checkSalary}
           />
           {errors.description && (
             <Alert type="error" message={errors.description} showIcon />
@@ -431,6 +434,7 @@ const AddReview = ({
                 placeholder="Annual Salary"
                 name="unit"
                 onChange={handleChange}
+                disabled={checkSalary}
               />
             </div>
             <div className="currency" style={{ width: '60%' }}>
@@ -447,6 +451,7 @@ const AddReview = ({
                   }
                   return false;
                 }}
+                disabled={checkSalary}
               >
                 {currencies.map((elem, i) => {
                   return (
@@ -490,6 +495,7 @@ const AddReview = ({
             maxLength="255"
             minLength="5"
             required
+            disabled={checkInterview}
           />
           {errors.text && <Alert type="error" message={errors.text} showIcon />}
         </Form.Item>
