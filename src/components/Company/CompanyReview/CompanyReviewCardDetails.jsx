@@ -59,18 +59,11 @@ const CompanyReviewCardDetailed = ({
       </Button>
       <StyledCard>
         <h2 className="company-name">{review.name}</h2>
-        <h3>
-          &quot;
-          {review.review_headline}
-          &quot;
-        </h3>
         <p>
-          Review:
           <br />
           <span className="review-div">{review.review}</span>
         </p>
         <div className="stars">
-          Rating:
           <br />
           {!isFetching ? (
             <Rate disabled defaultValue={review.ratings} size="small" />
