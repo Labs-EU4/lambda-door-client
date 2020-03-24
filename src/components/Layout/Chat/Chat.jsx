@@ -237,11 +237,11 @@ const ChatBody = styled.div`
 
   .chat_message {
     display: flex;
-    background: #ebebeb;
+    background: rgb(230, 0, 76);
     margin: 0.5em 0.6em;
     border-radius: 5px;
     font-size: 0.8rem;
-    color: rgba(117, 117, 117, 1);
+    color: #fff;
     width: fit-content;
     max-width: 70%;
 
@@ -251,6 +251,8 @@ const ChatBody = styled.div`
 
     &.move_right {
       align-self: flex-end;
+      color: #ffffff;
+      background: #0099ff;
     }
   }
 `;
