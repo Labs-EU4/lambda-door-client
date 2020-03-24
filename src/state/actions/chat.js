@@ -75,6 +75,7 @@ export const openChat = (
           open: true,
           createdAt: new Date(),
           read: true,
+          userNotified: false,
         })
         .then(function(docRef) {
           console.log('Document written with ID: ', docRef.id);
