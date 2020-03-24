@@ -9,8 +9,8 @@ import { connect } from 'react-redux';
 import { Avatar, Input, Form, Icon } from 'antd';
 import {
   SendOutlined,
-  ArrowsAltOutlined,
-  ShrinkOutlined,
+  PlusOutlined,
+  MinusOutlined,
 } from '@ant-design/icons';
 import styled from 'styled-components';
 
@@ -79,12 +79,12 @@ const Chat = ({
           </div>
           <div className="chat_header_icon">
             {isMinimized ? (
-              <ArrowsAltOutlined
+              <PlusOutlined
                 onClick={minimizeChat}
                 style={{ fontSize: '22px', color: '#fff' }}
               />
             ) : (
-              <ShrinkOutlined
+              <MinusOutlined
                 onClick={minimizeChat}
                 style={{ fontSize: '22px', color: '#fff' }}
               />
