@@ -345,7 +345,7 @@ const AddReview = ({
           </SwitchContainer>
         </Form.Item>
 
-        <Form.Item label="Review" required>
+        <Form.Item label="Review">
           <TextArea
             rows={10}
             placeholder="Please share some of the pros and cons of working at this company"
@@ -512,18 +512,11 @@ const AddReview = ({
                 formValues.employment_type === '' ||
                 errors.description !== '' ||
                 formValues.unit === '' ||
-                formValues.currency === ''))
-            // Number(formValues.company_id) !== formValues.company_id ||
-            // job_title, employment_type, description, unit, currency
+                formValues.currency === '')) ||
+            Number(formValues.company_id) !== formValues.company_id ||
+            formValues.ratings === '' ||
+            errors.review !== ''
           }
-
-          // disabled={
-          //   Boolean(
-          //     Object.keys(formValues).filter(elem => formValues[elem] === '')
-          //       .length
-          //   ) ||
-          //   Number(formValues.company_id) !== formValues.company_id ||
-          //   Object.values(errors).filter(elem => elem !== '').length // if there is more than 0 non empty properties on the errors object
         >
           Submit
         </Button>
