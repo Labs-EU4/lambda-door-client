@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import ContactReviewer from '../../ContactReviewerModal';
 import { getSalaryReviewsByCompanyId } from '../../../state/actions/reviews';
 import currencies from '../../../utils/currencies';
+import ChatButton from '../../Layout/Chat/ChatButton';
 
 let salaryFormatted;
 
@@ -82,11 +83,18 @@ const SalaryReviewDetails = ({
 
         <div className="bottom">
           <div className="contact">
-            {!review.is_anonymous && (
-              <p>
-                Have questions? &nbsp;&nbsp;
-                <Button onClick={() => setOpen(true)}> Contact Me</Button>
-              </p>
+            {review.is_accepting_questions && !review.is_anonymous ? (
+              <>
+                <p>
+                  Have questions? &nbsp;&nbsp;
+                  <ChatButton
+                    toUserID={review.user_id}
+                    toUserName={review.full_name}
+                  />
+                </p>
+              </>
+            ) : (
+              ''
             )}
           </div>
           {review.is_anonymous ? (
