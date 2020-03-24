@@ -56,7 +56,7 @@ describe('Chat Interface', () => {
         closeChat={closeChat}
         markAsRead={markAsRead}
         messages={chatMessages}
-        chat={chats[1]}
+        chat={chats}
       />
     ).queryAllByText(/wowza/i);
 
