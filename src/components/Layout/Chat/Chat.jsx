@@ -54,7 +54,10 @@ const Chat = ({
 
   const markAsReadOnClick = () => {
     // If the last message `fromUserID` is not from the current user mark it as read
-    if (chat.messages[chat.messages.length - 1].fromUserID !== id) {
+    if (
+      chat.messages.length &&
+      chat.messages[chat.messages.length - 1].fromUserID !== id
+    ) {
       markAsRead(chatID);
     }
   };
