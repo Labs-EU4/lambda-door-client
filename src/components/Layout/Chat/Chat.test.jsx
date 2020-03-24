@@ -63,8 +63,8 @@ describe('Chat Interface', () => {
         sendMessage={sendMessage}
         closeChat={closeChat}
         markAsRead={markAsRead}
-        messages={messages}
-        chat={chats}
+        messages={chatMessages}
+        chat={chats[0]}
       />
     );
     expect(chatElement.baseElement).toMatchSnapshot();
@@ -77,7 +77,7 @@ describe('Chat Interface', () => {
         closeChat={closeChat}
         markAsRead={markAsRead}
         messages={chatMessages}
-        chat={chats}
+        chat={chats[1]}
       />
     ).queryAllByText(/wowza/i);
 
