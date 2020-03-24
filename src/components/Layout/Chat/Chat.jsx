@@ -282,4 +282,9 @@ const ChatFooter = styled.div`
     padding: 0 0.3em;
     color: #bb1333;
   }
+
+  .dummy-class {
+    /* this is dummy code. */
+    border: 5px solid red;
+  }
 `;
