@@ -40,12 +40,7 @@ exports[`CompanyReviewCardDetails renders correctly 1`] = `
         <h2
           class="company-name"
         />
-        <h3>
-          "
-          "
-        </h3>
         <p>
-          Review:
           <br />
           <span
             class="review-div"
@@ -54,7 +49,6 @@ exports[`CompanyReviewCardDetails renders correctly 1`] = `
         <div
           class="stars"
         >
-          Rating:
           <br />
         </div>
         <div
