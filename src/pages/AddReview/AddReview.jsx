@@ -2,7 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Alert, Input, Rate, Switch, Form, Button, Icon, Select } from 'antd';
+import {
+  Alert,
+  Input,
+  Rate,
+  Switch,
+  Form,
+  Button,
+  Icon,
+  Select,
+  Checkbox,
+} from 'antd';
 import styled from 'styled-components';
 import { fx } from 'money';
 
@@ -23,7 +33,6 @@ const { Option } = Select;
 
 const AddReview = ({
   history,
-  location,
   companies: { companies },
   authState: {
     credentials: { id },
@@ -53,8 +62,9 @@ const AddReview = ({
   });
 
   const [errors, setErrors] = useState({});
-
   const [loading, setLoading] = useState(false);
+  const [checkSalary, setCheckSalary] = useState(false);
+  const [checkInterview, setCheckInterview] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -65,7 +75,40 @@ const AddReview = ({
     getCurrencyRates();
   }, []);
 
-  const handleSubmit = async e => {
+  const onSalaryCheckChange = evt => {
+    setCheckSalary(evt.target.checked);
+  };
+
+  const onInterviewCheckChange = evt => {
+    setCheckInterview(evt.target.checked);
+  };
+
+  const convertCurrency = () => {
+    const { unit, currency } = formValues;
+    const otherRates = {
+      NGN: 360,
+    };
+
+    fx.base = currencyRates.base;
+    fx.rates = {
+      ...currencyRates.rates,
+      ...otherRates,
+    };
+
+    let convertedSalary;
+
+    if (checkSalary) {
+      return null;
+    } else {
+      convertedSalary = fx.convert(Number(unit), {
+        from: currency.key,
+        to: fx.base,
+      });
+    }
+    return convertedSalary;
+  };
+
+  const handleSubmit = e => {
     e.preventDefault();
     setLoading(true);
 
@@ -96,41 +139,64 @@ const AddReview = ({
       is_accepting_questions,
     };
 
-    const otherRates = {
-      NGN: 360,
-    };
-
-    fx.base = currencyRates.base;
-    fx.rates = {
-      ...currencyRates.rates,
-      ...otherRates,
-    };
-
-    const convertedSalary = fx.convert(Number(unit), {
-      from: currency.key,
-      to: fx.base,
-    });
-
     salaryReview['employment_type'] = employment_type.key;
     salaryReview['salary'] = Number(unit);
     salaryReview['currency'] = currency.label;
-    salaryReview['base_salary'] = Math.round(convertedSalary);
+    salaryReview['base_salary'] = Math.round(convertCurrency());
     salaryReview['is_current_employee'] = is_currently_employed;
 
-    await addCompanyReview(
-      { ...companyReview, user_id: id, review_headline: '' },
-      id,
-      history
-    );
-    await addSalaryReview(salaryReview, id, history);
-    await addInterviewReview(
-      {
-        ...formValues,
-        is_current_employee: formValues.is_currently_employed,
-      },
-      id,
-      history
-    );
+    // if interview is hidden, call salary and company
+    // else if salary is hidden call interview and company
+    // else call of them...
+
+    try {
+      if (checkInterview && checkSalary) {
+        addCompanyReview(
+          { ...companyReview, user_id: id, review_headline: '' },
+          id,
+          history
+        );
+      } else if (checkInterview) {
+        addSalaryReview(salaryReview, id, history);
+        addCompanyReview(
+          { ...companyReview, user_id: id, review_headline: '' },
+          id,
+          history
+        );
+      } else if (checkSalary) {
+        addInterviewReview(
+          {
+            ...formValues,
+            is_current_employee: formValues.is_currently_employed,
+          },
+          id,
+          history
+        );
+        addCompanyReview(
+          { ...companyReview, user_id: id, review_headline: '' },
+          id,
+          history
+        );
+      } else {
+        addCompanyReview(
+          { ...companyReview, user_id: id, review_headline: '' },
+          id,
+          history
+        );
+        addSalaryReview(salaryReview, id, history);
+        addInterviewReview(
+          {
+            ...formValues,
+            is_current_employee: formValues.is_currently_employed,
+          },
+          id,
+          history
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
     setLoading(false);
   };
 
@@ -188,6 +254,21 @@ const AddReview = ({
     });
   };
 
+  const salaryLabel = `${`(This section is ${
+    checkSalary ? 'not required,' : 'required,'
+  }`}${` `}${`click on the checkbox to ${
+    checkSalary ? 'enable' : 'disable'
+  })`}`;
+
+  const interviewLabel = `${`(This section is ${
+    checkInterview ? 'not required,' : 'required,'
+  }`}${` `}${`click on the checkbox to ${
+    checkInterview ? 'enable' : 'disable'
+  })`}`;
+
+  const checkSalaryLabel = `${checkSalary ? 'Disabled' : 'Enabled'}`;
+  const checkInterviewLabel = `${checkInterview ? 'Disabled' : 'Enabled'}`;
+
   return (
     <div>
       <h1>
@@ -195,9 +276,16 @@ const AddReview = ({
       </h1>
       <br />
       <Form layout="vertical">
-        <h3>
-          <b>General Review</b>
-        </h3>
+        <div>
+          <h3>
+            <b>
+              General Review{' '}
+              <span className="req-style" style={{ color: '#ff4d4f' }}>
+                (This section is required)
+              </span>
+            </b>
+          </h3>
+        </div>
         <Form.Item
           hasFeedback={Number(formValues.company_id) !== formValues.company_id}
           help={
@@ -207,7 +295,6 @@ const AddReview = ({
           }
         >
           <AutoCompleteCompany
-            label="Company Name"
             placeholder="Company name"
             onChange={e => {
               handleCompanyName(e);
@@ -257,28 +344,46 @@ const AddReview = ({
             </div>
           </SwitchContainer>
         </Form.Item>
+
         <Form.Item label="Review">
           <TextArea
             rows={10}
             placeholder="Please share some of the pros and cons of working at this company"
-            name="review"
             onChange={handleChange}
             maxLength="255"
             minLength="5"
+            name="review"
             required
           />
           {errors.review && (
             <Alert type="error" message={errors.review} showIcon />
           )}
         </Form.Item>
-        <h3>
-          <b>Salary Review</b>
-        </h3>
+        <ReviewHeader>
+          <h3>
+            <b>
+              Salary Review{' '}
+              <span
+                className="req-style"
+                style={{ color: checkSalary ? '#999999' : '#ff4d4f' }}
+              >
+                {' '}
+                {salaryLabel}{' '}
+              </span>
+            </b>
+          </h3>
+          <p style={{ marginBottom: '20px' }}>
+            <Checkbox checked={checkSalary} onChange={onSalaryCheckChange}>
+              {checkSalaryLabel}
+            </Checkbox>
+          </p>
+        </ReviewHeader>
         <Form.Item label="Job Title">
           <Input
             name="job_title"
             placeholder="Job Title"
             onChange={handleChange}
+            disabled={checkSalary}
           />
         </Form.Item>
         <Form.Item label="Employment Type">
@@ -287,6 +392,7 @@ const AddReview = ({
             name="employment_type"
             placeholder="Employment Type"
             onChange={e => handleComponentChange('employment_type', e)}
+            disabled={checkSalary}
           >
             {employmentType.map(elem => {
               return (
@@ -307,6 +413,7 @@ const AddReview = ({
             maxLength="255"
             minLength="5"
             required
+            disabled={checkSalary}
           />
           {errors.description && (
             <Alert type="error" message={errors.description} showIcon />
@@ -327,6 +434,7 @@ const AddReview = ({
                 placeholder="Annual Salary"
                 name="unit"
                 onChange={handleChange}
+                disabled={checkSalary}
               />
             </div>
             <div className="currency" style={{ width: '60%' }}>
@@ -343,6 +451,7 @@ const AddReview = ({
                   }
                   return false;
                 }}
+                disabled={checkSalary}
               >
                 {currencies.map((elem, i) => {
                   return (
@@ -352,37 +461,31 @@ const AddReview = ({
                   );
                 })}
               </Select>
-
-              {/* <Select
-                
-                optionLabelProp="value"
-
-                // label="Currency"
-                // placeholder="Pick currency"
-                // onChange={e => handleComponentChange('unit', e)}
-                // filterOption={(inputValue, option) => {
-                //   if (
-                //     option.key.toLowerCase().includes(inputValue.toLowerCase())
-                //   ) {
-                //     return true;
-                //   }
-                //   return false;
-                // }}
-              >
-                {currencies.map((elem, i) => {
-                  return (
-                    <Option key={i} value={elem.code}>
-                      {elem.name}
-                    </Option>
-                  );
-                })}
-              </Select> */}
             </div>
           </div>
         </Form.Item>
-        <h3>
-          <b>Interview Process Review</b>
-        </h3>
+        <ReviewHeader>
+          <h3>
+            <b>
+              Interview Process Review{' '}
+              <span
+                className="req-style"
+                style={{ color: checkInterview ? '#999999' : '#ff4d4f' }}
+              >
+                {' '}
+                {interviewLabel}{' '}
+              </span>
+            </b>
+          </h3>
+          <p style={{ marginBottom: '20px' }}>
+            <Checkbox
+              checked={checkInterview}
+              onChange={onInterviewCheckChange}
+            >
+              {checkInterviewLabel}
+            </Checkbox>
+          </p>
+        </ReviewHeader>
         <Form.Item label="Review">
           <Input.TextArea
             rows={10}
@@ -392,6 +495,7 @@ const AddReview = ({
             maxLength="255"
             minLength="5"
             required
+            disabled={checkInterview}
           />
           {errors.text && <Alert type="error" message={errors.text} showIcon />}
         </Form.Item>
@@ -401,12 +505,16 @@ const AddReview = ({
           loading={loading}
           onClick={handleSubmit}
           disabled={
-            Boolean(
-              Object.keys(formValues).filter(elem => formValues[elem] === '')
-                .length
-            ) ||
+            (!checkInterview && errors.text !== '') ||
+            (!checkSalary &&
+              (formValues.job_title === '' ||
+                formValues.employment_type === '' ||
+                errors.description !== '' ||
+                formValues.unit === '' ||
+                formValues.currency === '')) ||
             Number(formValues.company_id) !== formValues.company_id ||
-            Object.values(errors).filter(elem => elem !== '').length // if there is more than 0 non empty properties on the errors object
+            formValues.ratings === '' ||
+            errors.review !== ''
           }
         >
           Submit
@@ -463,7 +571,6 @@ const SwitchContainer = styled.div`
     div {
       width: 100%;
       margin-bottom: 5%;
-      /* justify-content: center; */
       p {
         justify-content: flex-start;
         margin-bottom: 0;
@@ -481,7 +588,6 @@ const SwitchContainer = styled.div`
     div {
       width: 100%;
       margin-bottom: 5%;
-      /* justify-content: center; */
       p {
         justify-content: flex-start;
         margin-bottom: 0;
@@ -492,4 +598,9 @@ const SwitchContainer = styled.div`
       }
     }
   }
+`;
+
+const ReviewHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;

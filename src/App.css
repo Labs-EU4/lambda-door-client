@@ -12,3 +12,10 @@ body {
 .ant-card {
   border-radius: 4px;
 }
+
+.req-style {
+  font-size: 0.8rem;
+  font-style: italic;
+  font-weight: 400;
+  font-family: 'Nunito', sans-serif;
+}
