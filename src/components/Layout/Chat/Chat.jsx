@@ -237,11 +237,11 @@ const ChatBody = styled.div`
 
   .chat_message {
     display: flex;
-    background: #ebebeb;
+    background: rgb(230, 0, 76);
     margin: 0.5em 0.6em;
     border-radius: 5px;
     font-size: 0.8rem;
-    color: rgba(117, 117, 117, 1);
+    color: #fff;
     width: fit-content;
     max-width: 70%;
 
@@ -281,10 +281,5 @@ const ChatFooter = styled.div`
   .ant-input-suffix {
     padding: 0 0.3em;
     color: #bb1333;
-  }
-
-  .dummy-class {
-    /* this is dummy code. */
-    border: 5px solid red;
   }
 `;
