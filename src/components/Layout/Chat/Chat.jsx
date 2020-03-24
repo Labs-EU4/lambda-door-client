@@ -251,6 +251,8 @@ const ChatBody = styled.div`
 
     &.move_right {
       align-self: flex-end;
+      color: #ffffff;
+      background: #0099ff;
     }
   }
 `;

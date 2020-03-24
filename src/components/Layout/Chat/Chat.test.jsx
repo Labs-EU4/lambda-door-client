@@ -6,44 +6,23 @@ import { renderWithRedux } from '../../../utils/testingHelpers';
 
 beforeEach(rtl.cleanup);
 
-const chats = [
-  {
-    toUserID: 1,
-    fromUserID: 6,
-    fromUserName: 'Rodrigo Graça',
-    toUserName: 'Lisa Wilton',
-    messages: [
-      {
-        fromUserID: 6,
-        message: 'some new message 1',
-      },
-      {
-        fromUserID: 6,
-        message: 'some new message 2',
-      },
-    ],
-    open: true,
-  },
-  {
-    toUserID: 1,
-    fromUserID: 6,
-    fromUserName: 'Rodrigo Graça',
-    toUserName: 'Lisa Wilton',
-    messages: [
-      {
-        fromUserID: 6,
-        message: 'what new message?',
-      },
-      {
-        fromUserID: 6,
-        message: 'wowza',
-      },
-    ],
-    open: true,
-  },
-];
-
-const messages = chats.map(messages => messages);
+const chats = {
+  toUserID: 1,
+  fromUserID: 6,
+  fromUserName: 'Rodrigo Graça',
+  toUserName: 'Lisa Wilton',
+  messages: [
+    {
+      fromUserID: 6,
+      message: 'some new message 1',
+    },
+    {
+      fromUserID: 6,
+      message: 'some new message 2',
+    },
+  ],
+  open: true,
+};
 
 const chatMessages = [
   {
@@ -63,7 +42,7 @@ describe('Chat Interface', () => {
         sendMessage={sendMessage}
         closeChat={closeChat}
         markAsRead={markAsRead}
-        messages={messages}
+        messages={chatMessages}
         chat={chats}
       />
     );

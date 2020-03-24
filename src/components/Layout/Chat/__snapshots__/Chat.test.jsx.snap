@@ -22,10 +22,12 @@ exports[`Chat Interface should render the Chat Interface without crashing 1`] = 
               class="ant-avatar-string"
               style="transform: scale(1) translateX(-50%);"
             >
-              U
+              R
             </span>
           </span>
-          <h4 />
+          <h4>
+            Rodrigo Graça
+          </h4>
         </div>
         <div
           class="chat_header_icon"
@@ -76,21 +78,20 @@ exports[`Chat Interface should render the Chat Interface without crashing 1`] = 
         </div>
       </div>
       <div
-        class="sc-htpNat gvFqbI"
+        class="sc-htpNat eMMKMD"
         id="chat_body"
       >
         <div
           class="chat_message null"
         >
-          <p />
+          <p>
+            wowza
+          </p>
           <div />
         </div>
-        <div
-          class="chat_message null"
-        >
-          <p />
-          <div />
-        </div>
+        <span
+          style="text-align: right; margin: -7px 10px; font-size: 0.6em;"
+        />
       </div>
       <div
         class="sc-bxivhb hNeMQD"
