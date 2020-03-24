@@ -13,11 +13,20 @@ exports[`AddReview renders correctly 1`] = `
       <form
         class="ant-form ant-form-vertical"
       >
-        <h3>
-          <b>
-            General Review
-          </b>
-        </h3>
+        <div>
+          <h3>
+            <b>
+              General Review
+               
+              <span
+                class="req-style"
+                style="color: rgb(255, 77, 79);"
+              >
+                (This section is required)
+              </span>
+            </b>
+          </h3>
+        </div>
         <div
           class="ant-row ant-form-item"
         >
@@ -33,16 +42,6 @@ exports[`AddReview renders correctly 1`] = `
                 <div
                   class="ant-row ant-form-item"
                 >
-                  <div
-                    class="ant-col ant-form-item-label"
-                  >
-                    <label
-                      class=""
-                      title="Company Name"
-                    >
-                      Company Name
-                    </label>
-                  </div>
                   <div
                     class="ant-col ant-form-item-control-wrapper"
                   >
@@ -461,7 +460,7 @@ exports[`AddReview renders correctly 1`] = `
                 class="ant-form-item-children"
               >
                 <div
-                  class="sc-bdVaJa iCMYSg"
+                  class="sc-bdVaJa fRWxWX"
                 >
                   <div>
                     <p>
@@ -610,11 +609,47 @@ exports[`AddReview renders correctly 1`] = `
             </div>
           </div>
         </div>
-        <h3>
-          <b>
-            Salary Review
-          </b>
-        </h3>
+        <div
+          class="sc-bwzfXH MKmUa"
+        >
+          <h3>
+            <b>
+              Salary Review
+               
+              <span
+                class="req-style"
+                style="color: rgb(255, 77, 79);"
+              >
+                 
+                (This section is required, click on the checkbox to disable)
+                 
+              </span>
+            </b>
+          </h3>
+          <p
+            style="margin-bottom: 20px;"
+          >
+            <label
+              class="ant-checkbox-wrapper"
+            >
+              <span
+                class="ant-checkbox"
+              >
+                <input
+                  class="ant-checkbox-input"
+                  type="checkbox"
+                  value=""
+                />
+                <span
+                  class="ant-checkbox-inner"
+                />
+              </span>
+              <span>
+                Enabled
+              </span>
+            </label>
+          </p>
+        </div>
         <div
           class="ant-row ant-form-item"
         >
@@ -856,11 +891,47 @@ exports[`AddReview renders correctly 1`] = `
             </div>
           </div>
         </div>
-        <h3>
-          <b>
-            Interview Process Review
-          </b>
-        </h3>
+        <div
+          class="sc-bwzfXH MKmUa"
+        >
+          <h3>
+            <b>
+              Interview Process Review
+               
+              <span
+                class="req-style"
+                style="color: rgb(255, 77, 79);"
+              >
+                 
+                (This section is required, click on the checkbox to disable)
+                 
+              </span>
+            </b>
+          </h3>
+          <p
+            style="margin-bottom: 20px;"
+          >
+            <label
+              class="ant-checkbox-wrapper"
+            >
+              <span
+                class="ant-checkbox"
+              >
+                <input
+                  class="ant-checkbox-input"
+                  type="checkbox"
+                  value=""
+                />
+                <span
+                  class="ant-checkbox-inner"
+                />
+              </span>
+              <span>
+                Enabled
+              </span>
+            </label>
+          </p>
+        </div>
         <div
           class="ant-row ant-form-item"
         >

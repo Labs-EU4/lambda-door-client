@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import ContactReviewer from '../../ContactReviewerModal';
 import { getInterviewReviewsByReviewId } from '../../../state/actions/reviews';
 import { mobilePortrait, tabletPortrait } from '../../../styles/theme.styles';
+import ChatButton from '../../Layout/Chat/ChatButton';
 
 const InterviewReviewDetails = ({
   history,
@@ -59,10 +60,15 @@ const InterviewReviewDetails = ({
         <div className="bottom">
           <div className="contact">
             {review.is_accepting_questions ? (
-              <p>
-                Have questions? &nbsp;&nbsp;
-                <Button onClick={() => setOpen(true)}> Contact Me</Button>
-              </p>
+              <>
+                <p>
+                  Have questions? &nbsp;&nbsp;
+                  <ChatButton
+                    toUserID={review.user_id}
+                    toUserName={review.full_name}
+                  />
+                </p>
+              </>
             ) : (
               ''
             )}
