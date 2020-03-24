@@ -460,7 +460,7 @@ exports[`AddReview renders correctly 1`] = `
                 class="ant-form-item-children"
               >
                 <div
-                  class="sc-bdVaJa iCMYSg"
+                  class="sc-bdVaJa fRWxWX"
                 >
                   <div>
                     <p>
@@ -969,6 +969,7 @@ exports[`AddReview renders correctly 1`] = `
         </div>
         <button
           class="ant-btn ant-btn-primary"
+          disabled=""
           type="submit"
         >
           <span>
