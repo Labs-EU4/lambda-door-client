@@ -76,7 +76,18 @@ npm install
 npm start [or] yarn start
 ```
 
-##
+## Environment Variables
+
+```
+REACT_APP_UPLOAD_PRESET=
+REACT_APP_API_KEY=
+REACT_APP_CLIENT_ID=
+REACT_APP_CLIENT_SECRET=
+REACT_APP_JWT_SECRET=
+REACT_APP_REDIRECT_URI=
+REACT_APP_BACKEND_URL=
+REACT_APP_GOOGLE_API_KEY=
+```
 
 <!-- # LambdaDoor
 
