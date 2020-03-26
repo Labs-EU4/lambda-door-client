@@ -32,6 +32,24 @@
 |                       [<img src="https://github.com/favicon.ico" width="20"> ](https://github.com/kip-guile)                        |
 | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="20"> ](https://www.linkedin.com/in/alexanderoguejiofor) |
 
+## Table of Content
+
+1. [Tech used](#tech-used)
+2. [Starting up the app](#starting-up-the-app)
+3. [Environment Variables](#environment-variables)
+4. [Running the test](#running-the-test)
+5. [How to contribute](#how-to-contribute)
+6. [How to create an Issue/Bug Request](#how-to-create-an-issue/bug-request)
+7. [Attribution](#attribution)
+8. [Acknowledgement](#acknowledgement)
+9. [Backend](#backend)
+   - [Documentation](#documentation)
+   - [Hosted on](#hosted-on)
+10. [App Demonstration](#app-demonstration)
+11. [LICENSE](#license)
+
+## Tech Used
+
 <!-- # LambdaDoor
 
 Many atimes Job seekers find it difficult getting information specific to their search with respect to companies' interview processes, cultures and salary information that are less generalized, hence they spend alot of time searching and filtering what's needed from the sea of available information.
@@ -45,20 +63,6 @@ LambdaDoor is here to make that search simpler by providing stream lined informa
 HTML, CSS, Ant design, Formik, Styled-Component, Javascript, React, Redux, coveralls, Sentry, Travis CI etc.
 
 =============================================================================== -->
-
-<!-- ## Contributors
-
-|                                          [ Jessica Eze ](https://github.com/Ofega)                                           |                                      [ Emily Abrahart ](https://github.com/EmilyAbrahart)                                      |                                                [ Martins O.U ](https://github.com/Martins-O-U)                                                 |                                      [Ifiok Udoidiok ](https://github.com/ifiokudoidiok)                                       |                                       [ Victor Arowo ](https://github.com/VictorArowo)                                        |                                         [ Lisa Wilton ](https://github.com/ziggyss)                                         |
-| :--------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------: |
-|    [<img src="https://ca.slack-edge.com/T4JUEB3ME-ULVMR4SPP-c30afa04a17f-512" width = "200" />](https://github.com/Ofega)    | [<img src="https://ca.slack-edge.com/T4JUEB3ME-UHF8R5GQ4-fd2ea3305cae-512" width = "200" />](https://github.com/EmilyAbrahart) |          [<img src="https://ca.slack-edge.com/T4JUEB3ME-ULVNLC70D-01f9ac56c2a9-512" width = "200" />](https://github.com/Martins-O-U)          | [<img src="https://ca.slack-edge.com/T4JUEB3ME-UM1351D55-8a2734e116e4-512" width = "200" />](https://github.com/ifiokudoidiok) | [<img src="https://ca.slack-edge.com/T4JUEB3ME-ULXJFUDRV-ba9a1ceaec35-512" width = "200" />](https://github.com/VictorArowo)  |  [<img src="https://ca.slack-edge.com/T4JUEB3ME-ULJMDT5V1-8ce48d15c5ed-512" width = "200" />](https://github.com/ziggyss)   |
-|                      [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Ofega)                      |                   [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/EmilyAbrahart)                   |                            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Martins-O-U)                            |                   [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/ifiokudoidiok)                   |                   [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/VictorArowo)                    |                    [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/ziggyss)                     |
-| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/jessica-eze/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/emilyabrahart/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/onyedikachi-martins-28b890101/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/ifiokudoidiok/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/victor-arowo/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/lisawilton/) |
-
-|                                      [Ogbonna Basil](https://github.com/basilcea) - Team Lead                                      |
-| :--------------------------------------------------------------------------------------------------------------------------------: |
-|     [<img src="https://ca.slack-edge.com/T4JUEB3ME-UJ27SUD9C-b7cdcdc19c37-512" width = "200" />](https://github.com/basilcea)      |
-|                       [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/basilcea)                        |
-| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/ogbonna-basil-cea/) | -->
 
 <!-- <br>
 
