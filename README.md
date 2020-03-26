@@ -4,6 +4,34 @@
 
 # Lambda Door v2.0
 
+### The frontend is deployed here: [Lambda Door v2.0](https://lambdadooreu4.netlify.com/)
+
+## Relevant Documents
+
+[PVD](https://www.notion.so/EU4-Lambda-Door-11340785bab24a1c8ec3e5fcaec72e8f) - Product Vision Document containing project planning and release canvas documents
+
+[Trello Board](https://trello.com/b/EQoZOK3D/lambda-door-eu4) - Product and Task vision board
+
+[Whimsical](https://whimsical.com/P9iMr3hcptGnJ8T7MEA85b) - Wireframes for product design
+
+## Project Summary
+
+## Team
+
+|                                               **[Colin Toft](http://colintoft.dev/)**                                                |                                     **[Olamide Oredola](https://github.com/ola-dola)**                                      |                                        **[Evans Ibok](http://evansibok.com)**                                         |                                    **[Rodrigo Gracia](http://portfolio.rodrigograca.com/)**                                    |
+| :----------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------: |
+|                                                         Full-Stack Developer                                                         |                                                    Full-Stack Developer                                                     |                                                 Full-Stack Developer                                                  |                                                      Full-Stack Developer                                                      |
+|                  [<img src="https://ca.slack-edge.com/T4JUEB3ME-UNM9CA6NS-ae583a3c9f79-512" width="200" />](colin)                   |               [<img src="https://ca.slack-edge.com/T4JUEB3ME-UM3NF5BTQ-f7cf3f2c495e-512" width="200" />](ola)               |           [<img src="https://ca.slack-edge.com/T4JUEB3ME-ULW170LKF-b68116040dbd-512" width="200" />](evans)           |              [<img src="https://ca.slack-edge.com/T4JUEB3ME-UNM9C9G4W-gb34f66f0b1d-512" width="200" />](rodrigo)               |
+|                        [<img src="https://github.com/favicon.ico" width="20"> ](https://github.com/cappers86)                        |                    [<img src="https://github.com/favicon.ico" width="20"> ](https://github.com/ola-dola)                    |                [<img src="https://github.com/favicon.ico" width="20"> ](https://github.com/evansibok)                 |                  [<img src="https://github.com/favicon.ico" width="20"> ](https://github.com/rodrigograca31)                   |
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="20"> ](https://www.linkedin.com/in/colin-toft-41975518a) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="20"> ](https://www.linkedin.com/in/ola-oredola) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="20"> ](https://linkedin.com/in/evansibok) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="20"> ](https://www.linkedin.com/in/rodrigograca31) |
+
+|                                      **[Alexander Oguejiofor](https://github.com/kip-guile)**                                       |
+| :---------------------------------------------------------------------------------------------------------------------------------: |
+|                                                              Team Lead                                                              |
+|                  [ <img src="https://ca.slack-edge.com/T4JUEB3ME-UM150T4TZ-d6a8275db0f5-512" width="200"> ](alex)                   |
+|                       [<img src="https://github.com/favicon.ico" width="20"> ](https://github.com/kip-guile)                        |
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="20"> ](https://www.linkedin.com/in/alexanderoguejiofor) |
+
 <!-- # LambdaDoor
 
 Many atimes Job seekers find it difficult getting information specific to their search with respect to companies' interview processes, cultures and salary information that are less generalized, hence they spend alot of time searching and filtering what's needed from the sea of available information.
