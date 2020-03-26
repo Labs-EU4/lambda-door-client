@@ -16,6 +16,10 @@
 
 ## Project Summary
 
+Lambda Door is the one stop platform for Lambda Students and Alumni to find relevant information with respect to companies, interview processes, cultural fit and salary while on their job search.
+
+We offer you a much simpler and friendlier approach by providing stream lined information about companies specific to your region, we also offer a one-on-one approach to make connections with previous job seekers that have interviewed or work(ed) with the companies you're interested in.
+
 ## Team
 
 |                                               **[Colin Toft](http://colintoft.dev/)**                                                |                                     **[Olamide Oredola](https://github.com/ola-dola)**                                      |                                          **[Evans Ibok](http://evansibok.com)**                                          |                                    **[Rodrigo Gracia](http://portfolio.rodrigograca.com/)**                                    |
@@ -39,11 +43,10 @@
 3. [Environment Variables](#environment-variables)
 4. [Running the test](#running-the-test)
 5. [How to contribute](#how-to-contribute)
-6. [How to create an Issue/Bug Request](#how-to-create-a-request)
+6. [How to create a Request](#how-to-create-a-request)
 7. [Attribution](#attribution)
-8. [Acknowledgement](#acknowledgement)
-9. [Backend](#backend)
-10. [LICENSE](#license)
+8. [Backend](#backend)
+9. [LICENSE](#license)
 
 ## Tech Used
 
@@ -157,94 +160,3 @@ See [Lambda Door Backend v2.0](https://github.com/Labs-EU4/lambda-door-server/bl
 
 This project possesses an MIT License.<br>
 Please see the [LICENSE](https://github.com/Labs-EU4/lambda-door-client/blob/ch-readme/LICENSE) file for more details.
-
-<!-- # LambdaDoor
-
-Many atimes Job seekers find it difficult getting information specific to their search with respect to companies' interview processes, cultures and salary information that are less generalized, hence they spend alot of time searching and filtering what's needed from the sea of available information.
-
-LambdaDoor is here to make that search simpler by providing stream lined information that are specific to companies and regions, even providing connections to previous job seekers that have intervied or work(ed) with these firms.
-
-===============================================================================
-
-## Repo structure
-
-Sometimes it's helpful to know what all these different files are for…
-
-```
-/
-├─ src/
-│  ├─ assets/        # Assets
-│  │
-│  ├─ components/    # Components
-|  |  ├─ AddReview/  # …that manages all components under the Add Review Page
-│  │  ├─ Company/    # …that manages all component referring to a single company including reviews
-│  │  ├─ MyReviews/    # …that manages all component referring to the user's reviews
-│  │  ├─ Layouts/    # …that governs all site layouts including layout-specific components
-│  │  ├─ Router/     # …that handles all files that pertain to app routing
-│  │  ├─ UserDashboard/ # …that handles all the components that display on the user's dashboard
-│  │  ├─ AppinfoContainer # …contains brief information about what the App offers
-│  │  ├─ LocationSearch # …retrives users location using google map
-|  |
-|  ├─ pages/         # Pages
-│  │  ├─ AddReview/  # …that renders Add-Review page content
-│  │  ├─ Company/    # …that renders Company page content
-│  │  ├─ Home/       # …that renders Home page content
-│  │  ├─ MyReviews/  # …that renders user's reviews for management
-│  │  ├─ UserDashboard/ # …that renders User-Dashboard page content
-│  │  ├─ NotFound    # …serves as a fallback path when a request link is not available
-│  |
-|  |─ state/         # State
-│  │  ├─ actions/    # …that handles redux actions
-│  │  ├─ reducers/   # …that handles app reducer functions
-│  │  ├─ types/      # …that handles all action types
-│  │  ├─ store       # …contains redux store and devtools extension information
-|  |
-|  |─ styles/        # Styles
-|  |
-|  |─ utils/         # Components
-│  │  ├─ hooks/      # …that handles reusable custom logic
-|
-├─ .env/              # Contains environment variables(ignored by Git)
-├─ www/              # Public build (ignored by Git)
-│
-├─ .editorconfig     # Code style definitions
-├─ .gitignore        # List of files and folders not tracked by Git
-├─ .prettierrc       # Code Formatting preferences for JavasScript
-├─ .eslintrc         # Linting preferences for JavasScript
-├─ travis.yml        # Configuration for Travis CI
-├─ commit_template   # Contains instruction for commit
-├─ LICENSE           # License information for this project
-├─ package.json      # Project manifest
-└─ README.md         # This file
-```
-
-## Requests
-
-### Pull Requests
-
-If you have developed a patch, bug fix, or new feature that would improve this app, please submit a pull request. It is best to communicate your ideas with the developers first before investing a great deal of time into a pull request to ensure that it will mesh smoothly with the project.
-Remember that this project is licensed under the MIT license, and by submitting a pull request, you agree that your work will be, too.
-
-### Pull Request Guidelines
-
-- Ensure any install or build dependencies are removed before the end of the layer when doing a build.
-- Update the README.md with details of changes to the interface, including new plist variables, exposed ports, useful file locations and container parameters.
-- Ensure that your code conforms to our existing code conventions and test coverage.
-- Include the relevant issue number, if applicable.
-- You may merge the Pull Request in once you have the sign-off of two other developers, or if you do not have permission to do that, you may request the second reviewer to merge it for you.
-
-### Feature Requests
-
-We would love to hear from you about new features which would improve this app and further the aims of our project. Please provide as much detail and information as possible to show us why you think your new feature should be implemented.
-
-===============================================================================
-
-
-
-## Giphy Demonstrations for the App
-
-### Sign-In
-
-![Sign In clip](https://media.giphy.com/media/dVo7if5pt3iwDrIaqu/giphy.gif)
-
-Demonstrates the Log-in process showing user information in slack that the App will be having access to.
