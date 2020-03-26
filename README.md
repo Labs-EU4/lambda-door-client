@@ -50,6 +50,10 @@
 
 ## Tech Used
 
+`HTML5`, `CSS3`, `ANT DESIGN`, `FORMIK`, `STYLED COMPONENTS`, `JAVASCRIPT`, `REACT`, `REDUX`, `FIREBASE`, `NODEMAILER`, `COVERALLS`, `SENTRY`, `TRAVIS CI`, `HEROKU`, `CRON SCHEDULER`.
+
+==================================================================================
+
 <!-- # LambdaDoor
 
 Many atimes Job seekers find it difficult getting information specific to their search with respect to companies' interview processes, cultures and salary information that are less generalized, hence they spend alot of time searching and filtering what's needed from the sea of available information.
