@@ -67,7 +67,7 @@ git clone https://github.com/Labs-EU4/lambda-door-client.git
 2. Move into the root folder and install dependencies
 
 ```
-npm install
+npm install [or] yarn install
 ```
 
 3. Start the app locally
@@ -78,6 +78,10 @@ npm start [or] yarn start
 
 ## Environment Variables
 
+Environment variables were used for the development and deployment, thus users must set up their own environment variables in an .env file.
+
+Note: `This file is ignored by git`
+
 ```
 REACT_APP_UPLOAD_PRESET=
 REACT_APP_API_KEY=
@@ -88,55 +92,33 @@ REACT_APP_REDIRECT_URI=
 REACT_APP_BACKEND_URL=
 REACT_APP_GOOGLE_API_KEY=
 ```
+
+## Running the test
+
+Run this command in your terminal to startup tests:
+
+```
+npm test [or] yarn test
+```
+
+## How to contribute
+
+When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
+
+## How to create an Issue/Bug Request
+
+<blockquote>If you are having an issue with the existing project code, please submit a bug report under the following guidelines:</blockquote>
+
+- Check first to see if your issue has already been reported.
+- Check to see if the issue has recently been fixed by attempting to reproduce the issue using the latest master branch in the repository.
+- Create a live example of the problem.
+- Submit a detailed bug report including your environment & browser, steps to reproduce the issue, actual and expected outcomes, where you believe the issue is originating from, and any potential solutions you have considered.
 
 <!-- # LambdaDoor
 
 Many atimes Job seekers find it difficult getting information specific to their search with respect to companies' interview processes, cultures and salary information that are less generalized, hence they spend alot of time searching and filtering what's needed from the sea of available information.
 
 LambdaDoor is here to make that search simpler by providing stream lined information that are specific to companies and regions, even providing connections to previous job seekers that have intervied or work(ed) with these firms.
-
-===============================================================================
-
-<!-- <br>
-
-
-## Available Scripts
-
-In the project directory, you can run: `yarn start` or `npm start`
-which runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-### Other Scripts
-
-Other scripts available on the app are:
-
-- **npm install** to install all required dependencies
-- **npm test** to start server using testing environment
-
-===============================================================================
-
-## Installation Instructions
-
-- Clone this repo
-- change directory to root folder
-- Run npm install
-- Run npm start
-
-===============================================================================
-
-### Environment Variables
-
-An environment virriable was used for the developement and deployment file, thus user must set up their own environment variables in an .env file.
-```
-REACT_APP_UPLOAD_PRESET=
-REACT_APP_API_KEY=
-REACT_APP_CLIENT_ID=
-REACT_APP_CLIENT_SECRET=
-REACT_APP_JWT_SECRET=
-REACT_APP_REDIRECT_URI=
-REACT_APP_BACKEND_URL=
-REACT_APP_GOOGLE_API_KEY=
-```
 
 ===============================================================================
 
@@ -194,9 +176,6 @@ Sometimes it's helpful to know what all these different files are for…
 
 ===============================================================================
 
-## Contributing
-
-When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
 
 ## Issue/Bug Request
 
