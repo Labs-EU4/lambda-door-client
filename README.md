@@ -56,6 +56,8 @@ We offer you a much simpler and friendlier approach by providing stream lined in
 
 ## Starting the app
 
+:dash:
+
 You need a basic knowledge of the following to be able to start up this project:
 
 1. Clone this project from your terminal
@@ -78,6 +80,8 @@ npm start [or] yarn start
 
 ## Environment Variables
 
+:microscope:
+
 Environment variables were used for the development and deployment, thus users must set up their own environment variables in an .env file.
 
 Note: `This file is ignored by git`
@@ -95,6 +99,8 @@ REACT_APP_GOOGLE_API_KEY=
 
 ## Running the test
 
+:rocket:
+
 Run this command in your terminal to startup tests:
 
 ```
@@ -102,6 +108,8 @@ npm test [or] yarn test
 ```
 
 ## How to contribute
+
+:raised_hands:
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
 
@@ -139,6 +147,8 @@ We would love to hear from you about new features which would improve this app a
 
 ## Attribution
 
+:clap:
+
 These contribution guidelines have been adapted from this [good-Contributing.md-template](https://gist.github.com/PurpleBooth/b24679402957c63ec426).
 
 ### Acknowledgment
@@ -148,7 +158,7 @@ These contribution guidelines have been adapted from this [good-Contributing.md-
 
 ## Backend
 
-### Documentation
+### Documentation :electric_plug:
 
 See [Lambda Door Backend v2.0](https://github.com/Labs-EU4/lambda-door-server/blob/develop/README.md) for details on the backend of our project.
 
