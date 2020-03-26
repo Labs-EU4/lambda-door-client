@@ -52,8 +52,6 @@ We offer you a much simpler and friendlier approach by providing stream lined in
 
 `HTML5`, `CSS3`, `ANT DESIGN`, `FORMIK`, `STYLED COMPONENTS`, `JAVASCRIPT`, `REACT`, `REDUX`, `JSONWEBTOKEN`, `FIREBASE`, `NODEMAILER`, `COVERALLS`, `SENTRY`, `TRAVIS CI`, `HEROKU`, `CRON SCHEDULER`.
 
-================================================================================
-
 ## Starting the app
 
 :dash:
@@ -124,8 +122,6 @@ When contributing to this repository, please first discuss the change you wish t
 - Create a live example of the problem.
 - Submit a detailed bug report including your environment & browser, steps to reproduce the issue, actual and expected outcomes, where you believe the issue is originating from, and any potential solutions you have considered.
 
-================================================================================
-
 ### Pull Requests
 
 If you have developed a patch, bug fix, or new feature that would improve this app, please submit a pull request. It is best to communicate your ideas with the developers first before investing a great deal of time into a pull request to ensure that it will mesh smoothly with the project.
@@ -142,8 +138,6 @@ Remember that this project is licensed under the MIT license, and by submitting 
 ### Feature Requests
 
 We would love to hear from you about new features which would improve this app and further the aims of our project. Please provide as much detail and information as possible to show us why you think your new feature should be implemented.
-
-================================================================================
 
 ## Attribution
 
@@ -163,8 +157,6 @@ These contribution guidelines have been adapted from this [good-Contributing.md-
 See [Lambda Door Backend v2.0](https://github.com/Labs-EU4/lambda-door-server/blob/develop/README.md) for details on the backend of our project.
 
 ### Backend hosted at [Lambda Door](https://lambdadooreu4-staging.herokuapp.com/)
-
-================================================================================
 
 ## LICENSE
 
