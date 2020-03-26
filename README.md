@@ -35,7 +35,7 @@
 ## Table of Content
 
 1. [Tech used](#tech-used)
-2. [Starting the app](#starting-the-app-)
+2. [Starting the app](#starting-the-app)
 3. [Environment Variables](#environment-variables)
 4. [Running the test](#running-the-test)
 5. [How to contribute](#how-to-contribute)
