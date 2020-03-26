@@ -39,12 +39,11 @@
 3. [Environment Variables](#environment-variables)
 4. [Running the test](#running-the-test)
 5. [How to contribute](#how-to-contribute)
-6. [How to create an Issue/Bug Request](#how-to-create-an-issue-/-bug-request)
+6. [How to create an Issue/Bug Request](#how-to-create-a-request)
 7. [Attribution](#attribution)
 8. [Acknowledgement](#acknowledgement)
 9. [Backend](#backend)
-10. [App Demonstration](#app-demonstration)
-11. [LICENSE](#license)
+10. [LICENSE](#license)
 
 ## Tech Used
 
@@ -103,7 +102,9 @@ npm test [or] yarn test
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
 
-## How to create an Issue/Bug Request
+## How to create a Request
+
+### Creating an Issue/Bug Request
 
 <blockquote>If you are having an issue with the existing project code, please submit a bug report under the following guidelines:</blockquote>
 
@@ -111,6 +112,25 @@ When contributing to this repository, please first discuss the change you wish t
 - Check to see if the issue has recently been fixed by attempting to reproduce the issue using the latest master branch in the repository.
 - Create a live example of the problem.
 - Submit a detailed bug report including your environment & browser, steps to reproduce the issue, actual and expected outcomes, where you believe the issue is originating from, and any potential solutions you have considered.
+
+================================================================================
+
+### Pull Requests
+
+If you have developed a patch, bug fix, or new feature that would improve this app, please submit a pull request. It is best to communicate your ideas with the developers first before investing a great deal of time into a pull request to ensure that it will mesh smoothly with the project.
+Remember that this project is licensed under the MIT license, and by submitting a pull request, you agree that your work will be, too.
+
+### Pull Request Guidelines
+
+- Ensure any install or build dependencies are removed before the end of the layer when doing a build.
+- Update the README.md with details of changes to the interface, including new plist variables, exposed ports, useful file locations and container parameters.
+- Ensure that your code conforms to our existing code conventions and test coverage.
+- Include the relevant issue number, if applicable.
+- You may merge the Pull Request in once you have the sign-off of two other developers, or if you do not have permission to do that, you may request the second reviewer to merge it for you.
+
+### Feature Requests
+
+We would love to hear from you about new features which would improve this app and further the aims of our project. Please provide as much detail and information as possible to show us why you think your new feature should be implemented.
 
 ================================================================================
 
@@ -130,6 +150,13 @@ These contribution guidelines have been adapted from this [good-Contributing.md-
 See [Lambda Door Backend v2.0](https://github.com/Labs-EU4/lambda-door-server/blob/develop/README.md) for details on the backend of our project.
 
 ### Backend hosted at [Lambda Door](https://lambdadooreu4-staging.herokuapp.com/)
+
+================================================================================
+
+## LICENSE
+
+This project possesses an MIT License.<br>
+Please see the [LICENSE](https://github.com/Labs-EU4/lambda-door-client/blob/ch-readme/LICENSE) file for more details.
 
 <!-- # LambdaDoor
 
@@ -212,23 +239,7 @@ We would love to hear from you about new features which would improve this app a
 
 ===============================================================================
 
-### Attribution
 
-These contribution guidelines have been adapted from [this good-Contributing.md-template](https://gist.github.com/PurpleBooth/b24679402957c63ec426).
-
-### Frontend is deployed on https://Lambdadoor.com
-
-===============================================================================
-
-## Backend
-
-### Backend Documentation
-
-See [Lambda_Door](https://github.com/Labs-EU4/lambda-door-server/blob/develop/README.md) for details on the backend of our project.
-
-### Backend is hosted on Heroku https://lambdadoor.herokuapp.com/
-
-===============================================================================
 
 ## Giphy Demonstrations for the App
 
@@ -237,33 +248,3 @@ See [Lambda_Door](https://github.com/Labs-EU4/lambda-door-server/blob/develop/RE
 ![Sign In clip](https://media.giphy.com/media/dVo7if5pt3iwDrIaqu/giphy.gif)
 
 Demonstrates the Log-in process showing user information in slack that the App will be having access to.
-
-### Dashboard display
-
-![Dashboard display](https://media.giphy.com/media/gdqwvVzH4pOoAI6QMG/giphy.gif)
-
-Shows the Dashboard display with TOP Rated Companies and a list of reviewed Job roles by Percentages
-
-### Companies near user
-
-![Companies near user](https://media.giphy.com/media/eJMPVNFc6AaYmu71Sw/giphy.gif)
-
-Displays companies within a set distance of the user location if they exist in the DB, with a graph that shows an average pay for different roles
-
-### Company reviews
-
-![Companies reviews](https://media.giphy.com/media/YOpOAQXeyPNFFAtyOi/giphy.gif)
-
-Shows information about selected company, its location and more, along with tabs for salary and interview review, each tab having cickable cards for more information on the presented search.
-
-### Leave a review
-
-![Leave a review](https://media.giphy.com/media/SWWTv4Qoj7epVOHGfI/giphy.gif)
-
-shows the Manage review page that contains reviews the user made as well as the leave review page with tabs for salary, company and interview reviews.
-
-### Search Bar
-
-![Search Bar](https://media.giphy.com/media/jQ8uoOo6m4lhN2OC5u/giphy.gif)
-
-Shows a clip of the search bar being used for search company, Salary and interview information either by location,company name or job title. -->
