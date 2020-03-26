@@ -35,7 +35,7 @@
 ## Table of Content
 
 1. [Tech used](#tech-used)
-2. [Starting up the app](#starting-up-the-app)
+2. [Starting the app](#starting-the-app-)
 3. [Environment Variables](#environment-variables)
 4. [Running the test](#running-the-test)
 5. [How to contribute](#how-to-contribute)
@@ -50,9 +50,33 @@
 
 ## Tech Used
 
-`HTML5`, `CSS3`, `ANT DESIGN`, `FORMIK`, `STYLED COMPONENTS`, `JAVASCRIPT`, `REACT`, `REDUX`, `FIREBASE`, `NODEMAILER`, `COVERALLS`, `SENTRY`, `TRAVIS CI`, `HEROKU`, `CRON SCHEDULER`.
+`HTML5`, `CSS3`, `ANT DESIGN`, `FORMIK`, `STYLED COMPONENTS`, `JAVASCRIPT`, `REACT`, `REDUX`, `JSONWEBTOKEN`, `FIREBASE`, `NODEMAILER`, `COVERALLS`, `SENTRY`, `TRAVIS CI`, `HEROKU`, `CRON SCHEDULER`.
 
-==================================================================================
+================================================================================
+
+## Starting the app
+
+You need a basic knowledge of the following to be able to start up this project:
+
+1. Clone this project from your terminal
+
+```
+git clone https://github.com/Labs-EU4/lambda-door-client.git
+```
+
+2. Move into the root folder and install dependencies
+
+```
+npm install
+```
+
+3. Start the app locally
+
+```
+npm start [or] yarn start
+```
+
+##
 
 <!-- # LambdaDoor
 
@@ -62,29 +86,8 @@ LambdaDoor is here to make that search simpler by providing stream lined informa
 
 ===============================================================================
 
-## Tech stack
-
-HTML, CSS, Ant design, Formik, Styled-Component, Javascript, React, Redux, coveralls, Sentry, Travis CI etc.
-
-=============================================================================== -->
-
 <!-- <br>
 
-## Project Overview
-
-[Trello Board](https://trello.com/b/YdfO1w9X/lambda-door) Contains Product breakdown and user story for each feature.
-
-[Product Canvas](https://www.notion.so/EU3-Lambda-Door-e78fd9396061487b8b458a28912d66c4)
-Contains information on the survey, technical researches, style guide and design consideration.
-
-[UX Design files](<https://www.figma.com/file/S43H7Y36xwlBNkzuik4v1w/Ant-Design-System-UI-Kit-(1.0)-(%2Bexamples)?node-id=212%3A153>)
-Contains files of the created designs for the App.
-
-===============================================================================
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-===============================================================================
 
 ## Available Scripts
 
