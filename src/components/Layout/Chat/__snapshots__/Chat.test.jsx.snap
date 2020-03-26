@@ -33,8 +33,8 @@ exports[`Chat Interface should render the Chat Interface without crashing 1`] = 
           class="chat_header_icon"
         >
           <span
-            aria-label="shrink"
-            class="anticon anticon-shrink"
+            aria-label="minus"
+            class="anticon anticon-minus"
             role="img"
             style="font-size: 22px; color: rgb(255, 255, 255);"
             tabindex="-1"
@@ -42,7 +42,7 @@ exports[`Chat Interface should render the Chat Interface without crashing 1`] = 
             <svg
               aria-hidden="true"
               class=""
-              data-icon="shrink"
+              data-icon="minus"
               fill="currentColor"
               focusable="false"
               height="1em"
@@ -50,7 +50,7 @@ exports[`Chat Interface should render the Chat Interface without crashing 1`] = 
               width="1em"
             >
               <path
-                d="M881.7 187.4l-45.1-45.1a8.03 8.03 0 00-11.3 0L667.8 299.9l-54.7-54.7a7.94 7.94 0 00-13.5 4.7L576.1 439c-.6 5.2 3.7 9.5 8.9 8.9l189.2-23.5c6.6-.8 9.3-8.8 4.7-13.5l-54.7-54.7 157.6-157.6c3-3 3-8.1-.1-11.2zM439 576.1l-189.2 23.5c-6.6.8-9.3 8.9-4.7 13.5l54.7 54.7-157.5 157.5a8.03 8.03 0 000 11.3l45.1 45.1c3.1 3.1 8.2 3.1 11.3 0l157.6-157.6 54.7 54.7a7.94 7.94 0 0013.5-4.7L447.9 585a7.9 7.9 0 00-8.9-8.9z"
+                d="M872 474H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h720c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"
               />
             </svg>
           </span>
@@ -78,7 +78,7 @@ exports[`Chat Interface should render the Chat Interface without crashing 1`] = 
         </div>
       </div>
       <div
-        class="sc-htpNat eMMKMD"
+        class="sc-htpNat bFNfLl"
         id="chat_body"
       >
         <div
