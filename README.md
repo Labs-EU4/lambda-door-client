@@ -39,12 +39,10 @@
 3. [Environment Variables](#environment-variables)
 4. [Running the test](#running-the-test)
 5. [How to contribute](#how-to-contribute)
-6. [How to create an Issue/Bug Request](#how-to-create-an-issue/bug-request)
+6. [How to create an Issue/Bug Request](#how-to-create-an-issue-/-bug-request)
 7. [Attribution](#attribution)
 8. [Acknowledgement](#acknowledgement)
 9. [Backend](#backend)
-   - [Documentation](#documentation)
-   - [Hosted on](#hosted-on)
 10. [App Demonstration](#app-demonstration)
 11. [LICENSE](#license)
 
@@ -114,6 +112,25 @@ When contributing to this repository, please first discuss the change you wish t
 - Create a live example of the problem.
 - Submit a detailed bug report including your environment & browser, steps to reproduce the issue, actual and expected outcomes, where you believe the issue is originating from, and any potential solutions you have considered.
 
+================================================================================
+
+## Attribution
+
+These contribution guidelines have been adapted from this [good-Contributing.md-template](https://gist.github.com/PurpleBooth/b24679402957c63ec426).
+
+### Acknowledgment
+
+- [Alex Emedeme](https://github.com/AlexEntrepreneur) - Engineering Manager
+- [Lambda School](https://lambdaschool.com) - An immersive, online program to prepare you for a successful tech career
+
+## Backend
+
+### Documentation
+
+See [Lambda Door Backend v2.0](https://github.com/Labs-EU4/lambda-door-server/blob/develop/README.md) for details on the backend of our project.
+
+### Backend hosted at [Lambda Door](https://lambdadooreu4-staging.herokuapp.com/)
+
 <!-- # LambdaDoor
 
 Many atimes Job seekers find it difficult getting information specific to their search with respect to companies' interview processes, cultures and salary information that are less generalized, hence they spend alot of time searching and filtering what's needed from the sea of available information.
@@ -173,20 +190,6 @@ Sometimes it's helpful to know what all these different files are for…
 ├─ package.json      # Project manifest
 └─ README.md         # This file
 ```
-
-===============================================================================
-
-
-## Issue/Bug Request
-
-**If you are having an issue with the existing project code, please submit a bug report under the following guidelines:**
-
-- Check first to see if your issue has already been reported.
-- Check to see if the issue has recently been fixed by attempting to reproduce the issue using the latest master branch in the repository.
-- Create a live example of the problem.
-- Submit a detailed bug report including your environment & browser, steps to reproduce the issue, actual and expected outcomes, where you believe the issue is originating from, and any potential solutions you have considered.
-
-===============================================================================
 
 ## Requests
 
