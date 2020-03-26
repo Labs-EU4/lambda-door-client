@@ -2,6 +2,8 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/1568ef4b-934b-4ce2-a4e1-0a00a72f719b/deploy-status)](https://app.netlify.com/sites/lambdadooreu4/deploys)
 [![Coverage Status](https://coveralls.io/repos/github/Labs-EU4/lambda-door-client/badge.svg?branch=develop)](https://coveralls.io/github/Labs-EU4/lambda-door-client?branch=develop)
 
+# Lambda Door v2.0
+
 <!-- # LambdaDoor
 
 Many atimes Job seekers find it difficult getting information specific to their search with respect to companies' interview processes, cultures and salary information that are less generalized, hence they spend alot of time searching and filtering what's needed from the sea of available information.
